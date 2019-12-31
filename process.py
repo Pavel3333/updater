@@ -127,7 +127,7 @@ for archive_name in os.listdir('archives'):
     with zipfile.ZipFile('archives/' + archive_name) as archive:
         archive.extractall('unpacked_deploy/' + mod_name)
 
-    with zipfile.ZipFile('deploy/' + archive_name, 'w') as archive:
+    with zipfile.ZipFile('deploy/' + archive_name, 'w', zipfile.ZIP_DEFLATED) as archive:
         os.chdir('unpacked_deploy/%s/'%(mod_name))
         zip_folder('./', archive)
         os.chdir('../../')
