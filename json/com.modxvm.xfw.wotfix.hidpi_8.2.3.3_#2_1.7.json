@@ -1,0 +1,24 @@
+{
+"hashes": {
+"4": "23e8d13e768d80721e81251a1a8df26d"
+}, 
+"names": {
+"1": "mods", 
+"2": "1.7.0.2", 
+"3": "com.modxvm.xfw", 
+"4": "com.modxvm.xfw.wotfix.hidpi_8.2.4.25.wotmod"
+}, 
+"paths": {
+"4": "mods/1.7.0.2/com.modxvm.xfw/com.modxvm.xfw.wotfix.hidpi_8.2.4.25.wotmod"
+}, 
+"settings": {}, 
+"tree": {
+"1": {
+"2": {
+"3": {
+"4": 0
+}
+}
+}
+}
+}

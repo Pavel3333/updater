@@ -1,0 +1,24 @@
+{
+"hashes": {
+"4": "d196a6135005f59a45ab4017a74a7ad5"
+}, 
+"names": {
+"1": "mods", 
+"2": "1.7.0.2", 
+"3": "com.modxvm.xfw", 
+"4": "com.modxvm.xfw.actionscript_8.2.4.25.wotmod"
+}, 
+"paths": {
+"4": "mods/1.7.0.2/com.modxvm.xfw/com.modxvm.xfw.actionscript_8.2.4.25.wotmod"
+}, 
+"settings": {}, 
+"tree": {
+"1": {
+"2": {
+"3": {
+"4": 0
+}
+}
+}
+}
+}

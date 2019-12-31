@@ -1,0 +1,24 @@
+{
+"hashes": {
+"4": "129bbcb9d530391d08e2881045996020"
+}, 
+"names": {
+"1": "mods", 
+"2": "1.7.0.2", 
+"3": "com.modxvm.xfw", 
+"4": "com.modxvm.xfw.native_1.5.7.wotmod"
+}, 
+"paths": {
+"4": "mods/1.7.0.2/com.modxvm.xfw/com.modxvm.xfw.native_1.5.7.wotmod"
+}, 
+"settings": {}, 
+"tree": {
+"1": {
+"2": {
+"3": {
+"4": 0
+}
+}
+}
+}
+}

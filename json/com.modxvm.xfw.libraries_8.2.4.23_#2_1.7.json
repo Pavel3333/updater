@@ -1,0 +1,24 @@
+{
+"hashes": {
+"4": "29a93b266c7819656b19430432f516e0"
+}, 
+"names": {
+"1": "mods", 
+"2": "1.7.0.2", 
+"3": "com.modxvm.xfw", 
+"4": "com.modxvm.xfw.libraries_8.2.4.25.wotmod"
+}, 
+"paths": {
+"4": "mods/1.7.0.2/com.modxvm.xfw/com.modxvm.xfw.libraries_8.2.4.25.wotmod"
+}, 
+"settings": {}, 
+"tree": {
+"1": {
+"2": {
+"3": {
+"4": 0
+}
+}
+}
+}
+}
