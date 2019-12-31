@@ -17,62 +17,510 @@
         "dependencies": [
             "com.modxvm.xfw.libraries"
         ], 
-        "deploy": false
+        "deploy": false, 
+        "description": {
+            "CN": "XFW Actionscript module", 
+            "EN": "XFW Actionscript module", 
+            "RU": "XFW Actionscript module"
+        }, 
+        "name": {
+            "CN": "XFW Actionscript", 
+            "EN": "XFW Actionscript", 
+            "RU": "XFW Actionscript"
+        }
     }, 
     "com.modxvm.xfw.filewatcher": {
         "dependencies": [
             "com.modxvm.xfw.native"
         ], 
-        "deploy": false
+        "deploy": false, 
+        "description": {
+            "CN": "XFW filewatcher module", 
+            "EN": "XFW filewatcher module", 
+            "RU": "XFW filewatcher module"
+        }, 
+        "name": {
+            "CN": "XFW filewatcher", 
+            "EN": "XFW filewatcher", 
+            "RU": "XFW filewatcher"
+        }
     }, 
     "com.modxvm.xfw.fonts": {
         "dependencies": [
             "com.modxvm.xfw.native", 
             "com.modxvm.xfw.libraries"
         ], 
-        "deploy": false
+        "deploy": false, 
+        "description": {
+            "CN": "XFW Font Manager module", 
+            "EN": "XFW Font Manager module", 
+            "RU": "XFW Font Manager module"
+        }, 
+        "name": {
+            "CN": "XFW Font Manager", 
+            "EN": "XFW Font Manager", 
+            "RU": "XFW Font Manager"
+        }
     }, 
     "com.modxvm.xfw.libraries": {
         "dependencies": [], 
-        "deploy": false
+        "deploy": false, 
+        "description": {
+            "CN": "XFW Libraries Module", 
+            "EN": "XFW Libraries Module", 
+            "RU": "XFW Libraries Module"
+        }, 
+        "name": {
+            "CN": "XFW Libraries Module", 
+            "EN": "XFW Libraries Module", 
+            "RU": "XFW Libraries Module"
+        }
     }, 
     "com.modxvm.xfw.loader": {
         "dependencies": [], 
-        "deploy": false
+        "deploy": false, 
+        "description": {
+            "CN": "Set of nice utilities and libraries for modmakers", 
+            "EN": "Set of nice utilities and libraries for modmakers", 
+            "RU": "Set of nice utilities and libraries for modmakers"
+        }, 
+        "name": {
+            "CN": "XVM Framework Loader", 
+            "EN": "XVM Framework Loader", 
+            "RU": "XVM Framework Loader"
+        }
     }, 
     "com.modxvm.xfw.mutex": {
         "dependencies": [
             "com.modxvm.xfw.native"
         ], 
-        "deploy": false
+        "deploy": false, 
+        "description": {
+            "CN": "XFW WoT mutex module", 
+            "EN": "XFW WoT mutex module", 
+            "RU": "XFW WoT mutex module"
+        }, 
+        "name": {
+            "CN": "XFW Mutex", 
+            "EN": "XFW Mutex", 
+            "RU": "XFW Mutex"
+        }
     }, 
     "com.modxvm.xfw.native": {
         "dependencies": [], 
-        "deploy": false
+        "deploy": false, 
+        "description": {
+            "CN": "Set of nice C/C++ libraries for low-level access to WoT internals", 
+            "EN": "Set of nice C/C++ libraries for low-level access to WoT internals", 
+            "RU": "Set of nice C/C++ libraries for low-level access to WoT internals"
+        }, 
+        "name": {
+            "CN": "XVM Framework Native Components", 
+            "EN": "XVM Framework Native Components", 
+            "RU": "XVM Framework Native Components"
+        }
     }, 
     "com.modxvm.xfw.ping": {
         "dependencies": [
             "com.modxvm.xfw.native"
         ], 
-        "deploy": false
+        "deploy": false, 
+        "description": {
+            "CN": "XFW ping module", 
+            "EN": "XFW ping module", 
+            "RU": "XFW ping module"
+        }, 
+        "name": {
+            "CN": "XFW Ping module", 
+            "EN": "XFW Ping module", 
+            "RU": "XFW Ping module"
+        }
     }, 
     "com.modxvm.xfw.wotfix.crashes": {
         "dependencies": [
             "com.modxvm.xfw.native"
         ], 
-        "deploy": false
+        "deploy": false, 
+        "description": {
+            "CN": "XFW Crashfix module", 
+            "EN": "XFW Crashfix module", 
+            "RU": "XFW Crashfix module"
+        }, 
+        "name": {
+            "CN": "XFW Crashfix module", 
+            "EN": "XFW Crashfix module", 
+            "RU": "XFW Crashfix module"
+        }
     }, 
     "com.modxvm.xfw.wotfix.hidpi": {
         "dependencies": [
             "com.modxvm.xfw.native"
         ], 
-        "deploy": false
+        "deploy": false, 
+        "description": {
+            "CN": "XFW HiDPI module", 
+            "EN": "XFW HiDPI module", 
+            "RU": "XFW HiDPI module"
+        }, 
+        "name": {
+            "CN": "XFW HiDPI module", 
+            "EN": "XFW HiDPI module", 
+            "RU": "XFW HiDPI module"
+        }
     }, 
     "com.modxvm.xfw.wwise": {
         "dependencies": [
             "com.modxvm.xfw.native", 
             "com.modxvm.xfw.libraries"
         ], 
-        "deploy": false
+        "deploy": false, 
+        "description": {
+            "CN": "XFW WWISE module", 
+            "EN": "XFW WWISE module", 
+            "RU": "XFW WWISE module"
+        }, 
+        "name": {
+            "CN": "XFW WWISE module", 
+            "EN": "XFW WWISE module", 
+            "RU": "XFW WWISE module"
+        }
+    }, 
+    "xvm_autologin": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Autologin module", 
+            "EN": "XVM Autologin module", 
+            "RU": "XVM Autologin module"
+        }, 
+        "name": {
+            "CN": "XVM Autologin", 
+            "EN": "XVM Autologin", 
+            "RU": "XVM Autologin"
+        }
+    }, 
+    "xvm_battle": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Battle module", 
+            "EN": "XVM Battle module", 
+            "RU": "XVM Battle module"
+        }, 
+        "name": {
+            "CN": "XVM Battle", 
+            "EN": "XVM Battle", 
+            "RU": "XVM Battle"
+        }
+    }, 
+    "xvm_battleresults": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Battle Results module", 
+            "EN": "XVM Battle Results module", 
+            "RU": "XVM Battle Results module"
+        }, 
+        "name": {
+            "CN": "XVM Battle Results", 
+            "EN": "XVM Battle Results", 
+            "RU": "XVM Battle Results"
+        }
+    }, 
+    "xvm_contacts": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Contacts", 
+            "EN": "XVM Contacts", 
+            "RU": "XVM Contacts"
+        }, 
+        "name": {
+            "CN": "XVM Contacts", 
+            "EN": "XVM Contacts", 
+            "RU": "XVM Contacts"
+        }
+    }, 
+    "xvm_crew": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Crew Module", 
+            "EN": "XVM Crew Module", 
+            "RU": "XVM Crew Module"
+        }, 
+        "name": {
+            "CN": "XVM Crew", 
+            "EN": "XVM Crew", 
+            "RU": "XVM Crew"
+        }
+    }, 
+    "xvm_equip": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Equip Module", 
+            "EN": "XVM Equip Module", 
+            "RU": "XVM Equip Module"
+        }, 
+        "name": {
+            "CN": "XVM Equip", 
+            "EN": "XVM Equip", 
+            "RU": "XVM Equip"
+        }
+    }, 
+    "xvm_export": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Export Module", 
+            "EN": "XVM Export Module", 
+            "RU": "XVM Export Module"
+        }, 
+        "name": {
+            "CN": "XVM Export", 
+            "EN": "XVM Export", 
+            "RU": "XVM Export"
+        }
+    }, 
+    "xvm_hangar": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Hangar Module", 
+            "EN": "XVM Hangar Module", 
+            "RU": "XVM Hangar Module"
+        }, 
+        "name": {
+            "CN": "XVM Hangar", 
+            "EN": "XVM Hangar", 
+            "RU": "XVM Hangar"
+        }
+    }, 
+    "xvm_hotfix": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Hotfix Module", 
+            "EN": "XVM Hotfix Module", 
+            "RU": "XVM Hotfix Module"
+        }, 
+        "name": {
+            "CN": "XVM Hotfix", 
+            "EN": "XVM Hotfix", 
+            "RU": "XVM Hotfix"
+        }
+    }, 
+    "xvm_integrity": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Integrity Module", 
+            "EN": "XVM Integrity Module", 
+            "RU": "XVM Integrity Module"
+        }, 
+        "name": {
+            "CN": "XVM Integrity", 
+            "EN": "XVM Integrity", 
+            "RU": "XVM Integrity"
+        }
+    }, 
+    "xvm_limits": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Limits Module", 
+            "EN": "XVM Limits Module", 
+            "RU": "XVM Limits Module"
+        }, 
+        "name": {
+            "CN": "XVM Limits", 
+            "EN": "XVM Limits", 
+            "RU": "XVM Limits"
+        }
+    }, 
+    "xvm_main": {
+        "dependencies": [
+            "com.modxvm.xfw.libraries"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM", 
+            "EN": "XVM", 
+            "RU": "XVM"
+        }, 
+        "name": {
+            "CN": "XVM", 
+            "EN": "XVM", 
+            "RU": "XVM"
+        }
+    }, 
+    "xvm_online": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Online module", 
+            "EN": "XVM Online module", 
+            "RU": "XVM Online module"
+        }, 
+        "name": {
+            "CN": "XVM Online", 
+            "EN": "XVM Online", 
+            "RU": "XVM Online"
+        }
+    }, 
+    "xvm_ping": {
+        "dependencies": [
+            "com.modxvm.xvm", 
+            "com.modxvm.xfw.actionscript"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Ping module", 
+            "EN": "XVM Ping module", 
+            "RU": "XVM Ping module"
+        }, 
+        "name": {
+            "CN": "XVM Ping", 
+            "EN": "XVM Ping", 
+            "RU": "XVM Ping"
+        }
+    }, 
+    "xvm_profile": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Profile module", 
+            "EN": "XVM Profile module", 
+            "RU": "XVM Profile module"
+        }, 
+        "name": {
+            "CN": "XVM Profile", 
+            "EN": "XVM Profile", 
+            "RU": "XVM Profile"
+        }
+    }, 
+    "xvm_profiler": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Profiler module", 
+            "EN": "XVM Profiler module", 
+            "RU": "XVM Profiler module"
+        }, 
+        "name": {
+            "CN": "XVM Profiler", 
+            "EN": "XVM Profiler", 
+            "RU": "XVM Profiler"
+        }
+    }, 
+    "xvm_sounds": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Sounds module", 
+            "EN": "XVM Sounds module", 
+            "RU": "XVM Sounds module"
+        }, 
+        "name": {
+            "CN": "XVM Sounds", 
+            "EN": "XVM Sounds", 
+            "RU": "XVM Sounds"
+        }
+    }, 
+    "xvm_squad": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Squad module", 
+            "EN": "XVM Squad module", 
+            "RU": "XVM Squad module"
+        }, 
+        "name": {
+            "CN": "XVM Squad", 
+            "EN": "XVM Squad", 
+            "RU": "XVM Squad"
+        }
+    }, 
+    "xvm_tankcarousel": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Tankcarousel module", 
+            "EN": "XVM Tankcarousel module", 
+            "RU": "XVM Tankcarousel module"
+        }, 
+        "name": {
+            "CN": "XVM Tankcarousel", 
+            "EN": "XVM Tankcarousel", 
+            "RU": "XVM Tankcarousel"
+        }
+    }, 
+    "xvm_techtree": {
+        "dependencies": [
+            "com.modxvm.xvm"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Techtree module", 
+            "EN": "XVM Techtree module", 
+            "RU": "XVM Techtree module"
+        }, 
+        "name": {
+            "CN": "XVM Techtree", 
+            "EN": "XVM Techtree", 
+            "RU": "XVM Techtree"
+        }
+    }, 
+    "xvm_tooltips": {
+        "dependencies": [
+            "com.modxvm.xvm", 
+            "com.modxvm.xvm.limits"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Tooltips module", 
+            "EN": "XVM Tooltips module", 
+            "RU": "XVM Tooltips module"
+        }, 
+        "name": {
+            "CN": "XVM Tooltips", 
+            "EN": "XVM Tooltips", 
+            "RU": "XVM Tooltips"
+        }
     }
 }

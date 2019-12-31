@@ -51,13 +51,14 @@ def move(path, child, curr_dic):
         for subchild in os.listdir(subpath):
             move(subpath, subchild, subdic)
 
-def get_dependency(mod_name):
+def get_dependency(mod_name, is_deploy):
     if mod_name not in config or 'dependencies' not in config[mod_name]: return set()
     
     dependency_list = config[mod_name]['dependencies']
     for dependency in dependency_list:
-        dependencies.add(str(mods_list_by_name[dependency]['ID']))
-        get_dependency(dependency)
+        dependencies.add(int(mods_list_by_name[dependency]['ID']))
+        if is_deploy:
+            get_dependency(dependency)
 
 def zip_folder(path, archive):
     for root, dirs, files in os.walk(path):
@@ -113,7 +114,8 @@ for archive_name in os.listdir('archives'):
         is_deploy = True
     
     dependencies = set()
-    get_dependency(mod_name)
+
+    get_dependency(mod_name, is_deploy)
     print mod_name, 'mod dependencies:', dependencies
     
     if mod_name not in mods_list_by_name:

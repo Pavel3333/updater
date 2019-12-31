@@ -118,7 +118,13 @@ with open('config.json', 'r') as cfg:
     config = json.load(cfg)
 
 for mod_name in wotmods_metadata:
-    if mod_name not in config: continue
+    if mod_name not in config:
+        print mod_name, 'not found in config. Creating a new one...'
+        config[mod_name] = {}
+        continue
+
+    if 'deploy' not in config[mod_name]:
+        config[mod_name]['deploy'] = False
     
     metadata = wotmods_metadata[mod_name]
     if 'dependencies' not in metadata:
@@ -127,18 +133,32 @@ for mod_name in wotmods_metadata:
     else:
         config[mod_name]['dependencies'] = list(metadata['dependencies'])
 
-    is_deploy = False
-    if mod_name in config and config[mod_name].get('deploy', False):
-        is_deploy = True
+    if 'name' not in config[mod_name]:
+        config[mod_name]['name'] = {
+            'RU' : metadata['name'],
+            'EN' : metadata['name'],
+            'CN' : metadata['name']
+        }
+
+    if 'description' not in config[mod_name]:
+        config[mod_name]['description'] = {
+            'RU' : metadata['description'],
+            'EN' : metadata['description'],
+            'CN' : metadata['description']
+        }
     
     req = requests.post(
         'http://api.pavel3333.ru/add_mod.php',
         data = {
             'ID'           : metadata['id'],
-            'name'         : metadata['name'],
-            'desc'         : metadata['description'],
+            'name_ru'      : config[mod_name]['name']['RU'],
+            'name_en'      : config[mod_name]['name']['EN'],
+            'name_cn'      : config[mod_name]['name']['CN'],
+            'desc_ru'      : config[mod_name]['description']['RU'],
+            'desc_en'      : config[mod_name]['description']['EN'],
+            'desc_cn'      : config[mod_name]['description']['CN'],
             'version'      : metadata['version'],
-            'deploy'       : is_deploy
+            'deploy'       : config[mod_name]['deploy']
         }
     )
     print req.text
