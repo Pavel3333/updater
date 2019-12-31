@@ -1,66 +1,78 @@
 {
     "PositionsMod": {
+        "dependencies": [
+            "com.modxvm.xfw.filewatcher", 
+            "com.modxvm.xfw.libraries", 
+            "com.modxvm.xfw.loader", 
+            "com.modxvm.xfw.native", 
+            "com.modxvm.xfw.wotfix.crashes", 
+            "com.modxvm.xfw.wotfix.hidpi"
+        ], 
+        "deploy": true, 
         "excludeChecksum": [
             "mods/configs/mods_gui/mods_gui.json"
-        ],
-        "dependencies": [
-            "com.modxvm.xfw.filewatcher",
-            "com.modxvm.xfw.libraries",
-            "com.modxvm.xfw.loader",
-            "com.modxvm.xfw.native",
-            "com.modxvm.xfw.wotfix.crashes",
-            "com.modxvm.xfw.wotfix.hidpi"
         ]
     }, 
     "com.modxvm.xfw.actionscript": {
         "dependencies": [
             "com.modxvm.xfw.libraries"
-        ]
+        ], 
+        "deploy": false
     }, 
     "com.modxvm.xfw.filewatcher": {
         "dependencies": [
             "com.modxvm.xfw.native"
-        ]
+        ], 
+        "deploy": false
     }, 
     "com.modxvm.xfw.fonts": {
         "dependencies": [
             "com.modxvm.xfw.native", 
             "com.modxvm.xfw.libraries"
-        ]
+        ], 
+        "deploy": false
     }, 
     "com.modxvm.xfw.libraries": {
-        "dependencies": []
+        "dependencies": [], 
+        "deploy": false
     }, 
     "com.modxvm.xfw.loader": {
-        "dependencies": []
+        "dependencies": [], 
+        "deploy": false
     }, 
     "com.modxvm.xfw.mutex": {
         "dependencies": [
             "com.modxvm.xfw.native"
-        ]
+        ], 
+        "deploy": false
     }, 
     "com.modxvm.xfw.native": {
-        "dependencies": []
+        "dependencies": [], 
+        "deploy": false
     }, 
     "com.modxvm.xfw.ping": {
         "dependencies": [
             "com.modxvm.xfw.native"
-        ]
+        ], 
+        "deploy": false
     }, 
     "com.modxvm.xfw.wotfix.crashes": {
         "dependencies": [
             "com.modxvm.xfw.native"
-        ]
+        ], 
+        "deploy": false
     }, 
     "com.modxvm.xfw.wotfix.hidpi": {
         "dependencies": [
             "com.modxvm.xfw.native"
-        ]
+        ], 
+        "deploy": false
     }, 
     "com.modxvm.xfw.wwise": {
         "dependencies": [
             "com.modxvm.xfw.native", 
             "com.modxvm.xfw.libraries"
-        ]
+        ], 
+        "deploy": false
     }
 }

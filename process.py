@@ -19,7 +19,7 @@ paths  = {}
 names  = {}
 hashes = {}
 
-dependencies    = set()
+dependencies = set()
 
 exclude_paths = []
 
@@ -107,6 +107,10 @@ for archive_name in os.listdir('archives'):
     settings = {}
     
     mod_name = str(archive_name.replace('.zip', ''))
+
+    is_deploy = False
+    if mod_name in config and config[mod_name].get('deploy', False):
+        is_deploy = True
     
     dependencies = set()
     get_dependency(mod_name)
@@ -118,19 +122,20 @@ for archive_name in os.listdir('archives'):
     with zipfile.ZipFile('archives/' + archive_name) as archive:
         archive.extractall('unpacked/' + mod_name)
 
-    for dependencyID in dependencies:
-        dependency_name = mods_list_by_ID[dependencyID]['name']
+    if is_deploy:
+        for dependencyID in dependencies:
+            dependency_name = mods_list_by_ID[dependencyID]['name']
+            
+            with zipfile.ZipFile('archives/%s.zip'%(dependency_name)) as archive:
+                archive.extractall('unpacked_deploy/' + mod_name)
         
-        with zipfile.ZipFile('archives/%s.zip'%(dependency_name)) as archive:
+        with zipfile.ZipFile('archives/' + archive_name) as archive:
             archive.extractall('unpacked_deploy/' + mod_name)
 
-    with zipfile.ZipFile('archives/' + archive_name) as archive:
-        archive.extractall('unpacked_deploy/' + mod_name)
-
-    with zipfile.ZipFile('deploy/' + archive_name, 'w', zipfile.ZIP_DEFLATED) as archive:
-        os.chdir('unpacked_deploy/%s/'%(mod_name))
-        zip_folder('./', archive)
-        os.chdir('../../')
+        with zipfile.ZipFile('deploy/' + archive_name, 'w', zipfile.ZIP_DEFLATED) as archive:
+            os.chdir('unpacked_deploy/%s/'%(mod_name))
+            zip_folder('./', archive)
+            os.chdir('../../')
     
     mod = mods_list_by_name[mod_name]
 
@@ -171,6 +176,13 @@ for archive_name in os.listdir('archives'):
 
     os.chdir('../')
     
+    files_dict = {
+        'mod_autoupd' : open('archives/%s.zip'%(mod_name), 'rb')
+    }
+
+    if is_deploy:
+        files_dict['mod_deploy'] = open('deploy/%s.zip'%(mod_name), 'rb')
+    
     req = requests.post(
         'http://api.pavel3333.ru/update_mods.php',
         data = {
@@ -183,10 +195,7 @@ for archive_name in os.listdir('archives'):
             'settings'     : json.dumps(settings,           sort_keys=True),
             'dependencies' : json.dumps(list(dependencies), sort_keys=True)
         },
-        files = {
-            'mod_autoupd' : open('archives/%s.zip'%(mod_name), 'rb'),
-            'mod_deploy'  : open('deploy/%s.zip'%(mod_name),   'rb')
-        }
+        files = files_dict
     )
 
     print req.text

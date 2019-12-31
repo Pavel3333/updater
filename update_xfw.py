@@ -1,4 +1,5 @@
 import json
+import requests
 
 from urllib import urlretrieve
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -27,8 +28,9 @@ xfw_packages = {
     'com.modxvm.xfw.wwise'          : 'xfw_wwise'
 }
 
-if not exists('temp'):
-    mkdir('temp')
+if exists('temp'):
+    rmtree('temp')
+mkdir('temp')
 
 with ZipFile(filename) as archive:
     archive.extractall(
@@ -64,6 +66,7 @@ if exists(wotmod_wd):
                     metadata = json.load(meta)
                     
                     wotmods_metadata[metadata['id']] = {
+                        'id'           : metadata['id'],
                         'name'         : metadata['name'],
                         'description'  : metadata['description'],
                         
@@ -124,6 +127,21 @@ for mod_name in wotmods_metadata:
     else:
         config[mod_name]['dependencies'] = list(metadata['dependencies'])
 
+    is_deploy = False
+    if mod_name in config and config[mod_name].get('deploy', False):
+        is_deploy = True
+    
+    req = requests.post(
+        'http://api.pavel3333.ru/add_mod.php',
+        data = {
+            'ID'           : metadata['id'],
+            'name'         : metadata['name'],
+            'desc'         : metadata['description'],
+            'version'      : metadata['version'],
+            'deploy'       : is_deploy
+        }
+    )
+    print req.text
+
 with open('config.json', 'w') as cfg:
     json.dump(config, cfg, sort_keys=True, indent=4)
-    
