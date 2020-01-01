@@ -127,11 +127,18 @@ for mod_name in wotmods_metadata:
         config[mod_name]['deploy'] = False
     
     metadata = wotmods_metadata[mod_name]
+    
+    dependencies = set()
     if 'dependencies' not in metadata:
         print 'Dependencies not found in %s. Please set it manually'%(metadata['name'])
         config[mod_name]['dependencies'] = []
     else:
-        config[mod_name]['dependencies'] = list(metadata['dependencies'])
+        dependencies.update(set(metadata['dependencies']))
+    
+    if 'dependencies_optional' in metadata:
+        dependencies.update(set(metadata['dependencies_optional']))
+    
+    config[mod_name]['dependencies'] = list(dependencies)
 
     if 'name' not in config[mod_name]:
         config[mod_name]['name'] = {

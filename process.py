@@ -52,13 +52,18 @@ def move(path, child, curr_dic):
             move(subpath, subchild, subdic)
 
 def get_dependency(mod_name, is_deploy):
-    if mod_name not in config or 'dependencies' not in config[mod_name]: return set()
+    if mod_name not in config:
+        print mod_name, 'not in config'
+        return set()
+    if 'dependencies' not in config[mod_name]:
+        print 'dependencies not in config[mod_name]'
+        return set()
     
     dependency_list = config[mod_name]['dependencies']
     for dependency in dependency_list:
         dependencies.add(int(mods_list_by_name[dependency]['ID']))
         if is_deploy:
-            get_dependency(dependency)
+            get_dependency(dependency, is_deploy)
 
 def zip_folder(path, archive):
     for root, dirs, files in os.walk(path):
@@ -126,7 +131,7 @@ for archive_name in os.listdir('archives'):
 
     if is_deploy:
         for dependencyID in dependencies:
-            dependency_name = mods_list_by_ID[dependencyID]['name']
+            dependency_name = mods_list_by_ID[str(dependencyID)]['name']
             
             with zipfile.ZipFile('archives/%s.zip'%(dependency_name)) as archive:
                 archive.extractall('unpacked_deploy/' + mod_name)
@@ -189,7 +194,6 @@ for archive_name in os.listdir('archives'):
         'http://api.pavel3333.ru/update_mods.php',
         data = {
             'ID'           : mod['ID'],
-            'name'         : prefix,
             'tree'         : json.dumps(tree,               sort_keys=True),
             'paths'        : json.dumps(paths,              sort_keys=True),
             'names'        : json.dumps(names,              sort_keys=True),

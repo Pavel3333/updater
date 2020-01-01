@@ -1,3 +1,4 @@
+import codecs
 import os
 import json
 import requests
@@ -42,7 +43,8 @@ if exists(packages_wd):
         metadata = {}
         
         with open(package_path, 'r') as package:
-            metadata = packages_metadata[package_name] = json.load(package)
+            metadata = json.load(package)
+            packages_metadata[metadata['id']] = metadata
 
         print '%s:\n\tID: %s\n\tName: %s\n\tDescription: %s\n\tVersion: %s\n\tWoT version: %s'%(
             package_name,
@@ -73,7 +75,7 @@ rmtree('temp')
 remove(filename)
 
 config = {}
-with open('config.json', 'r') as cfg:
+with codecs.open('config.json', 'r', 'utf-8') as cfg:
     config = json.load(cfg)
 
 for mod_name in packages_metadata:
@@ -83,13 +85,22 @@ for mod_name in packages_metadata:
     
     if 'deploy' not in config[mod_name]:
         config[mod_name]['deploy'] = False
-    
+
     metadata = packages_metadata[mod_name]
+    
+    dependencies = set()
     if 'dependencies' not in metadata:
         print 'Dependencies not found in %s. Please set it manually'%(metadata['name'])
         config[mod_name]['dependencies'] = []
     else:
-        config[mod_name]['dependencies'] = list(metadata['dependencies'])
+        dependencies.update(set(metadata['dependencies']))
+    
+    if 'dependencies_optional' in metadata:
+        dependencies.update(set(metadata['dependencies_optional']))
+
+    print mod_name, 'deps:', dependencies
+    
+    config[mod_name]['dependencies'] = list(dependencies)
 
     if 'name' not in config[mod_name]:
         config[mod_name]['name'] = {
@@ -121,5 +132,5 @@ for mod_name in packages_metadata:
     )
     print req.text
     
-with open('config.json', 'w') as cfg:
-    json.dump(config, cfg, sort_keys=True, indent=4)
+with codecs.open('config.json', 'w', 'utf-8') as cfg:
+    json.dump(config, cfg, ensure_ascii=False, sort_keys=True, indent=4) #
