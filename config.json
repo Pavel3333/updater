@@ -251,6 +251,118 @@
             "RU": "XVM: Результаты боя"
         }
     }, 
+    "com.modxvm.xvm.configs": {
+        "dependencies": [
+            "com.modxvm.xvm.configs.sirmax", 
+            "com.modxvm.xvm.configs.default"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Configs Package", 
+            "EN": "XVM Configs Package", 
+            "RU": "XVM Configs Package"
+        }, 
+        "name": {
+            "CN": "XVM Configs", 
+            "EN": "XVM Configs", 
+            "RU": "XVM Configs"
+        }
+    }, 
+    "com.modxvm.xvm.configs.default": {
+        "dependencies": [], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Default Config", 
+            "EN": "XVM Default Config", 
+            "RU": "XVM: Конфигурация по умолчанию"
+        }, 
+        "excludeChecksum": [
+            "res_mods/configs/xvm/default/@xvm.xc", 
+            "res_mods/configs/xvm/default/alpha.xc", 
+            "res_mods/configs/xvm/default/battle.xc", 
+            "res_mods/configs/xvm/default/battleLabels.xc", 
+            "res_mods/configs/xvm/default/battleLabelsTemplates.xc", 
+            "res_mods/configs/xvm/default/battleLoading.xc", 
+            "res_mods/configs/xvm/default/battleLoadingTips.xc", 
+            "res_mods/configs/xvm/default/battleResults.xc", 
+            "res_mods/configs/xvm/default/camera.xc", 
+            "res_mods/configs/xvm/default/captureBar.xc", 
+            "res_mods/configs/xvm/default/carousel.xc", 
+            "res_mods/configs/xvm/default/carouselNormal.xc", 
+            "res_mods/configs/xvm/default/carouselSmall.xc", 
+            "res_mods/configs/xvm/default/colors.xc", 
+            "res_mods/configs/xvm/default/damageLog.xc", 
+            "res_mods/configs/xvm/default/elements.xc", 
+            "res_mods/configs/xvm/default/export.xc", 
+            "res_mods/configs/xvm/default/hangar.xc", 
+            "res_mods/configs/xvm/default/hitLog.xc", 
+            "res_mods/configs/xvm/default/hotkeys.xc", 
+            "res_mods/configs/xvm/default/iconset.xc", 
+            "res_mods/configs/xvm/default/login.xc", 
+            "res_mods/configs/xvm/default/markers.xc", 
+            "res_mods/configs/xvm/default/markersAliveExtended.xc", 
+            "res_mods/configs/xvm/default/markersAliveNormal.xc", 
+            "res_mods/configs/xvm/default/markersDeadExtended.xc", 
+            "res_mods/configs/xvm/default/markersDeadNormal.xc", 
+            "res_mods/configs/xvm/default/minimap.xc", 
+            "res_mods/configs/xvm/default/minimapAlt.xc", 
+            "res_mods/configs/xvm/default/minimapCircles.xc", 
+            "res_mods/configs/xvm/default/minimapLabels.xc", 
+            "res_mods/configs/xvm/default/minimapLabelsAlt.xc", 
+            "res_mods/configs/xvm/default/minimapLabelsData.xc", 
+            "res_mods/configs/xvm/default/minimapLabelsTemplates.xc", 
+            "res_mods/configs/xvm/default/minimapLines.xc", 
+            "res_mods/configs/xvm/default/minimapMapSize.xc", 
+            "res_mods/configs/xvm/default/playersPanel.xc", 
+            "res_mods/configs/xvm/default/sounds.xc", 
+            "res_mods/configs/xvm/default/squad.xc", 
+            "res_mods/configs/xvm/default/statisticForm.xc", 
+            "res_mods/configs/xvm/default/texts.xc", 
+            "res_mods/configs/xvm/default/tooltips.xc", 
+            "res_mods/configs/xvm/default/tweaks.xc", 
+            "res_mods/configs/xvm/default/userInfo.xc", 
+            "res_mods/configs/xvm/default/vehicleNames.xc", 
+            "res_mods/configs/xvm/default/widgets.xc", 
+            "res_mods/configs/xvm/default/widgetsTemplates.xc", 
+            "res_mods/configs/xvm/default/xmqp.xc"
+        ], 
+        "name": {
+            "CN": "XVM Default Config", 
+            "EN": "XVM Default Config", 
+            "RU": "XVM: Конфигурация по умолчанию"
+        }
+    }, 
+    "com.modxvm.xvm.configs.sirmax": {
+        "dependencies": [], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Sirmax Config", 
+            "EN": "XVM Sirmax Config", 
+            "RU": "XVM: Конфигурация от sirmax"
+        }, 
+        "excludeChecksum": [
+            "res_mods/configs/xvm/sirmax/sirmax-battleLabels.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax-carousel.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax-hangar.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax-markers.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax-minimap.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax-minimapCircles.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax-minimapLabels.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax-minimapLines.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax-panels-none.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax-panels.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax-snippet-bt.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax-snippet-pp.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax-snippet-test.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax-widgets.xc", 
+            "res_mods/configs/xvm/sirmax/sirmax.xc"
+        ], 
+        "name": {
+            "CN": "XVM Sirmax Config", 
+            "EN": "XVM Sirmax Config", 
+            "RU": "XVM: Конфигурация от sirmax"
+        }
+    }, 
     "com.modxvm.xvm.contacts": {
         "dependencies": [
             "com.modxvm.xvm"
@@ -377,6 +489,20 @@
             "CN": "XVM Limits", 
             "EN": "XVM Limits", 
             "RU": "XVM Limits"
+        }
+    }, 
+    "com.modxvm.xvm.lobby": {
+        "dependencies": [], 
+        "deploy": false, 
+        "description": {
+            "CN": "XVM Lobby module", 
+            "EN": "XVM Lobby module", 
+            "RU": "XVM Lobby module"
+        }, 
+        "name": {
+            "CN": "XVM Lobby", 
+            "EN": "XVM Lobby", 
+            "RU": "XVM Lobby"
         }
     }, 
     "com.modxvm.xvm.online": {

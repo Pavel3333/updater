@@ -1,3 +1,4 @@
+import codecs
 import json
 import requests
 
@@ -114,7 +115,7 @@ rmtree('temp')
 remove(filename)
 
 config = {}
-with open('config.json', 'r') as cfg:
+with codecs.open('config.json', 'r', 'utf-8') as cfg:
     config = json.load(cfg)
 
 for mod_name in wotmods_metadata:
@@ -170,5 +171,5 @@ for mod_name in wotmods_metadata:
     )
     print req.text
 
-with open('config.json', 'w') as cfg:
-    json.dump(config, cfg, sort_keys=True, indent=4)
+with codecs.open('config.json', 'w', 'utf-8') as cfg:
+    json.dump(config, cfg, ensure_ascii=False, sort_keys=True, indent=4)

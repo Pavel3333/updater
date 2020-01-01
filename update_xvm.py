@@ -2,6 +2,7 @@ import codecs
 import os
 import json
 import requests
+import sys
 
 from urllib import urlretrieve
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -10,39 +11,57 @@ from os.path import basename, exists, isfile, join
 from shutil import rmtree
 from xml.etree import ElementTree as ET
 
+sys.path.insert(0, 'libs/')
+
+import JSONxLoader
+
 def zip_folder(path, archive):
     for root, dirs, files in os.walk(path):
         for fil in files:
             archive.write(join(root, fil))
 
+def create_archive(wd, zip_path, folder_path, del_folder=True):
+    if exists(zip_path):
+        remove(zip_path)
+    
+    with ZipFile(zip_path, 'w', ZIP_DEFLATED) as out_zip:
+        chdir(wd)
+        zip_folder(folder_path, out_zip)
+        if del_folder:
+            rmtree(folder_path)
+        chdir('../')
+
 filename = 'xvm.zip'
 urlretrieve('https://nightly.modxvm.com/download/master/xvm_latest.zip', filename)
 print filename, 'successfully downloaded'
 
-if exists('temp'):
-    rmtree('temp')
-mkdir('temp')
+wd = 'temp/'
+
+if exists(wd):
+    rmtree(wd)
+mkdir(wd)
 
 with ZipFile(filename) as archive:
     archive.extractall(
-        'temp/',
+        wd,
         filter(lambda path: 'res_mods/' in path, archive.namelist())
     )
 
-packages_metadata = {}
-packages_wd = 'temp/res_mods/mods/xfw_packages/'
+zip_path_fmt = 'archives/%s.zip'
 
-if exists(packages_wd):
-    for package_name in listdir(packages_wd):
-        package_path = packages_wd + package_name + '/xfw_package.json'
+packages_metadata = {}
+packages_wd = 'res_mods/mods/xfw_packages/'
+
+if exists(wd + packages_wd):
+    for package_name in listdir(wd + packages_wd):
+        metadata = {}
         
+        package_path = wd + packages_wd + package_name + '/xfw_package.json'
         if not exists(package_path):
             print '%s: metainfo was not found'%(package_name)
             continue
-
-        metadata = {}
         
-        with open(package_path, 'r') as package:
+        with codecs.open(package_path, 'r', 'utf-8') as package:
             metadata = json.load(package)
             packages_metadata[metadata['id']] = metadata
 
@@ -58,21 +77,31 @@ if exists(packages_wd):
             print '\tDependencies: %s'%(metadata['dependencies'])
         if 'wot_version_exactmatch' in metadata:
             print '\tExactly match: %s'%(metadata['wot_version_exactmatch'])
-        
-        zip_dir  = 'mods/%s/com.modxvm.xfw/'%(metadata['wot_version_min'])
-        zip_path = 'archives/%s.zip'%(metadata['id'])
-        if exists(zip_path):
-            remove(zip_path)
-        
-        with ZipFile(zip_path, 'w', ZIP_DEFLATED) as out_zip:
-            chdir('temp/')
-            zip_folder('res_mods/mods/xfw_packages/%s/'%(package_name), out_zip)
-            chdir('../')
 
-#processing resources
-resources_wd = 'temp/res_mods/mods/shared_resources/'
-if exists(resources_wd):
-    if 'com.modxvm.xvm' in packages_metadata:
+        create_archive(wd, zip_path_fmt%(metadata['id']), packages_wd + package_name)
+
+#some packages need main XVM module version
+if 'com.modxvm.xvm' in packages_metadata:
+    #processing lobby
+    xvm_lobby = {
+        'id'      : 'com.modxvm.xvm.lobby',
+        'wd'      : packages_wd + 'xvm_lobby/',
+    }
+    if exists(wd + xvm_lobby['wd']) and xvm_lobby['id'] not in packages_metadata:
+        packages_metadata[xvm_lobby['id']] = {
+            'id'           : xvm_lobby['id'],
+            'name'         : 'XVM Lobby',
+            'description'  : 'XVM Lobby module',
+            'version'      : packages_metadata['com.modxvm.xvm']['version'],
+            'dependencies' : []
+        }
+        print 'Generated xvm_lobby metadata'
+
+        create_archive(wd, zip_path_fmt%(xvm_lobby['id']), xvm_lobby['wd'])
+
+    #processing resources
+    resources_wd = 'res_mods/mods/shared_resources/'
+    if exists(wd + resources_wd):
         metadata = {
             'id'           : 'com.modxvm.xvm.shared_resources',
             'name'         : 'XVM Shared Resources',
@@ -83,21 +112,85 @@ if exists(resources_wd):
         packages_metadata[metadata['id']] = metadata
         print 'Generated shared resources metadata'
 
-        zip_path = 'archives/%s.zip'%(metadata['id'])
-        if exists(zip_path):
-            remove(zip_path)
-        
-        with ZipFile(zip_path, 'w', ZIP_DEFLATED) as out_zip:
-            chdir('temp/')
-            zip_folder('res_mods/mods/shared_resources/', out_zip)
-            chdir('../')
-    else:
-        print 'Main XVM module metadata was not found'
+        create_archive(wd, zip_path_fmt%(metadata['id']), resources_wd)
+else:
+    print 'Main XVM module metadata was not found'
+    print 'lobby and shared resources won\'t be processed'
+
+#processing configs
+xvm_configs = {
+    'id'      : 'com.modxvm.xvm.configs',
+    'wd'      : 'res_mods/configs/xvm/',
+}
+if exists(wd + xvm_configs['wd']):
+    configs = {
+        'default' : {
+            'id'          : xvm_configs['id'] + '.default',
+            'name'        : 'XVM Default Config',
+            'description' : 'XVM Default Config',
+            'wd'          : xvm_configs['wd'] + 'default/',
+            'main_cfg'    : '@xvm.xc',
+            'data'        : {}
+        },
+        'sirmax' : {
+            'id'       : xvm_configs['id'] + '.sirmax',
+            'wd'       : xvm_configs['wd'] + 'sirmax/',
+            'name'        : 'XVM Sirmax Config',
+            'description' : 'XVM Sirmax Config',
+            'main_cfg' : 'sirmax.xc',
+            'data'     : {}
+        }
+    }
     
+    for cfg_name in configs:
+        cfg_path = wd + configs[cfg_name]['wd'] + configs[cfg_name]['main_cfg']
+        if exists(cfg_path):
+            data = configs[cfg_name]['data'] = JSONxLoader.load(cfg_path)
+            if data is None:
+                print cfg_name, 'config loading error'
+    
+            else:
+                excludeChecksum = []
+                for cfg_file in listdir(wd + configs[cfg_name]['wd']):
+                    if isfile(wd + configs[cfg_name]['wd'] + cfg_file):
+                        excludeChecksum.append(configs[cfg_name]['wd'] + cfg_file)
+                              
+                packages_metadata[configs[cfg_name]['id']] = {
+                    'id'              : configs[cfg_name]['id'],
+                    'name'            : configs[cfg_name]['name'],
+                    'description'     : configs[cfg_name]['description'],
+                    'version'         : data['configVersion'],
+                    'dependencies'    : [],
+                    'excludeChecksum' : excludeChecksum
+                }
+                print 'Generated %s config metadata'%(cfg_name)
+
+                create_archive(wd, zip_path_fmt%(configs[cfg_name]['id']), configs[cfg_name]['wd'], False)
+
+    for cfg_name in configs:
+        if exists(wd + configs[cfg_name]['wd']):
+            rmtree(wd + configs[cfg_name]['wd'])
+    
+    if configs['default']['data'].get('configVersion') is None:
+        print 'Config version was not found'
+    else:
+        packages_metadata[xvm_configs['id']] = {
+            'id'           : xvm_configs['id'],
+            'name'         : 'XVM Configs',
+            'description'  : 'XVM Configs Package',
+            'version'      : configs['default']['data']['configVersion'],
+            'dependencies' : [
+                configs['default']['id'],
+                configs['sirmax']['id']
+            ]
+        }
+        print 'Generated configs metadata'
+        
+        create_archive(wd, zip_path_fmt%(xvm_configs['id']), xvm_configs['wd'])
 
 #archive.extract(path, 'unpacked/%s/mods/%s/com.modxvm.xfw/')
 
-rmtree('temp')
+rmtree(wd)
 remove(filename)
 
 config = {}
@@ -126,6 +219,9 @@ for mod_name in packages_metadata:
     
     config[mod_name]['dependencies'] = list(dependencies)
 
+    if 'excludeChecksum' in metadata:
+        config[mod_name]['excludeChecksum'] = metadata['excludeChecksum']
+
     if 'name' not in config[mod_name]:
         config[mod_name]['name'] = {
             'RU' : metadata['name'],
@@ -139,6 +235,7 @@ for mod_name in packages_metadata:
             'EN' : metadata['description'],
             'CN' : metadata['description']
         }
+    
     
     req = requests.post(
         'http://api.pavel3333.ru/add_mod.php',
@@ -157,4 +254,4 @@ for mod_name in packages_metadata:
     print req.text
     
 with codecs.open('config.json', 'w', 'utf-8') as cfg:
-    json.dump(config, cfg, ensure_ascii=False, sort_keys=True, indent=4) #
+    json.dump(config, cfg, ensure_ascii=False, sort_keys=True, indent=4)
