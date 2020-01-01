@@ -29,22 +29,24 @@ xfw_packages = {
     'com.modxvm.xfw.wwise'          : 'xfw_wwise'
 }
 
-if exists('temp'):
-    rmtree('temp')
-mkdir('temp')
+wd = 'temp/'
+
+if exists(wd):
+    rmtree(wd)
+mkdir(wd)
 
 with ZipFile(filename) as archive:
     archive.extractall(
-        'temp/',
+        wd,
         filter(lambda path: path.startswith(wotmod_prefix), archive.namelist())
     )
 
 wotmods_metadata = {}
 
-wotmod_wd = 'temp/wotmod/'
-if exists(wotmod_wd):
-    for wotmod_name in listdir(wotmod_wd):
-        wotmod_path = wotmod_wd + wotmod_name
+wotmod_wd = 'wotmod/'
+if exists(wd + wotmod_wd):
+    for wotmod_name in listdir(wd + wotmod_wd):
+        wotmod_path = wd + wotmod_wd + wotmod_name
 
         name = None
                 
@@ -103,15 +105,14 @@ if exists(wotmod_wd):
         
         zip_dir  = 'mods/%s/com.modxvm.xfw/'%(metadata['wot_version_min'])
         zip_path = 'archives/%s.zip'%(metadata['id'])
+        
         if exists(zip_path):
             remove(zip_path)
         
         with ZipFile(zip_path, 'w', ZIP_DEFLATED) as out_zip:
             out_zip.write(wotmod_path, zip_dir + wotmod_name)
 
-#archive.extract(path, 'unpacked/%s/mods/%s/com.modxvm.xfw/')
-
-rmtree('temp')
+rmtree(wd)
 remove(filename)
 
 config = {}
@@ -158,15 +159,15 @@ for mod_name in wotmods_metadata:
     req = requests.post(
         'http://api.pavel3333.ru/add_mod.php',
         data = {
-            'ID'           : metadata['id'],
-            'name_ru'      : config[mod_name]['name']['RU'],
-            'name_en'      : config[mod_name]['name']['EN'],
-            'name_cn'      : config[mod_name]['name']['CN'],
-            'desc_ru'      : config[mod_name]['description']['RU'],
-            'desc_en'      : config[mod_name]['description']['EN'],
-            'desc_cn'      : config[mod_name]['description']['CN'],
-            'version'      : metadata['version'],
-            'deploy'       : config[mod_name]['deploy']
+            'ID'      : metadata['id'],
+            'name_ru' : config[mod_name]['name']['RU'],
+            'name_en' : config[mod_name]['name']['EN'],
+            'name_cn' : config[mod_name]['name']['CN'],
+            'desc_ru' : config[mod_name]['description']['RU'],
+            'desc_en' : config[mod_name]['description']['EN'],
+            'desc_cn' : config[mod_name]['description']['CN'],
+            'version' : metadata['version'],
+            'deploy'  : config[mod_name]['deploy']
         }
     )
     print req.text

@@ -44,7 +44,7 @@ mkdir(wd)
 with ZipFile(filename) as archive:
     archive.extractall(
         wd,
-        filter(lambda path: 'res_mods/' in path, archive.namelist())
+        archive.namelist()
     )
 
 zip_path_fmt = 'archives/%s.zip'
@@ -79,43 +79,6 @@ if exists(wd + packages_wd):
             print '\tExactly match: %s'%(metadata['wot_version_exactmatch'])
 
         create_archive(wd, zip_path_fmt%(metadata['id']), packages_wd + package_name)
-
-#some packages need main XVM module version
-if 'com.modxvm.xvm' in packages_metadata:
-    #processing lobby
-    xvm_lobby = {
-        'id'      : 'com.modxvm.xvm.lobby',
-        'wd'      : packages_wd + 'xvm_lobby/',
-    }
-    if exists(wd + xvm_lobby['wd']) and xvm_lobby['id'] not in packages_metadata:
-        packages_metadata[xvm_lobby['id']] = {
-            'id'           : xvm_lobby['id'],
-            'name'         : 'XVM Lobby',
-            'description'  : 'XVM Lobby module',
-            'version'      : packages_metadata['com.modxvm.xvm']['version'],
-            'dependencies' : []
-        }
-        print 'Generated xvm_lobby metadata'
-
-        create_archive(wd, zip_path_fmt%(xvm_lobby['id']), xvm_lobby['wd'])
-
-    #processing resources
-    resources_wd = 'res_mods/mods/shared_resources/'
-    if exists(wd + resources_wd):
-        metadata = {
-            'id'           : 'com.modxvm.xvm.shared_resources',
-            'name'         : 'XVM Shared Resources',
-            'description'  : 'XVM Shared Resources Package',
-            'version'      : packages_metadata['com.modxvm.xvm']['version'],
-            'dependencies' : []
-        }
-        packages_metadata[metadata['id']] = metadata
-        print 'Generated shared resources metadata'
-
-        create_archive(wd, zip_path_fmt%(metadata['id']), resources_wd)
-else:
-    print 'Main XVM module metadata was not found'
-    print 'lobby and shared resources won\'t be processed'
 
 #processing configs
 xvm_configs = {
@@ -188,14 +151,77 @@ if exists(wd + xvm_configs['wd']):
         
         create_archive(wd, zip_path_fmt%(xvm_configs['id']), xvm_configs['wd'])
 
-#archive.extract(path, 'unpacked/%s/mods/%s/com.modxvm.xfw/')
-
-rmtree(wd)
-remove(filename)
-
 config = {}
 with codecs.open('config.json', 'r', 'utf-8') as cfg:
     config = json.load(cfg)
+
+#some packages need main XVM module version
+if 'com.modxvm.xvm' in packages_metadata:
+    #processing lobby
+    xvm_lobby = {
+        'id'      : 'com.modxvm.xvm.lobby',
+        'wd'      : packages_wd + 'xvm_lobby/',
+    }
+    if exists(wd + xvm_lobby['wd']) and xvm_lobby['id'] not in packages_metadata:
+        packages_metadata[xvm_lobby['id']] = {
+            'id'           : xvm_lobby['id'],
+            'name'         : 'XVM Lobby',
+            'description'  : 'XVM Lobby module',
+            'version'      : packages_metadata['com.modxvm.xvm']['version'],
+            'dependencies' : []
+        }
+        print 'Generated xvm_lobby metadata'
+
+        create_archive(wd, zip_path_fmt%(xvm_lobby['id']), xvm_lobby['wd'])
+
+    #processing resources
+    resources_wd = 'res_mods/mods/shared_resources/'
+    if exists(wd + resources_wd):
+        metadata = {
+            'id'           : 'com.modxvm.xvm.shared_resources',
+            'name'         : 'XVM Shared Resources',
+            'description'  : 'XVM Shared Resources Package',
+            'version'      : packages_metadata['com.modxvm.xvm']['version'],
+            'dependencies' : []
+        }
+        packages_metadata[metadata['id']] = metadata
+        print 'Generated shared resources metadata'
+
+        create_archive(wd, zip_path_fmt%(metadata['id']), resources_wd)
+    
+    #building final XVM package
+    xvm_id = 'XVM'
+    
+    xfw_packages = set(filter(lambda name: 'com.modxvm.xfw' in name, config.keys()))
+    
+    dependencies = set(packages_metadata.keys())
+    dependencies.update(xfw_packages)
+
+    version = packages_metadata['com.modxvm.xvm']['version']
+    
+    packages_metadata[xvm_id] = {
+        'id'           : xvm_id,
+        'name'         : 'XVM',
+        'description'  : 'XVM - eXtended Visualization Mod',
+        'version'      : version,
+        'dependencies' : list(dependencies)
+    }
+    print 'Generated XVM metadata'
+
+    zip_path = zip_path_fmt%(xvm_id)
+    if exists(zip_path):
+        remove(zip_path)
+    
+    with ZipFile(zip_path, 'w', ZIP_DEFLATED) as out_zip:
+        for item in listdir(wd):
+            if isfile(wd + item):
+                out_zip.write(wd + item)
+else:
+    print 'Main XVM module metadata was not found'
+    print 'lobby and shared resources won\'t be processed'
+
+rmtree(wd)
+remove(filename)
 
 for mod_name in packages_metadata:
     if mod_name not in config:
@@ -236,7 +262,6 @@ for mod_name in packages_metadata:
             'CN' : metadata['description']
         }
     
-    
     req = requests.post(
         'http://api.pavel3333.ru/add_mod.php',
         data = {
@@ -248,7 +273,7 @@ for mod_name in packages_metadata:
             'desc_en'      : config[mod_name]['description']['EN'],
             'desc_cn'      : config[mod_name]['description']['CN'],
             'version'      : metadata['version'],
-            'deploy'       : config[mod_name]['deploy']
+            'deploy'       : 1 if config[mod_name]['deploy'] else 0
         }
     )
     print req.text
