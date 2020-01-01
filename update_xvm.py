@@ -26,7 +26,7 @@ mkdir('temp')
 with ZipFile(filename) as archive:
     archive.extractall(
         'temp/',
-        filter(lambda path: 'res_mods/mods/xfw_packages/' in path, archive.namelist())
+        filter(lambda path: 'res_mods/' in path, archive.namelist())
     )
 
 packages_metadata = {}
@@ -69,6 +69,32 @@ if exists(packages_wd):
             zip_folder('res_mods/mods/xfw_packages/%s/'%(package_name), out_zip)
             chdir('../')
 
+#processing resources
+resources_wd = 'temp/res_mods/mods/shared_resources/'
+if exists(resources_wd):
+    if 'com.modxvm.xvm' in packages_metadata:
+        metadata = {
+            'id'           : 'com.modxvm.xvm.shared_resources',
+            'name'         : 'XVM Shared Resources',
+            'description'  : 'XVM Shared Resources Package',
+            'version'      : packages_metadata['com.modxvm.xvm']['version'],
+            'dependencies' : []
+        }
+        packages_metadata[metadata['id']] = metadata
+        print 'Generated shared resources metadata'
+
+        zip_path = 'archives/%s.zip'%(metadata['id'])
+        if exists(zip_path):
+            remove(zip_path)
+        
+        with ZipFile(zip_path, 'w', ZIP_DEFLATED) as out_zip:
+            chdir('temp/')
+            zip_folder('res_mods/mods/shared_resources/', out_zip)
+            chdir('../')
+    else:
+        print 'Main XVM module metadata was not found'
+    
+
 #archive.extract(path, 'unpacked/%s/mods/%s/com.modxvm.xfw/')
 
 rmtree('temp')
@@ -97,8 +123,6 @@ for mod_name in packages_metadata:
     
     if 'dependencies_optional' in metadata:
         dependencies.update(set(metadata['dependencies_optional']))
-
-    print mod_name, 'deps:', dependencies
     
     config[mod_name]['dependencies'] = list(dependencies)
 
