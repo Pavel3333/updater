@@ -1,0 +1,24 @@
+{
+    "id": "com.pavel3333.mods.PositionsMod",
+    "name": "PositionsMod",
+    "description": "Signs on the nice positions in the battle",
+
+    "version": "1.0.1.4",
+    "dependencies": [
+        "com.modxvm.xfw.filewatcher", 
+        "com.modxvm.xfw.libraries", 
+        "com.modxvm.xfw.loader", 
+        "com.modxvm.xfw.native", 
+        "com.modxvm.xfw.wotfix.crashes", 
+        "com.modxvm.xfw.wotfix.hidpi"
+	],
+    
+    "url": "https://pavel3333.ru/positionsmod_free/",
+    "url_update": "https://pavel3333.ru/positionsmod_free/",
+    
+    "wot_version_min": "1.7.0.2",
+    "wot_version_exactmatch": false,
+    
+    "features": ["python", "native"],
+    "architecture": ["32bit"]
+}

@@ -1,0 +1,15 @@
+﻿{
+    "buttonMinimap": [ 38 ],
+    "buttonShow": [ 24 ],
+    "createFiring": true,
+    "createLFD": true,
+    "createLighting": true,
+    "createMarkers": true,
+    "enabled": true,
+    "hideMarkersInBattle": false,
+    "playAnimation": true,
+    "newModels": true,
+    "showBattleGreetings": true,
+    "showOnStartBattle": true,
+    "version": 105
+}
