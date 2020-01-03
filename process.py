@@ -188,9 +188,10 @@ for archive_name in os.listdir('archives'):
     
     try:
         req_decoded = json.loads(req.text)
-        continue
     except Exception:
         print 'invalid response:', req.text
+        continue
+    
     if req_decoded['status'] == 'ok':
         print 'successed'
         print 'log:',  req_decoded['log']
