@@ -170,7 +170,22 @@ for mod_name in wotmods_metadata:
             'deploy'  : config[mod_name]['deploy']
         }
     )
-    print req.text
+    
+    try:
+        req_decoded = json.loads(req.text)
+        continue
+    except Exception:
+        print 'invalid response:', req.text
+    if req_decoded['status'] == 'ok':
+        print 'successed'
+        print 'log:',  req_decoded['log']
+        print 'data:', req_decoded['data']
+    elif req_decoded['status'] == 'error':
+        print 'failed'
+        print 'error code:',  req_decoded['code']
+        print 'description:', req_decoded['desc']
+    else:
+        print 'invalid response:', req_decoded
 
 with codecs.open('config.json', 'w', 'utf-8') as cfg:
     json.dump(config, cfg, ensure_ascii=False, sort_keys=True, indent=4)

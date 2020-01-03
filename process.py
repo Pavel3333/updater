@@ -163,25 +163,7 @@ for archive_name in os.listdir('archives'):
         with open(settings_path, 'r') as fil:
             settings = json.loads(fil.read().decode('utf-8-sig'))
 
-    os.chdir('../../json/')
-    
-    prefix = '%s_%s_#%d_%s'%(mod_name, mod['ver'], int(mod['build']) + 1, mod['upd'])
-    
-    with open(prefix + '.json', 'w') as fil:
-        fil.write(
-            json.dumps(
-                {'tree'     : tree,
-                 'paths'    : paths,
-                 'names'    : names,
-                 'hashes'   : hashes,
-                 'settings' : settings
-                },
-                sort_keys=True,
-                indent=INDENT
-            )
-        )
-
-    os.chdir('../')
+    os.chdir('../../')
     
     files_dict = {
         'mod_autoupd' : open('archives/%s.zip'%(mod_name), 'rb')
@@ -203,5 +185,36 @@ for archive_name in os.listdir('archives'):
         },
         files = files_dict
     )
-
-    print req.text
+    
+    try:
+        req_decoded = json.loads(req.text)
+        continue
+    except Exception:
+        print 'invalid response:', req.text
+    if req_decoded['status'] == 'ok':
+        print 'successed'
+        print 'log:',  req_decoded['log']
+        print 'data:', req_decoded['data']
+        
+        name = req_decoded['data']
+    
+        with open('json/%s.json'%(name), 'w') as fil:
+            fil.write(
+                json.dumps(
+                    {'tree'     : tree,
+                     'paths'    : paths,
+                     'names'    : names,
+                     'hashes'   : hashes,
+                     'settings' : settings
+                    },
+                    sort_keys=True,
+                    indent=INDENT
+                )
+            )
+        
+    elif req_decoded['status'] == 'error':
+        print 'failed'
+        print 'error code:',  req_decoded['code']
+        print 'description:', req_decoded['desc']
+    else:
+        print 'invalid response:', req_decoded
