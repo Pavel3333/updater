@@ -213,9 +213,11 @@ if 'com.modxvm.xvm' in packages_metadata:
         remove(zip_path)
     
     with ZipFile(zip_path, 'w', ZIP_DEFLATED) as out_zip:
-        for item in listdir(wd):
-            if isfile(wd + item):
-                out_zip.write(wd + item)
+        chdir(wd)
+        for item in listdir('./'):
+            if isfile(item):
+                out_zip.write(item)
+        chdir('../')
 else:
     print 'Main XVM module metadata was not found'
     print 'lobby and shared resources won\'t be processed'
