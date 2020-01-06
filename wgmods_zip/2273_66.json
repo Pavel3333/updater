@@ -1,0 +1,38 @@
+{
+    "archives": {
+        "1.7.0.1_1.7.0.1": {
+            "filename": "/media/mod_files/BattleStats_ZStz7NS.zip", 
+            "game_version": "1.7.0.1", 
+            "mod_version": "1.7.0.1", 
+            "original_filename": "BattleStats.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/BattleStats_ZStz7NS.zip"
+        }, 
+        "1.7.0.2_1.7.0.2": {
+            "filename": "/media/mod_files/BattleStats_KQQarCc.zip", 
+            "game_version": "1.7.0.2", 
+            "mod_version": "1.7.0.2", 
+            "original_filename": "BattleStats.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/BattleStats_KQQarCc.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "EN": "<p>After Battle stats windows with more common sense. Green = Win, Red = Lose, Orange = Draw</p>\n<p>unpack the archive to your game folder (e.g.: C:\\Games\\World_of_Tanks)</p>", 
+        "RU": "<p>After Battle stats windows with more common sense. Green = Win, Red = Lose, Orange = Draw</p>\n<p>unpack the archive to your game folder (e.g.: C:\\Games\\World_of_Tanks)</p>"
+    }, 
+    "downloads": 1582, 
+    "img_cover": "https://wgmods.net/media/mod_files/win_XZ0Vac5.jpg", 
+    "mark": "3.8", 
+    "name": {
+        "EN": "Customized After Battle stats windows [win/loss/draw]", 
+        "RU": "Customized After Battle stats windows [win/loss/draw]"
+    }, 
+    "owner": "Ragnarocek", 
+    "rating": 1.43710005399863, 
+    "tags": [
+        18, 
+        22, 
+        20
+    ], 
+    "votes_count": 67
+}

@@ -8,28 +8,13 @@ from urllib import urlretrieve
 from zipfile import ZipFile, ZIP_DEFLATED
 from os import chdir, rename, remove, listdir, mkdir, makedirs
 from os.path import basename, exists, isfile, join
-from shutil import rmtree
 from xml.etree import ElementTree as ET
+
+from common import my_rmtree, check_depends, zip_folder, create_archive
 
 sys.path.insert(0, 'libs/')
 
 import JSONxLoader
-
-def zip_folder(path, archive):
-    for root, dirs, files in os.walk(path):
-        for fil in files:
-            archive.write(join(root, fil))
-
-def create_archive(wd, zip_path, folder_path, del_folder=True):
-    if exists(zip_path):
-        remove(zip_path)
-    
-    with ZipFile(zip_path, 'w', ZIP_DEFLATED) as out_zip:
-        chdir(wd)
-        zip_folder(folder_path, out_zip)
-        if del_folder:
-            rmtree(folder_path)
-        chdir('../')
 
 filename = 'xvm.zip'
 urlretrieve('https://nightly.modxvm.com/download/master/xvm_latest.zip', filename)
@@ -38,14 +23,11 @@ print filename, 'successfully downloaded'
 wd = 'temp/'
 
 if exists(wd):
-    rmtree(wd)
+    my_rmtree(wd)
 mkdir(wd)
 
 with ZipFile(filename) as archive:
-    archive.extractall(
-        wd,
-        archive.namelist()
-    )
+    archive.extractall(wd)
 
 zip_path_fmt = 'archives/%s.zip'
 
@@ -132,7 +114,7 @@ if exists(wd + xvm_configs['wd']):
 
     for cfg_name in configs:
         if exists(wd + configs[cfg_name]['wd']):
-            rmtree(wd + configs[cfg_name]['wd'])
+            my_rmtree(wd + configs[cfg_name]['wd'])
     
     if configs['default']['data'].get('configVersion') is None:
         print 'Config version was not found'
@@ -196,6 +178,7 @@ if 'com.modxvm.xvm' in packages_metadata:
     
     dependencies = set(packages_metadata.keys())
     dependencies.update(xfw_packages)
+    dependencies.update(check_depends(wd))
 
     version = packages_metadata['com.modxvm.xvm']['version']
     
@@ -222,7 +205,7 @@ else:
     print 'Main XVM module metadata was not found'
     print 'lobby and shared resources won\'t be processed'
 
-rmtree(wd)
+my_rmtree(wd)
 remove(filename)
 
 for mod_name in packages_metadata:
@@ -281,9 +264,10 @@ for mod_name in packages_metadata:
     
     try:
         req_decoded = json.loads(req.text)
-        continue
     except Exception:
         print 'invalid response:', req.text
+        continue
+    
     if req_decoded['status'] == 'ok':
         print 'successed'
         print 'log:',  req_decoded['log']

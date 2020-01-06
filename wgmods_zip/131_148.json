@@ -1,0 +1,41 @@
+{
+    "archives": {
+        "1.0.0.1_2.1.1": {
+            "filename": "/media/mod_files/Nonnas_IS-2_winter_skin_Chinese_XZursSc1.0.zip", 
+            "game_version": "1.0.0.1", 
+            "mod_version": "2.1.1", 
+            "original_filename": "Nonnas_IS-2_winter_skin_Chinese_XZursSc(1.0).zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/Nonnas_IS-2_winter_skin_Chinese_XZursSc1.0.zip"
+        }, 
+        "9.19.0.1_2.1": {
+            "filename": "/media/mod_files/Nonnas_IS-2_winter_skin_Chinese_XZursSc.zip", 
+            "game_version": "9.19.0.1", 
+            "mod_version": "2.1", 
+            "original_filename": "Nonna's IS-2, winter skin (Chinese).zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/Nonnas_IS-2_winter_skin_Chinese_XZursSc.zip"
+        }, 
+        "9.19_2": {
+            "filename": "/media/mod_files/Nonnas_IS-2_winter_skin_Chinese.zip", 
+            "game_version": "9.19", 
+            "mod_version": "2", 
+            "original_filename": "Nonna's IS-2, winter skin (Chinese).zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/Nonnas_IS-2_winter_skin_Chinese.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "RU": "<p>Skin based on Nonna&rsquo;s IS-2 model 1944, from Girls und Panzer, for the Chinese IS-2</p>\n<p>This is it&rsquo;s form from the series, when it was painted white, used by Pravda during the semifinals match against Ooarai, where it knocked out the most tanks during the match</p>\n<p>Olive drab version coming up next</p>\n<p><em>edit</em></p>\n<p>It&rsquo;s illegal to monetise this stuff because Girls und Panzer is copyrighted and belongs to Girls und Panzer Projekt</p>\n<p>Download and use only for non profit purposes</p>\n<p>Download the zip file, extract the folder called &ldquo;vehicles&rdquo; inside and add it to here:</p>\n<p>C:\\Games\\World_of_Tanks\\res_mods\\1.0.0.1</p>\n<p>if you alredy have an existing &ldquo;vehicles&rdquo; and &ldquo;chinese&rdquo; folder, open the mod and extract the file &ldquo;Ch10_IS2&rdquo; to the &ldquo;chinese&rdquo; folder you alredy have</p>"
+    }, 
+    "downloads": 131, 
+    "img_cover": "https://wgmods.net/media/jingoIS2snow.png", 
+    "mark": "4.6", 
+    "name": {
+        "RU": "Nonna's IS-2 from the Girls und Panzer Anime, for the Chinese IS-2"
+    }, 
+    "owner": "Cheeseknife", 
+    "rating": 1.00369316514777, 
+    "tags": [
+        16
+    ], 
+    "votes_count": 11
+}

@@ -1,0 +1,38 @@
+{
+    "archives": {
+        "1.7.0.1_1.7.0.1": {
+            "filename": "/media/mod_files/techtree_colors_Mvp72ky.zip", 
+            "game_version": "1.7.0.1", 
+            "mod_version": "1.7.0.1", 
+            "original_filename": "techtree_colors.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/techtree_colors_Mvp72ky.zip"
+        }, 
+        "1.7.0.2_1.7.0.2": {
+            "filename": "/media/mod_files/techtree_colors.zip", 
+            "game_version": "1.7.0.2", 
+            "mod_version": "1.7.0.2", 
+            "original_filename": "techtree_colors.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/techtree_colors.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "EN": "<p>Addon is adding colored ribbons to tank icons in tech tree. Colors are based on Riskynet&rsquo;s color scheme.</p>\n", 
+        "RU": "<p>Addon is adding colored ribbons to tank icons in tech tree. Colors are based on Riskynet&rsquo;s color scheme.</p>\n<p>unpack archive to your game directory (e.g..: C:\\Games\\World_of_Tanks)</p>"
+    }, 
+    "downloads": 1178, 
+    "img_cover": "https://wgmods.net/media/PogByl0l.jpg.9e1f5716fd3d55d46656a27668fd67a3.jpg", 
+    "mark": "4.6", 
+    "name": {
+        "EN": "Techtree colored icons [Riskynet's style]", 
+        "RU": "Techtree colored icons [Riskynet's style]"
+    }, 
+    "owner": "Ragnarocek", 
+    "rating": 1.44077062484161, 
+    "tags": [
+        18, 
+        13, 
+        14
+    ], 
+    "votes_count": 46
+}

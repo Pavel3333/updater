@@ -1,0 +1,36 @@
+{
+    "archives": {
+        "1.0.0.2_1.0.0.2": {
+            "filename": "/media/mod_files/_INTERFACE_.zip", 
+            "game_version": "1.0.0.2", 
+            "mod_version": "1.0.0.2", 
+            "original_filename": "_INTERFACE_.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/_INTERFACE_.zip"
+        }, 
+        "9.19.0.1_3": {
+            "filename": "/media/mod_files/_INTERFACE_0.9.19.0.1_.zip", 
+            "game_version": "9.19.0.1", 
+            "mod_version": "3", 
+            "original_filename": "_INTERFACE_0.9.19.0.1_.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/_INTERFACE_0.9.19.0.1_.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "RU": "<p>Изменения внешнего вида ангарного интерфейса.</p>\n<ol>\n<li>Папку Res_Mods скопировать в корень игры <br />\n   К примеру в C:\\Games\\World_of_Tanks\\</li>\n</ol>\n<p>уважаемые друзья прошу финансовой помощи для приобретения монитора<br />\n   номер карты сбербанка 4276 7400 1529 7732<br />\n   qiwi +7 914 802 18 59<br />\n   всем спасибо</p>"
+    }, 
+    "downloads": 308, 
+    "img_cover": "https://wgmods.net/media/1_DTkdCB3.jpg", 
+    "mark": "4.2", 
+    "name": {
+        "RU": "Интерфейс ангара."
+    }, 
+    "owner": "____P_H_A_R_A_O_N____", 
+    "rating": 1.02911976736602, 
+    "tags": [
+        18, 
+        13, 
+        20
+    ], 
+    "votes_count": 24
+}

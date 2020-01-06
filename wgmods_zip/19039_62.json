@@ -1,0 +1,36 @@
+{
+    "archives": {
+        "1.7.0.1_1.7.0.1": {
+            "filename": "/media/mod_files/ragnastats_ext_EIp9PQD.zip", 
+            "game_version": "1.7.0.1", 
+            "mod_version": "1.7.0.1", 
+            "original_filename": "ragnastats_ext.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/ragnastats_ext_EIp9PQD.zip"
+        }, 
+        "1.7.0.2_1.7.0.2": {
+            "filename": "/media/mod_files/ragnastats_ext_3vKKb4Z.zip", 
+            "game_version": "1.7.0.2", 
+            "mod_version": "1.7.0.2", 
+            "original_filename": "ragnastats_ext.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/ragnastats_ext_3vKKb4Z.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "EN": "<p>CZ/SK/PL/EN/RU session stats modification</p>\n<p>CZ: obsah archivu rozbalte do zlozky s hrou (napr.: C:\\Games\\World_of_Tanks)<br>EN: unpack archive to game folder (eg: C:\\Games\\World_of_Tanks)</p><p>for other langs than czech: read readme.txt in Optional Configs directory</p><p>For good visibility of WN8/EFF I recommend this mod: https://wgmods.net/66/</p>", 
+        "RU": "<p>CZ/SK/PL/EN/RU session stats modification</p>\n<p>CZ: obsah archivu rozbalte do zlozky s hrou (napr.: C:\\Games\\World_of_Tanks)<br>EN: unpack archive to game folder (eg: C:\\Games\\World_of_Tanks)</p><p>for other langs than czech: read readme.txt in Optional Configs directory</p><p>For good visibility of WN8/EFF I recommend this mod: https://wgmods.net/66/</p>"
+    }, 
+    "downloads": 9096, 
+    "img_cover": "https://wgmods.net/media/5MfeME9.png.9c1db354cd4d30080bd5d3d7769316d4.png", 
+    "mark": "4.3", 
+    "name": {
+        "EN": "Ragnastats Extended CZ/SK/PL/EN/RU", 
+        "RU": "Ragnastats Extended CZ/SK/PL/EN/RU"
+    }, 
+    "owner": "Ragnarocek", 
+    "rating": 2.09316219270443, 
+    "tags": [
+        22
+    ], 
+    "votes_count": 116
+}

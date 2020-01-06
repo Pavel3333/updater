@@ -1,0 +1,30 @@
+{
+    "archives": {
+        "1.7.0.2_#107": {
+            "filename": "/media/mod_files/mirrored_vehicle_icons.zip", 
+            "game_version": "1.7.0.2", 
+            "mod_version": "#107", 
+            "original_filename": "mirrored_vehicle_icons.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/mirrored_vehicle_icons.zip"
+        }
+    }, 
+    "author": "night_dragon_on", 
+    "description": {
+        "EN": "<p>►Modification page on the forum: <a href=\"https://kr.cm/f/t/35159/\">Koreanrandom</a><br>►Author donation page: <a href=\"https://clc.la/support_page\">Donation</a></p><p>The files are designed to disable the mirroring of custom vehicles icons in size 80x24 pixels. Icons of vehicles of this size are created by the program <a href=\"https://bitbucket.org/rstarkov/tankiconmaker\">TankIconMaker</a></p><p><strong>Modified elements:&nbsp;</strong><br>– battle loading window;<br>– window by pressing Tab button;<br>– the players panel (ears).<br>– window of the training room;<br>– tooltip when hovering on a crew.</p><p><strong>Turn off mirroring for elements in battle:</strong></p><p>“mvi_battle” – without deleting items<br>“mvi_battle_clear” – with the removal of vehicles level</p><p><strong>Turn off mirroring for elements in the hangar:</strong></p><p>“mvi_hangar” – without deleting items<br>“mvi_hangar_clear” – title of vehicles<br>“mvi_hangar_clear-all” – title and level of vehicles</p>\n<p>1) Download the archive<br>2) Depending on the selected mod, the contents of the folder should be unpacked into the client’s root directory (in the folder with the game client)</p><blockquote><p>In this addons, the icons of the vehicles are not included!</p></blockquote>", 
+        "RU": "<p>►Страница мода на форуме: <a href=\"https://kr.cm/f/t/35159/\">Koreanrandom</a><br>►Страница поддержки автора: <a href=\"https://clc.la/support_page\">Поддержать</a></p><p>Файлы предназначены для отключения зеркальности кастомных иконок техники размером 80х24 пикселя. Иконки техники данного размера создаются программой <a href=\"https://bitbucket.org/rstarkov/tankiconmaker\">TankIconMaker</a></p><p><strong>Модифицированные элементы:</strong><br>– окно загрузки боя;<br>– окно по нажатию Tab;<br>– панели команд (уши).<br>– окно тренировочной комнаты;<br>– всплывающая подсказка при наведении на экипаж.</p><p><strong>Отключение зеркальности для элементов в бою:</strong></p><p>“mvi_battle” – без удаления элементов<br>“mvi_battle_clear” – с удалением уровня техники</p><p><strong>Отключение зеркальности для элементов в ангаре:</strong></p><p>“mvi_hangar” – без удаления элементов<br>“mvi_hangar_clear” – с удалением уровня техники<br>“mvi_hangar_clear-all” – с удалением уровня и названия техники</p>\n<p>1) Скачать архив<br>2) В зависимости от выбранного мода содержимое папки распаковать в корневую директорию клиента (в папку с игровым клиентом)</p><blockquote><p>В данном дополнении иконки техники не входят в комплект!</p></blockquote>"
+    }, 
+    "downloads": 3070, 
+    "img_cover": "https://wgmods.net/media/logo.png", 
+    "mark": "4.0", 
+    "name": {
+        "EN": "Disabling the mirroring of icons", 
+        "RU": "Отключение зеркальности иконок"
+    }, 
+    "owner": "night_dragon_on", 
+    "rating": 1.88206391092138, 
+    "tags": [
+        14, 
+        20
+    ], 
+    "votes_count": 144
+}

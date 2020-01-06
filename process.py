@@ -3,9 +3,10 @@ import os
 import requests
 import json
 import zipfile
-import shutil
 
 from hashlib import md5
+
+from common import my_rmtree, zip_folder
 
 DEBUG = False
 INDENT = 4 if DEBUG else 0
@@ -22,6 +23,11 @@ hashes = {}
 dependencies = set()
 
 exclude_paths = []
+
+archives_wd        = 'archives/'
+unpacked_wd        = 'unpacked/'
+unpacked_deploy_wd = 'unpacked_deploy/'
+deploy_wd          = 'deploy/'
 
 def move(path, child, curr_dic):
     subpath = path + child
@@ -51,24 +57,29 @@ def move(path, child, curr_dic):
         for subchild in os.listdir(subpath):
             move(subpath, subchild, subdic)
 
-def get_dependency(mod_name, is_deploy):
+def get_dependency(main_mod_name, mod_name=None):
+    if main_mod_name not in config:
+        print main_mod_name, 'not in config'
+        return set()
+    
+    if mod_name is None:
+        mod_name = main_mod_name
+    
     if mod_name not in config:
         print mod_name, 'not in config'
         return set()
     if 'dependencies' not in config[mod_name]:
-        print 'dependencies not in config[mod_name]'
+        print 'dependencies not in', mod_name, 'config'
         return set()
     
     dependency_list = config[mod_name]['dependencies']
     for dependency in dependency_list:
+        if dependency == main_mod_name: #recursion protection
+            continue
+        
         dependencies.add(int(mods_list_by_name[dependency]['ID']))
-        if is_deploy:
-            get_dependency(dependency, is_deploy)
-
-def zip_folder(path, archive):
-    for root, dirs, files in os.walk(path):
-        for fil in files:
-            archive.write(os.path.join(root, fil))
+        if config[main_mod_name]['deploy']:
+            get_dependency(main_mod_name, dependency)
     
 with open('config.json', 'r') as fil:
     config = json.load(fil)
@@ -86,21 +97,21 @@ for ID in mods_list_by_ID:
         'settings_path' : mod['settings_path']
     }
 
-if os.path.exists('unpacked'):
-    shutil.rmtree('unpacked')
-os.mkdir('unpacked')
+if os.path.exists(unpacked_wd):
+    my_rmtree(unpacked_wd)
+os.mkdir(unpacked_wd)
 
-if os.path.exists('unpacked_deploy'):
-    shutil.rmtree('unpacked_deploy')
-os.mkdir('unpacked_deploy')
+if os.path.exists(unpacked_deploy_wd):
+    my_rmtree(unpacked_deploy_wd)
+os.mkdir(unpacked_deploy_wd)
 
-if os.path.exists('deploy'):
-    shutil.rmtree('deploy')
-os.mkdir('deploy')
+if os.path.exists(deploy_wd):
+    my_rmtree(deploy_wd)
+os.mkdir(deploy_wd)
 
-for archive_name in os.listdir('archives'):
+for archive_name in os.listdir(archives_wd):
     if '.zip' not in archive_name:
-        raise StandardError('Archive %s is not ZIP-archive'%(archive_name))
+        continue
 
     exclude_paths = []
 
@@ -113,6 +124,7 @@ for archive_name in os.listdir('archives'):
     settings = {}
     
     mod_name = str(archive_name.replace('.zip', ''))
+    print 'mod:', mod_name
 
     is_deploy = False
     if mod_name in config and config[mod_name].get('deploy', False):
@@ -120,27 +132,33 @@ for archive_name in os.listdir('archives'):
     
     dependencies = set()
 
-    get_dependency(mod_name, is_deploy)
-    print mod_name, 'mod dependencies:', dependencies
+    get_dependency(mod_name)
+    '\tdependencies:', dependencies
     
     if mod_name not in mods_list_by_name:
-        raise StandardError('Mod %s is not exists on the server!'%(mod_name))
+        raise StandardError('Mod is not exists on the server!')
 
-    with zipfile.ZipFile('archives/' + archive_name) as archive:
-        archive.extractall('unpacked/' + mod_name)
+    with zipfile.ZipFile(archives_wd + archive_name) as archive:
+        archive.extractall(unpacked_wd + mod_name)
+
+    if not os.path.exists(unpacked_wd + mod_name):
+        os.mkdir(unpacked_wd + mod_name)
 
     if is_deploy:
         for dependencyID in dependencies:
             dependency_name = mods_list_by_ID[str(dependencyID)]['name']
             
-            with zipfile.ZipFile('archives/%s.zip'%(dependency_name)) as archive:
-                archive.extractall('unpacked_deploy/' + mod_name)
+            with zipfile.ZipFile(archives_wd + '%s.zip'%(dependency_name)) as archive:
+                archive.extractall(unpacked_deploy_wd + mod_name)
         
-        with zipfile.ZipFile('archives/' + archive_name) as archive:
-            archive.extractall('unpacked_deploy/' + mod_name)
+        with zipfile.ZipFile(archives_wd + archive_name) as archive:
+            archive.extractall(unpacked_deploy_wd + mod_name)
 
-        with zipfile.ZipFile('deploy/' + archive_name, 'w', zipfile.ZIP_DEFLATED) as archive:
-            os.chdir('unpacked_deploy/%s/'%(mod_name))
+        if not os.path.exists(unpacked_deploy_wd + mod_name):
+            os.mkdir(unpacked_deploy_wd + mod_name)
+
+        with zipfile.ZipFile(deploy_wd + archive_name, 'w', zipfile.ZIP_DEFLATED) as archive:
+            os.chdir(unpacked_deploy_wd + mod_name + '/')
             zip_folder('./', archive)
             os.chdir('../../')
     
@@ -153,24 +171,24 @@ for archive_name in os.listdir('archives'):
     if str(mod_name) in config and 'excludeChecksum' in config[mod_name]:
         exclude_paths.extend(config[mod_name]['excludeChecksum'])
     
-    os.chdir('unpacked/%s/'%(mod_name))
+    os.chdir(unpacked_wd + mod_name + '/')
+    
     for child in os.listdir('./'):
         move('', child, tree)
 
     settings_path = mod['settings_path']
     if settings_path:
-        print 'settings_path', settings_path
         with open(settings_path, 'r') as fil:
             settings = json.loads(fil.read().decode('utf-8-sig'))
 
     os.chdir('../../')
     
     files_dict = {
-        'mod_autoupd' : open('archives/%s.zip'%(mod_name), 'rb')
+        'mod_autoupd' : open(archives_wd + '%s.zip'%(mod_name), 'rb')
     }
 
     if is_deploy:
-        files_dict['mod_deploy'] = open('deploy/%s.zip'%(mod_name), 'rb')
+        files_dict['mod_deploy'] = open(deploy_wd + '%s.zip'%(mod_name), 'rb')
     
     req = requests.post(
         'http://api.pavel3333.ru/update_mods.php',
@@ -188,24 +206,26 @@ for archive_name in os.listdir('archives'):
     
     try:
         req_decoded = json.loads(req.text)
-        continue
     except Exception:
-        print 'invalid response:', req.text
+        print '\tinvalid response:', req.text
+        continue
+    
     if req_decoded['status'] == 'ok':
-        print 'successed'
-        print 'log:',  req_decoded['log']
-        print 'data:', req_decoded['data']
+        print '\tsuccessed'
+        print '\tlog:',  req_decoded['log']
+        print '\tdata:', req_decoded['data']
         
         name = req_decoded['data']
     
         with open('json/%s.json'%(name), 'w') as fil:
             fil.write(
                 json.dumps(
-                    {'tree'     : tree,
-                     'paths'    : paths,
-                     'names'    : names,
-                     'hashes'   : hashes,
-                     'settings' : settings
+                    {
+                        'tree'     : tree,
+                         'paths'    : paths,
+                         'names'    : names,
+                         'hashes'   : hashes,
+                         'settings' : settings
                     },
                     sort_keys=True,
                     indent=INDENT
@@ -213,8 +233,8 @@ for archive_name in os.listdir('archives'):
             )
         
     elif req_decoded['status'] == 'error':
-        print 'failed'
-        print 'error code:',  req_decoded['code']
-        print 'description:', req_decoded['desc']
+        print '\tfailed'
+        print '\terror code:',  req_decoded['code']
+        print '\tdescription:', req_decoded['desc']
     else:
-        print 'invalid response:', req_decoded
+        print '\tinvalid response:', req_decoded

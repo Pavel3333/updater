@@ -1,0 +1,62 @@
+{
+    "archives": {
+        "1.2.0.1_1.2.3": {
+            "filename": "/media/mod_files/HideHangarUI_1.2.3.zip", 
+            "game_version": "1.2.0.1", 
+            "mod_version": "1.2.3", 
+            "original_filename": "HideHangarUI_1.2.3.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/HideHangarUI_1.2.3.zip"
+        }, 
+        "1.3.0.1_1.2.4": {
+            "filename": "/media/mod_files/HideHangarUI_1.2.4.zip", 
+            "game_version": "1.3.0.1", 
+            "mod_version": "1.2.4", 
+            "original_filename": "HideHangarUI_1.2.4.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/HideHangarUI_1.2.4.zip"
+        }, 
+        "1.4.0.1_1.2.5": {
+            "filename": "/media/mod_files/HideHangarUI_1.2.5.zip", 
+            "game_version": "1.4.0.1", 
+            "mod_version": "1.2.5", 
+            "original_filename": "HideHangarUI_1.2.5.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/HideHangarUI_1.2.5.zip"
+        }, 
+        "1.4.1.1_1.2.6": {
+            "filename": "/media/mod_files/HideHangarUI_1.2.6.zip", 
+            "game_version": "1.4.1.1", 
+            "mod_version": "1.2.6", 
+            "original_filename": "HideHangarUI_1.2.6.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/HideHangarUI_1.2.6.zip"
+        }, 
+        "1.5.0.1_1.2.7": {
+            "filename": "/media/mod_files/HideHangarUI_1.2.7.zip", 
+            "game_version": "1.5.0.1", 
+            "mod_version": "1.2.7", 
+            "original_filename": "HideHangarUI_1.2.7.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/HideHangarUI_1.2.7.zip"
+        }, 
+        "1.5.1.1_1.2.8": {
+            "filename": "/media/mod_files/HideHangarUI_1.2.8.zip", 
+            "game_version": "1.5.1.1", 
+            "mod_version": "1.2.8", 
+            "original_filename": "HideHangarUI_1.2.8.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/HideHangarUI_1.2.8.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "EN": "<p>In Garage,<br />\nPush F11 Key To Hide Garage Interfaces<br />\n(LobbyHeader &amp; messengerBar is not Hide)<br />\nPush F12 Key To Hide All Interfaces<br />\n(Mause Cursor will Hide,It is a specification)</p>\n<p>Press the key again to return to the original state</p>\n<p>Copy content of downloaded archive into game folder, confirm the replacement of files.</p>"
+    }, 
+    "downloads": 755, 
+    "img_cover": "https://wgmods.net/media/shot_068_lcwv2nF.jpg", 
+    "mark": "4.5", 
+    "name": {
+        "EN": "Hide Hangar UI"
+    }, 
+    "owner": "alphasave1", 
+    "rating": 1.25246236186041, 
+    "tags": [
+        13
+    ], 
+    "votes_count": 30
+}

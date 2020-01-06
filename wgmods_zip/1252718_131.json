@@ -1,0 +1,27 @@
+{
+    "archives": {
+        "1.7.0.2_#6": {
+            "filename": "/media/mod_files/ModPack_by_Vspishka_v1.7.0.2_-_6.zip", 
+            "game_version": "1.7.0.2", 
+            "mod_version": "#6", 
+            "original_filename": "ModPack_by_Vspishka_v1.7.0.2_-_#6.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/ModPack_by_Vspishka_v1.7.0.2_-_6.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "RU": "<p>Представляем вашему вниманию модпак от <strong>Vspishka</strong>.<br>В этом модпаке собраны только самые полезные модификации для <strong>World of Tanks</strong>.<br>Модпак имеет удобную пошаговую установку и скриншоты представленных модификаций.</p>\n<ol><li>Запустить установщик</li><li>Выбрать нужные вам моды</li><li>Произвести установку</li></ol>"
+    }, 
+    "downloads": 441190, 
+    "img_cover": "https://wgmods.net/media/mod_files/WizardImage_1.png", 
+    "mark": "4.4", 
+    "name": {
+        "RU": "Модпак от Vspishka"
+    }, 
+    "owner": "AtotIK", 
+    "rating": 2.83940812430709, 
+    "tags": [
+        12
+    ], 
+    "votes_count": 3067
+}

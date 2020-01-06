@@ -1,0 +1,64 @@
+{
+    "archives": {
+        "1.6.1.2_3.4.2": {
+            "filename": "/media/mod_files/1.6.1.2_ReplaysManager_3.4.2.zip", 
+            "game_version": "1.6.1.2", 
+            "mod_version": "3.4.2", 
+            "original_filename": "1.6.1.2_ReplaysManager_3.4.2.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/1.6.1.2_ReplaysManager_3.4.2.zip"
+        }, 
+        "1.6.1.3_3.4.2": {
+            "filename": "/media/mod_files/1.6.1.3_ReplaysManager_3.4.2.zip", 
+            "game_version": "1.6.1.3", 
+            "mod_version": "3.4.2", 
+            "original_filename": "1.6.1.3_ReplaysManager_3.4.2.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/1.6.1.3_ReplaysManager_3.4.2.zip"
+        }, 
+        "1.6.1.4_3.4.2": {
+            "filename": "/media/mod_files/1.6.1.4_ReplaysManager_3.4.2.zip", 
+            "game_version": "1.6.1.4", 
+            "mod_version": "3.4.2", 
+            "original_filename": "1.6.1.4_ReplaysManager_3.4.2.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/1.6.1.4_ReplaysManager_3.4.2.zip"
+        }, 
+        "1.7.0.0_3.4.4": {
+            "filename": "/media/mod_files/1.7.0.0_ReplaysManager_3.4.4.zip", 
+            "game_version": "1.7.0.0", 
+            "mod_version": "3.4.4", 
+            "original_filename": "[1.7.0.0] ReplaysManager 3.4.4.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/1.7.0.0_ReplaysManager_3.4.4.zip"
+        }, 
+        "1.7.0.1_3.4.4": {
+            "filename": "/media/mod_files/1.7.0.1_ReplaysManager_3.4.4.zip", 
+            "game_version": "1.7.0.1", 
+            "mod_version": "3.4.4", 
+            "original_filename": "[1.7.0.1] ReplaysManager 3.4.4.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/1.7.0.1_ReplaysManager_3.4.4.zip"
+        }, 
+        "1.7.0.2_3.4.4": {
+            "filename": "/media/mod_files/1.7.0.2_ReplaysManager_3.4.4.zip", 
+            "game_version": "1.7.0.2", 
+            "mod_version": "3.4.4", 
+            "original_filename": "[1.7.0.2] ReplaysManager 3.4.4.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/1.7.0.2_ReplaysManager_3.4.4.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "EN": "<p>Replays Manager</p><p>Mod allows you to manage your game replays directly from the the game!</p><p>Main features of the mod:<br>- display in a convenient form all replays from the folder “replays”.<br>- sorting and filtering replays on various parameters, simplifying the search for the desired replay.<br>- viewing the results of the recorded battle in a convenient form.<br>- running the selected replay (is possible only after disconnecting from the server, and then restarting the client).<br>- upload replays to the site wotreplays.com and get a direct link to it.</p>\n<p>Copy content of downloaded archive into game folder, confirm the replacement of files.</p>", 
+        "RU": "<p>Менеджер Реплеев</p><p>Мод позволяет управлять Вашими игровыми реплями прямо из клиента игры!</p><p>Основные возможности мода:<br>- отображение в удобной форме всех реплеев из папки “replays”.<br>- сортировка и фильтрация реплеев по различным параметрам, упрощающая поиск нужного реплея.<br>- просмотр результатов записанного боя в удобном виде.<br>- запуск выбранного реплея (запуск реплея возможен ТОЛЬКО после отключения от сервера, и последующего перезапуска клиента).<br>- загрузка выбранного реплея на сайт wotreplays.ru и получение прямой ссылки на него.</p>\n<p>Скопировать содержимое архива в папку с игрой, подтвердить замену файлов.</p>"
+    }, 
+    "downloads": 60854, 
+    "img_cover": "https://wgmods.net/media/%D0%91%D0%B5%D0%B7%D1%8B%D0%BC%D1%8F%D0%BD%D0%BD%D1%8B%D0%B9.png", 
+    "mark": "4.3", 
+    "name": {
+        "EN": "Replay Manager", 
+        "RU": "Менеджер Реплеев"
+    }, 
+    "owner": "WGmods", 
+    "rating": 2.70628236922673, 
+    "tags": [
+        20
+    ], 
+    "votes_count": 853
+}

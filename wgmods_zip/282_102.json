@@ -1,0 +1,36 @@
+{
+    "archives": {
+        "1.7.0.1_1.7.0.1": {
+            "filename": "/media/mod_files/lagindicator_arr_zGoLbjA.zip", 
+            "game_version": "1.7.0.1", 
+            "mod_version": "1.7.0.1", 
+            "original_filename": "lagindicator_arr.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/lagindicator_arr_zGoLbjA.zip"
+        }, 
+        "1.7.0.2_1.7.0.2": {
+            "filename": "/media/mod_files/lagindicator_arr_K3Iahov.zip", 
+            "game_version": "1.7.0.2", 
+            "mod_version": "1.7.0.2", 
+            "original_filename": "lagindicator_arr.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/lagindicator_arr_K3Iahov.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "EN": "<p>more visible lag indicator (arrow)</p>\n<p>unpack archive to your game folder (e.g.: C:\\Games\\World_of_Tanks)</p>", 
+        "RU": "<p>more visible lag indicator (arrow)</p>\n<p>unpack archive to your game folder (e.g.: C:\\Games\\World_of_Tanks)</p>"
+    }, 
+    "downloads": 256, 
+    "img_cover": "https://wgmods.net/media/arrow.png", 
+    "mark": "4.6", 
+    "name": {
+        "EN": "Better Lag Indicator Arrow", 
+        "RU": "Better Lag Indicator - Arrow"
+    }, 
+    "owner": "Ragnarocek", 
+    "rating": 1.10509104380475, 
+    "tags": [
+        18
+    ], 
+    "votes_count": 28
+}

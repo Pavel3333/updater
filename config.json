@@ -1,18 +1,4 @@
 {
-    "PositionsMod": {
-        "dependencies": [
-            "com.modxvm.xfw.filewatcher", 
-            "com.modxvm.xfw.libraries", 
-            "com.modxvm.xfw.loader", 
-            "com.modxvm.xfw.native", 
-            "com.modxvm.xfw.wotfix.crashes", 
-            "com.modxvm.xfw.wotfix.hidpi"
-        ], 
-        "deploy": true, 
-        "excludeChecksum": [
-            "mods/configs/mods_gui/mods_gui.json"
-        ]
-    }, 
     "XVM": {
         "dependencies": [
             "com.modxvm.xvm.crew", 
@@ -39,6 +25,7 @@
             "com.modxvm.xfw.ping", 
             "com.modxvm.xvm.export", 
             "com.modxvm.xfw.native", 
+            "XVM", 
             "com.modxvm.xfw.loader", 
             "com.modxvm.xvm.online", 
             "com.modxvm.xvm", 
@@ -63,6 +50,34 @@
             "CN": "XVM", 
             "EN": "XVM", 
             "RU": "XVM"
+        }
+    }, 
+    "com.PYmods.PYmodsCore": {
+        "dependencies": [], 
+        "deploy": false, 
+        "description": {
+            "CN": "Shared code archive for Polyacov_Yury's (and other's) mods.", 
+            "EN": "Shared code archive for Polyacov_Yury's (and other's) mods.", 
+            "RU": "Общий архив кода для модов от Polyacov_Yury (и других)."
+        }, 
+        "name": {
+            "CN": "Polyacov_Yury's mods core", 
+            "EN": "Polyacov_Yury's mods core", 
+            "RU": "Ядро модов от Polyacov_Yury"
+        }
+    }, 
+    "com.gambiter.guiflash": {
+        "dependencies": [], 
+        "deploy": false, 
+        "description": {
+            "CN": "Flash components for use in python mods", 
+            "EN": "Flash components for use in python mods", 
+            "RU": "Флеш-компоненты для использования в модах, написанных на Python"
+        }, 
+        "name": {
+            "CN": "GUIFlash", 
+            "EN": "GUIFlash", 
+            "RU": "GUIFlash"
         }
     }, 
     "com.modxvm.xfw.actionscript": {
@@ -312,12 +327,12 @@
         "description": {
             "CN": "XVM Configs Package", 
             "EN": "XVM Configs Package", 
-            "RU": "XVM Configs Package"
+            "RU": "XVM: Конфигурационный пакет"
         }, 
         "name": {
             "CN": "XVM Configs", 
             "EN": "XVM Configs", 
-            "RU": "XVM Configs"
+            "RU": "XVM: Конфигурация"
         }
     }, 
     "com.modxvm.xvm.configs.default": {
@@ -549,7 +564,7 @@
         "description": {
             "CN": "XVM Lobby module", 
             "EN": "XVM Lobby module", 
-            "RU": "XVM Lobby module"
+            "RU": "XVM: модуль Lobby"
         }, 
         "name": {
             "CN": "XVM Lobby", 
@@ -583,7 +598,7 @@
         "description": {
             "CN": "XVM Ping module", 
             "EN": "XVM Ping module", 
-            "RU": "XVM: модуль Пинга"
+            "RU": "XVM: модуль Пинг"
         }, 
         "name": {
             "CN": "XVM Ping", 
@@ -717,6 +732,66 @@
             "CN": "XVM Tooltips", 
             "EN": "XVM Tooltips", 
             "RU": "XVM Подсказки"
+        }
+    }, 
+    "com.pavel3333.mods.PositionsMod": {
+        "dependencies": [
+            "com.pavel3333.mods.PositionsMod.models", 
+            "com.PYmods.PYmodsCore", 
+            "com.modxvm.xfw.wotfix.hidpi", 
+            "com.modxvm.xfw.libraries", 
+            "com.modxvm.xfw.native", 
+            "com.modxvm.xfw.filewatcher", 
+            "com.modxvm.xfw.loader", 
+            "com.modxvm.xfw.wotfix.crashes", 
+            "com.spoter.mods_gui"
+        ], 
+        "deploy": true, 
+        "description": {
+            "CN": "Shows signs on the nice positions in the battle", 
+            "EN": "Shows signs on the nice positions in the battle", 
+            "RU": "Показывает знаки на отличных позициях в бою"
+        }, 
+        "excludeChecksum": [
+            "mods/configs/pavel3333/PositionsMod/PositionsMod.json"
+        ], 
+        "name": {
+            "CN": "Positions Mod", 
+            "EN": "Positions Mod", 
+            "RU": "Мод Позиций"
+        }
+    }, 
+    "com.pavel3333.mods.PositionsMod.models": {
+        "dependencies": [], 
+        "deploy": false, 
+        "description": {
+            "CN": "Models package for Positions Mod", 
+            "EN": "Models package for Positions Mod", 
+            "RU": "Пакет моделей для мода Позиций"
+        }, 
+        "name": {
+            "CN": "Positions Mod Models", 
+            "EN": "Positions Mod Models", 
+            "RU": "Positions Mod Models"
+        }
+    }, 
+    "com.spoter.mods_gui": {
+        "dependencies": [
+            "com.gambiter.guiflash"
+        ], 
+        "deploy": false, 
+        "description": {
+            "CN": "GUI Settings for mods", 
+            "EN": "GUI Settings for mods", 
+            "RU": "Графическая оболочка для настроек модов"
+        }, 
+        "excludeChecksum": [
+            "mods/configs/mods_gui/mods_gui.json"
+        ], 
+        "name": {
+            "CN": "Mods Settings GUI", 
+            "EN": "Mods Settings GUI", 
+            "RU": "Графические настройки модов"
         }
     }
 }

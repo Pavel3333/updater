@@ -6,8 +6,9 @@ from urllib import urlretrieve
 from zipfile import ZipFile, ZIP_DEFLATED
 from os import chdir, rename, remove, listdir, mkdir, makedirs
 from os.path import basename, exists, isfile
-from shutil import rmtree
 from xml.etree import ElementTree as ET
+
+from common import my_rmtree
 
 filename = 'xfw.zip'
 urlretrieve('https://nightly.modxvm.com/download/master/xfw_latest.zip', filename)
@@ -32,7 +33,7 @@ xfw_packages = {
 wd = 'temp/'
 
 if exists(wd):
-    rmtree(wd)
+    my_rmtree(wd)
 mkdir(wd)
 
 with ZipFile(filename) as archive:
@@ -112,7 +113,7 @@ if exists(wd + wotmod_wd):
         with ZipFile(zip_path, 'w', ZIP_DEFLATED) as out_zip:
             out_zip.write(wotmod_path, zip_dir + wotmod_name)
 
-rmtree(wd)
+my_rmtree(wd)
 remove(filename)
 
 config = {}
@@ -173,9 +174,10 @@ for mod_name in wotmods_metadata:
     
     try:
         req_decoded = json.loads(req.text)
-        continue
     except Exception:
         print 'invalid response:', req.text
+        continue
+    
     if req_decoded['status'] == 'ok':
         print 'successed'
         print 'log:',  req_decoded['log']

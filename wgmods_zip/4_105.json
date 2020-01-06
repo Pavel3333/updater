@@ -1,0 +1,41 @@
+{
+    "archives": {
+        "1.0.0.1_1.1.1": {
+            "filename": "/media/mod_files/Nonnas_IS-2_Berlin_summer1.0.zip", 
+            "game_version": "1.0.0.1", 
+            "mod_version": "1.1.1", 
+            "original_filename": "Nonnas_IS-2_Berlin_summer(1.0).zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/Nonnas_IS-2_Berlin_summer1.0.zip"
+        }, 
+        "9.19.0.1_1.1": {
+            "filename": "/media/mod_files/Nonnas_IS-2_Berlin_summer.zip", 
+            "game_version": "9.19.0.1", 
+            "mod_version": "1.1", 
+            "original_filename": "Nonna's IS-2 Berlin summer.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/Nonnas_IS-2_Berlin_summer.zip"
+        }, 
+        "9.19_1": {
+            "filename": "/media/mod_files/Nonnas_IS-2_Berlin_Film_by_Cheseknife.zip", 
+            "game_version": "9.19", 
+            "mod_version": "1", 
+            "original_filename": "Nonna's IS-2 Berlin (Film) by Cheseknife.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/Nonnas_IS-2_Berlin_Film_by_Cheseknife.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "RU": "<p>IS-2 Berlin reskin based on Nonna&rsquo;s IS-2 model 1944, from Girls und Panzer, der Film</p>\n<p>This is it&rsquo;s form from the movie, in summer colours, used by Pravda during the exhebition match against Ooarai, and in the Annihilation match against Selection university</p>\n<p><em>edit</em></p>\n<p>It&rsquo;s illegal to monetise this stuff because Girls und Panzer is copyrighted and belongs to Girls und Panzer Projekt</p>\n<p>Download and use only for non profit purposes</p>\n<p>Download the zip file, extract the folder called &ldquo;vehicles&rdquo; inside and add it to here:</p>\n<p>C:\\Games\\World_of_Tanks\\res_mods\\1.0.0.1</p>\n<p>if you alredy have an existing &ldquo;vehicles&rdquo; and &ldquo;russian&rdquo; folder, open the mod and extract the file &ldquo;R71_IS_2_Berlin&rdquo; to the &ldquo;russian&rdquo; folder you alredy have</p>\n<p>If you have any other skins for the IS-2 Berlin there you&rsquo;ll have to move them somewhere else (duh)</p>"
+    }, 
+    "downloads": 79, 
+    "img_cover": "https://wgmods.net/media/wooow.png", 
+    "mark": null, 
+    "name": {
+        "RU": "Nonna's IS-2 Berlin, as seen in the GuP Film"
+    }, 
+    "owner": "Cheeseknife", 
+    "rating": 0.0587337721092928, 
+    "tags": [
+        16
+    ], 
+    "votes_count": 9
+}

@@ -1,0 +1,29 @@
+{
+    "archives": {
+        "1.5_v.12": {
+            "filename": "/media/mod_files/Bcore_-wga.zip", 
+            "game_version": "1.5", 
+            "mod_version": "v.12", 
+            "original_filename": "Bcore -wga.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/Bcore_-wga.zip"
+        }
+    }, 
+    "author": "Beals", 
+    "description": {
+        "EN": "<p>What's Inside?</p><blockquote><ul><li>xvm &nbsp;Aslains config tweaked</li><li>custom site</li><li>deadtanks of white &amp; tracks</li><li>zoom in 30 max &amp; zoom out 500</li><li>custom damage panel and log</li><li>eff counter</li><li>custom radial menu = z</li><li>mini map pop up = x</li><li>crew skill informer = backspace</li><li>custom 6th sense sound</li><li>focus fire mod activate = ctrl + v = on/off</li><li>Arty splash Bloom b = on/off</li><li>Instant join and quit battle =alt = f1 = on/off</li><li>15 meter camo checker = f9 = on/off</li><li>Quick repair &nbsp;two options = t or ctrl + mouse click = on/off</li><li>Wg Replay</li><li>custom garage</li><li>last shot viewer</li><li>Auto clan spam 5 min into match = b +n = on/off</li><li>two easter egg sounds</li><li>TessuMod ts3 bridge</li><li>friendfinder and notifier</li><li>Minion crew</li><li>Grid coords on map</li></ul><p>&nbsp;</p><figure class=\"media\"><div data-oembed-url=\"https://youtu.be/tFgZkd5e-hc\"><div style=\"position: relative; padding-bottom: 100%; height: 0; padding-bottom: 56.2493%;\"><iframe src=\"https://www.youtube.com/embed/tFgZkd5e-hc\" style=\"position: absolute; width: 100%; height: 100%; top: 0; left: 0;\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen=\"\"></iframe></div></div></figure><p>More can be seen here: <a href=\"http://forum.worldoftanks.com/index.php?/topic/353873-%E0%B8%87%CC%80-%CC%81%E0%B8%87-0918-beals-world-of-tanks-collected-mods-installer-%E0%B8%87%CC%80-%CC%81/page__pid__7067550#entry7067550\">Wot Forums</a></p><p>Stay Informed: <a href=\"https://pitstop.nafigg.com\">The Pit Stop</a></p></blockquote>\n<p>&nbsp;</p><ol><li>Go to C:\\Games\\World_of_Tanks or C:\\Games\\World_of_Tanks_Na .</li><li>Delete res_mods and mods folder REPEAT Only Res_mods and mods folder.</li><li>Open Bcore zip then open bcore folder drag the res_mods and mods folder from my zip to your world of tanks install location as above.</li><li>If you happen to show blank info on sights or damage log look in the extra folder for fonts to install.</li></ol><figure class=\"media\"><div data-oembed-url=\"https://youtu.be/aHMtz2RBY5I\"><div style=\"position: relative; padding-bottom: 100%; height: 0; padding-bottom: 56.2493%;\"><iframe src=\"https://www.youtube.com/embed/aHMtz2RBY5I\" style=\"position: absolute; width: 100%; height: 100%; top: 0; left: 0;\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen=\"\"></iframe></div></div></figure>"
+    }, 
+    "downloads": 212, 
+    "img_cover": "https://wgmods.net/media/1800x900.png", 
+    "mark": "3.0", 
+    "name": {
+        "EN": "Beals Mods"
+    }, 
+    "owner": "TomatoSauceHero", 
+    "rating": 0.708147965005212, 
+    "tags": [
+        12, 
+        18, 
+        20
+    ], 
+    "votes_count": 10
+}

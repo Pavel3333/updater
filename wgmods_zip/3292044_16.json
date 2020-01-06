@@ -1,0 +1,38 @@
+{
+    "archives": {
+        "1.7.0.2_#5": {
+            "filename": "/media/mod_files/WGMods_Essentials_for_1.7.0.2_-_5.zip", 
+            "game_version": "1.7.0.2", 
+            "mod_version": "#5", 
+            "original_filename": "WGMods_Essentials_for_1.7.0.2_-_#5.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/WGMods_Essentials_for_1.7.0.2_-_5.zip"
+        }, 
+        "1.7.0.2_#6": {
+            "filename": "/media/mod_files/WGMods_Essentials_for_1.7.0.2_-_6.zip", 
+            "game_version": "1.7.0.2", 
+            "mod_version": "#6", 
+            "original_filename": "WGMods_Essentials_for_1.7.0.2_-_#6.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/WGMods_Essentials_for_1.7.0.2_-_6.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "EN": "<p><strong>1.7.0.2 Release - Update #6 of December 30, 2019.&nbsp;</strong><br><strong>Updated:&nbsp;</strong><br><strong>· &nbsp;«XVM»: to 8.2.3-r25 version;&nbsp;</strong><br><strong>· &nbsp;«PMOD»: to 44-2 version.</strong></p><p>We present to your attention a modpack by WGMods team.</p><p>Our modpack is a collection of the most popular and most essential modifications for World of Tanks. Sights, damage-panels, additional info indicators, Replay manager and lots of other mods for your choice.</p><p>Modpack itself has a convenient step-by-step installation, screenshots of modifications and playback of sound mods, as well as ModSetting functional, which allows you to tune some of your mods directly in client.</p><p>Be advised, localization may contain errors and inaccuracies, report it to us if you found one.</p><p>Before asking a question in the comments - please carefully read the FAQ in the installer.</p>\n<ol><li>Launch the installer</li><li>Pick a way of installation and a game folder</li><li>Pick mods you want</li><li>Press “Next” button</li><li>Enjoy your game!</li></ol>", 
+        "RU": "<p><strong>1.7.0.2 Release - Update #6 от 30.12.2019.&nbsp;</strong><br><strong>Обновлено:&nbsp;</strong><br><strong>· &nbsp;«XVM»: до версии 8.2.3-r25;&nbsp;</strong><br><strong>· &nbsp;«PMOD»: до версии 44-2.</strong></p><figure class=\"media\"><div data-oembed-url=\"https://youtu.be/iEWuXIAXPN8\"><div style=\"position: relative; padding-bottom: 100%; height: 0; padding-bottom: 56.2493%;\"><iframe src=\"https://www.youtube.com/embed/iEWuXIAXPN8\" style=\"position: absolute; width: 100%; height: 100%; top: 0; left: 0;\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen=\"\"></iframe></div></div></figure><p>Представляем вашему вниманию подборку от WGMods.</p><p>Мы постарались собрать самые популярные и полезные моды World of tanks. Прицелы, дамаг-панели, менеджер реплеев и многое другое.</p><p>Сам модпак имеет удобную пошаговую установку, скриншоты модификаций и воспроизведение звуковых модов.</p><p>Также наша подборка имеет удобный функционал настройки некоторых модов прямо в клиенте, без перезапуска игры.</p><p><a href=\"http://forum.worldoftanks.ru/index.php?/topic/1374243-\">Тема модпака на официальном форуме игры</a></p><p><a href=\"https://vk.com/wgmodses\">Группа Вконтакте</a></p><p><a href=\"https://discord.gg/JkCSW5r\">Дискорд сервер</a></p><p>Перед тем, как задавать вопрос в комментариях - просьба внимательно прочитать FAQ в установщике.</p>\n<ol><li>Запустить установщик</li><li>Выбрать нужные вам моды</li><li>Произвести установку</li></ol>"
+    }, 
+    "downloads": 1151128, 
+    "img_cover": "https://wgmods.net/media/mod_files/web_960x536_EN.png", 
+    "mark": "4.4", 
+    "name": {
+        "EN": "WGMods Essentials", 
+        "RU": "Подборка от WGMods"
+    }, 
+    "owner": "WGmods", 
+    "rating": 2.85984266625447, 
+    "tags": [
+        12, 
+        18, 
+        22
+    ], 
+    "votes_count": 6085
+}

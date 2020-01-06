@@ -1,0 +1,27 @@
+{
+    "archives": {
+        "1.7.0.2_№1": {
+            "filename": "/media/mod_files/Modpack_%D0%BE%D1%82_Presents87.zip", 
+            "game_version": "1.7.0.2", 
+            "mod_version": "№1", 
+            "original_filename": "Modpack_от_Presents87.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/Modpack_%D0%BE%D1%82_Presents87.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "RU": "<figure class=\"media\"><div data-oembed-url=\"https://youtu.be/De2XIW_HZ2Q\"><div style=\"position: relative; padding-bottom: 100%; height: 0; padding-bottom: 56.2493%;\"><iframe src=\"https://www.youtube.com/embed/De2XIW_HZ2Q\" style=\"position: absolute; width: 100%; height: 100%; top: 0; left: 0;\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen=\"\"></iframe></div></div></figure><p>1.Конфиг XVM от Presents87.&nbsp;<br>2.Мод: Винтик - Быстрый ремонт и лечение экипажа на кнопку пробел.&nbsp;<br>3.Мод Светлячок - индикация засвеченных игроком противников.&nbsp;<br>4.Мод для анализа брони танков прямо в ангаре.&nbsp;<br>5.Боевые раны от Торнадо.&nbsp;<br>6.Радио.&nbsp;<br>7.Менеджер реплеев.&nbsp;<br>8.Иконки от betax.&nbsp;<br>&nbsp;</p><h2>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; **** &nbsp; Минимализм тащит!!! ****</h2>\n<p>Для установки данного мода скопируйте папку mods и res_mods &nbsp;из архива в папку: /World_of_Tanks/заменяем с подтверждением!</p>"
+    }, 
+    "downloads": 2795, 
+    "img_cover": "https://wgmods.net/media/173496-logo.jpg", 
+    "mark": "3.2", 
+    "name": {
+        "RU": "Modpack_от_Presents87"
+    }, 
+    "owner": "Presents87", 
+    "rating": 1.50036083756913, 
+    "tags": [
+        12
+    ], 
+    "votes_count": 69
+}

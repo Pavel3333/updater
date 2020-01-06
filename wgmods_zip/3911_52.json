@@ -1,0 +1,63 @@
+{
+    "archives": {
+        "1.4.1.0_1.4.1": {
+            "filename": "/media/mod_files/mod_compact_tree_1.4.1.zip", 
+            "game_version": "1.4.1.0", 
+            "mod_version": "1.4.1", 
+            "original_filename": "mod_compact_tree_1.4.1.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/mod_compact_tree_1.4.1.zip"
+        }, 
+        "1.5.1.1_1.5.1.1": {
+            "filename": "/media/mod_files/mod_compact_tree_full_1.5.1.zip", 
+            "game_version": "1.5.1.1", 
+            "mod_version": "1.5.1.1", 
+            "original_filename": "mod_compact_tree_full_1.5.1.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/mod_compact_tree_full_1.5.1.zip"
+        }, 
+        "1.5_1.5": {
+            "filename": "/media/mod_files/mod_compact_tree_1.5.0.zip", 
+            "game_version": "1.5", 
+            "mod_version": "1.5", 
+            "original_filename": "mod_compact_tree_1.5.0.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/mod_compact_tree_1.5.0.zip"
+        }, 
+        "1.6.0.0_1.6.0.0": {
+            "filename": "/media/mod_files/mod_compact_tree_1.6.0.0__mod_all_prem_tanks.zip", 
+            "game_version": "1.6.0.0", 
+            "mod_version": "1.6.0.0", 
+            "original_filename": "mod_compact_tree_1.6.0.0_+_mod_all_prem_tanks.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/mod_compact_tree_1.6.0.0__mod_all_prem_tanks.zip"
+        }, 
+        "1.6.1.0_1": {
+            "filename": "/media/mod_files/mod_compact_tree_1.6.1.0__mod_all_prem_tanks.zip", 
+            "game_version": "1.6.1.0", 
+            "mod_version": "1", 
+            "original_filename": "mod_compact_tree_1.6.1.0_+_mod_all_prem_tanks.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/mod_compact_tree_1.6.1.0__mod_all_prem_tanks.zip"
+        }, 
+        "1.7.0.1_1.7.0.1": {
+            "filename": "/media/mod_files/mod_compact_tree_full_1.7.0.1all_prems.zip", 
+            "game_version": "1.7.0.1", 
+            "mod_version": "1.7.0.1", 
+            "original_filename": "mod_compact_tree_full_1.7.0.1+all_prems.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/mod_compact_tree_full_1.7.0.1all_prems.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "RU": "<p>Данный мод просто укорачивает стрелочки в горизонтальном дереве исследований, чтоб не скролить влево-вправо простыню исследований, плюс максимально компактно располагает в дереве исследований танки по ширине.<br />\nБыл адаптирован с модом просмотра отсутствующих танков в ангаре авторства The_IzeBerg. Т.е. добавил в дерево абсолютно все имеющиеся в игре танки. На данный момент мод Айзберга не обновляется уже почти год :(</p>\n<p>Файл mod_compact_tree_X.wotmod поместить по адресу WoT\\mods\\0.1.x.x\\</p>"
+    }, 
+    "downloads": 2331, 
+    "img_cover": "https://wgmods.net/media/shot_5621_ZOsiH8O.jpg", 
+    "mark": "4.5", 
+    "name": {
+        "RU": "Горизонтальное компактное дерево исследований танков"
+    }, 
+    "owner": "DrLivesey", 
+    "rating": 1.6778483028906, 
+    "tags": [
+        18, 
+        13
+    ], 
+    "votes_count": 60
+}

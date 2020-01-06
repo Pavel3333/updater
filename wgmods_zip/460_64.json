@@ -1,0 +1,37 @@
+{
+    "archives": {
+        "1.7.0.1_1.7.0.1": {
+            "filename": "/media/mod_files/6xscroll_Pixvgt8.zip", 
+            "game_version": "1.7.0.1", 
+            "mod_version": "1.7.0.1", 
+            "original_filename": "6xscroll.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/6xscroll_Pixvgt8.zip"
+        }, 
+        "1.7.0.2_1.7.0.2": {
+            "filename": "/media/mod_files/6xscroll_8HSfSln.zip", 
+            "game_version": "1.7.0.2", 
+            "mod_version": "1.7.0.2", 
+            "original_filename": "6xscroll.zip", 
+            "url": "https://modp.wgcdn.co/media/mod_files/6xscroll_8HSfSln.zip"
+        }
+    }, 
+    "author": null, 
+    "description": {
+        "EN": "<p>Mod is enabling 6x speed scrolling in service channel</p>\n<p>unpack the archive to your game folder (e.g.: C:\\Games\\World_of_Tanks)</p>", 
+        "RU": "<p>Mod is enabling 6x speed scrolling in service channel</p>\n<p>unpack the archive to your game folder (e.g.: C:\\Games\\World_of_Tanks)</p>"
+    }, 
+    "downloads": 409, 
+    "img_cover": "https://wgmods.net/media/Untitled-3.png", 
+    "mark": "4.4", 
+    "name": {
+        "EN": "SpeedScroll in service channel [6x]", 
+        "RU": "SpeedScroll in service channel [6x]"
+    }, 
+    "owner": "Ragnarocek", 
+    "rating": 1.1267467935936, 
+    "tags": [
+        18, 
+        20
+    ], 
+    "votes_count": 31
+}
