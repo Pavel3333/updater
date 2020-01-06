@@ -205,9 +205,7 @@ for archive_name in os.listdir(archives_wd):
     )
     
     try:
-        req_decoded = json.loads(req.text)
-    except Exception:
-        print '\tinvalid response:', req.text
+        req_decoded = json.loads(req.text)        print 'invalid response:', req.text
         continue
     
     if req_decoded['status'] == 'ok':
