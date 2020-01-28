@@ -737,7 +737,7 @@
         "description": {
             "CN": "CollisionChecker", 
             "EN": "CollisionChecker", 
-            "RU": "CollisionChecker"
+            "RU": "Проверка коллизий по направлению прицела"
         }, 
         "name": {
             "CN": "Checks the collision on crosshair direction", 
@@ -758,7 +758,7 @@
         "description": {
             "CN": "CollisionChecker", 
             "EN": "CollisionChecker", 
-            "RU": "CollisionChecker"
+            "RU": "Проверка коллизий по направлению прицела"
         }, 
         "name": {
             "CN": "Checks the collision on crosshair direction", 
@@ -804,7 +804,7 @@
         "name": {
             "CN": "Positions Mod Models", 
             "EN": "Positions Mod Models", 
-            "RU": "Positions Mod Models"
+            "RU": "Модели мода Позиций"
         }
     }, 
     "com.spoter.mods_gui": {

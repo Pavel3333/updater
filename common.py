@@ -153,7 +153,7 @@ class Wotmod(ZipFile):
         self.path = path
         
         if not exists(path):
-            raise StandardError(path, 'not found')
+            raise StandardError(path + ' not found')
         
         super(Wotmod, self).__init__(path, 'r', ZIP_STORED)
     
@@ -175,7 +175,9 @@ class Wotmod(ZipFile):
         
         return meta
 
-    def getMeta(self, name=None, identifier=None):
+    def getMeta(self, name=None, identifier=None, ver=None):
+        meta = {}
+        
         if name is not None:
             meta = self.getXFWPackageMeta(name)
 
@@ -184,6 +186,9 @@ class Wotmod(ZipFile):
 
         if identifier is not None:
             meta['id'] = identifier
+        
+        if ver is not None:
+            meta['wot_version_min'] = ver
 
         if 'wot_version_min' not in meta:
             meta['wot_version_min'] = raw_input('WoT version is not defined. Please type it: ')

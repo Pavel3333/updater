@@ -27,12 +27,12 @@ mods = [
         'dir'  : 'PositionsMod',
         'deps' : {
             'com.pavel3333.mods.PositionsMod.models' : {
-                'dir'        : 'com.pavel3333.mods',
+                'dir'        : 'com.pavel3333.mods/',
                 'name_start' : 'com.pavel3333.mods.PositionsMod.models',
                 'markVer'    : True
             },
             'com.PYmods.PYmodsCore' : {
-                'dir'        : 'PYmods',
+                'dir'        : 'PYmods/',
                 'name_start' : 'PYmodsCore'
             },
             'com.spoter.mods_gui' : {
@@ -67,6 +67,8 @@ for mod in mods:
     if metadata is None:
         print mod['id'], 'metadata not found'
         continue
+
+    packages_metadata[mod['id']] = metadata
     
     if exists(wd + wotmods_wd):
         curr_mods_wd = wd + mods_wd + metadata['wot_version_min'] + '/'
@@ -77,6 +79,7 @@ for mod in mods:
 
 for mod in mods:
     if mod['id'] not in packages_metadata:
+        print mod['id'], 'not found'
         continue
     
     for dep_id in mod['deps']:
@@ -100,7 +103,7 @@ for mod in mods:
         metadata = {}
         
         with Wotmod(wd + dep_dir + wotmod_name) as wotmod:
-            packages_metadata[dep_id] = metadata = wotmod.getMeta(identifier=dep_id)
+            packages_metadata[dep_id] = metadata = wotmod.getMeta(identifier=dep_id, ver=packages_metadata[mod['id']]['wot_version_min'])
         
         if dep_path.get('markVer', False):
             rename(wd + dep_dir + wotmod_name, wd + dep_dir + wotmod_name.replace('.wotmod', '_%s_v%s.wotmod'%(metadata['wot_version_min'], metadata['version'])))
@@ -182,8 +185,6 @@ for mod['id'] in packages_metadata:
         print 'description:', req_decoded['desc']
     else:
         print 'invalid response:', req_decoded
-
-    
 
 with codecs.open('config.json', 'w', 'utf-8') as cfg:
     json.dump(config, cfg, ensure_ascii=False, sort_keys=True, indent=4)
