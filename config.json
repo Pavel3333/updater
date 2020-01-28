@@ -1,44 +1,32 @@
 {
     "XVM": {
         "dependencies": [
+            "com.modxvm.xvm.tankcarousel", 
+            "com.modxvm.xvm.squad", 
             "com.modxvm.xvm.crew", 
+            "com.modxvm.xvm.equip", 
             "com.modxvm.xvm.autologin", 
             "com.modxvm.xvm.configs.default", 
-            "com.modxvm.xfw.mutex", 
+            "com.modxvm.xvm.profiler", 
+            "com.modxvm.xvm.configs", 
+            "com.modxvm.xvm.export", 
             "com.modxvm.xvm.lobby", 
-            "com.modxvm.xfw.filewatcher", 
+            "com.modxvm.xvm.techtree", 
             "com.modxvm.xvm.hotfix", 
             "com.modxvm.xvm.tooltips", 
+            "com.modxvm.xvm", 
+            "com.modxvm.xvm.contacts", 
+            "com.modxvm.xvm.hangar", 
             "com.modxvm.xvm.integrity", 
-            "com.modxvm.xfw.libraries", 
-            "com.modxvm.xvm.techtree", 
+            "com.modxvm.xvm.profile", 
             "com.modxvm.xvm.configs.sirmax", 
             "com.modxvm.xvm.battle", 
             "com.modxvm.xvm.shared_resources", 
-            "com.modxvm.xvm.sounds", 
-            "com.modxvm.xvm.battleresults", 
-            "com.modxvm.xfw.fonts", 
-            "com.modxvm.xvm.tankcarousel", 
-            "com.modxvm.xvm.squad", 
-            "com.modxvm.xvm.profiler", 
-            "com.modxvm.xvm.configs", 
-            "com.modxvm.xfw.ping", 
-            "com.modxvm.xvm.export", 
-            "com.modxvm.xfw.native", 
-            "XVM", 
-            "com.modxvm.xfw.loader", 
-            "com.modxvm.xvm.online", 
-            "com.modxvm.xvm", 
-            "com.modxvm.xvm.contacts", 
-            "com.modxvm.xvm.profile", 
-            "com.modxvm.xvm.hangar", 
-            "com.modxvm.xfw.wotfix.hidpi", 
             "com.modxvm.xvm.limits", 
-            "com.modxvm.xfw.wotfix.crashes", 
+            "com.modxvm.xvm.sounds", 
             "com.modxvm.xvm.ping", 
-            "com.modxvm.xfw.actionscript", 
-            "com.modxvm.xfw.wwise", 
-            "com.modxvm.xvm.equip"
+            "com.modxvm.xvm.battleresults", 
+            "com.modxvm.xvm.online"
         ], 
         "deploy": true, 
         "description": {
@@ -130,7 +118,9 @@
         }
     }, 
     "com.modxvm.xfw.libraries": {
-        "dependencies": [], 
+        "dependencies": [
+            "com.modxvm.xfw.native"
+        ], 
         "deploy": false, 
         "description": {
             "CN": "XFW Libraries Module", 
@@ -732,6 +722,48 @@
             "CN": "XVM Tooltips", 
             "EN": "XVM Tooltips", 
             "RU": "XVM Подсказки"
+        }
+    }, 
+    "com.pavel3333.mods.CollisionChecker": {
+        "dependencies": [
+            "com.modxvm.xfw.wotfix.hidpi", 
+            "com.modxvm.xfw.libraries", 
+            "com.modxvm.xfw.native", 
+            "com.modxvm.xfw.filewatcher", 
+            "com.modxvm.xfw.loader", 
+            "com.modxvm.xfw.wotfix.crashes"
+        ], 
+        "deploy": true, 
+        "description": {
+            "CN": "CollisionChecker", 
+            "EN": "CollisionChecker", 
+            "RU": "CollisionChecker"
+        }, 
+        "name": {
+            "CN": "Checks the collision on crosshair direction", 
+            "EN": "Checks the collision on crosshair direction", 
+            "RU": "Проверка коллизий по направлению прицела"
+        }
+    }, 
+    "com.pavel3333.mods.CollisionChecker.alpha": {
+        "dependencies": [
+            "com.modxvm.xfw.wotfix.hidpi", 
+            "com.modxvm.xfw.libraries", 
+            "com.modxvm.xfw.native", 
+            "com.modxvm.xfw.filewatcher", 
+            "com.modxvm.xfw.loader", 
+            "com.modxvm.xfw.wotfix.crashes"
+        ], 
+        "deploy": true, 
+        "description": {
+            "CN": "CollisionChecker", 
+            "EN": "CollisionChecker", 
+            "RU": "CollisionChecker"
+        }, 
+        "name": {
+            "CN": "Checks the collision on crosshair direction", 
+            "EN": "Checks the collision on crosshair direction", 
+            "RU": "Проверка коллизий по направлению прицела"
         }
     }, 
     "com.pavel3333.mods.PositionsMod": {

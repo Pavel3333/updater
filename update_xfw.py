@@ -8,7 +8,7 @@ from os import chdir, rename, remove, listdir, mkdir, makedirs
 from os.path import basename, exists, isfile
 from xml.etree import ElementTree as ET
 
-from common import my_rmtree
+from common import *
 
 filename = 'xfw.zip'
 urlretrieve('https://nightly.modxvm.com/download/master/xfw_latest.zip', filename)
@@ -64,54 +64,15 @@ if exists(wd + wotmod_wd):
         
         metadata = {}
         
-        with ZipFile(wotmod_path) as wotmod:
-            try:
-                with wotmod.open('res/mods/xfw_packages/%s/xfw_package.json'%(name)) as meta:
-                    metadata = json.load(meta)
-                    
-                    wotmods_metadata[metadata['id']] = {
-                        'id'           : metadata['id'],
-                        'name'         : metadata['name'],
-                        'description'  : metadata['description'],
-                        
-                        'version'      : metadata['version'],
-                        'dependencies' : metadata['dependencies'],
-                        
-                        'wot_version_min'        : metadata['wot_version_min'],
-                        'wot_version_exactmatch' : metadata['wot_version_exactmatch']
-                    }
-            except KeyError:
-                with wotmod.open('meta.xml') as meta_file:
-                    meta = ET.fromstring(meta_file.read())
-                    metadata = wotmods_metadata[meta[0].text] = {
-                        'id'          : meta[0].text,
-                        'name'        : meta[2].text,
-                        'description' : meta[3].text,
-                        'version'     : meta[1].text             
-                    }
-                    metadata['wot_version_min'] = raw_input('WoT version for %s is not defined. Please type it: '%(name))
-
-        print '%s:\n\tID: %s\n\tName: %s\n\tDescription: %s\n\tVersion: %s\n\tWoT version: %s'%(
-            name,
-            metadata['id'],
-            metadata['name'],
-            metadata['description'],
-            metadata['version'],
-            metadata['wot_version_min']
-        )
-        if 'dependencies' in metadata:
-            print '\tDependencies: %s'%(metadata['dependencies'])
-        if 'wot_version_exactmatch' in metadata:
-            print '\tExactly match: %s'%(metadata['wot_version_exactmatch'])
+        with Wotmod(wotmod_path) as wotmod:
+            metadata = wotmod.getMeta(name)
+            
+            wotmods_metadata[metadata['id']] = metadata
         
         zip_dir  = 'mods/%s/com.modxvm.xfw/'%(metadata['wot_version_min'])
-        zip_path = 'archives/%s.zip'%(metadata['id'])
         
-        if exists(zip_path):
-            remove(zip_path)
-        
-        with ZipFile(zip_path, 'w', ZIP_DEFLATED) as out_zip:
-            out_zip.write(wotmod_path, zip_dir + wotmod_name)
+        with RawArchive(metadata['id'], True) as out:
+            out.write(wotmod_path, zip_dir + wotmod_name)
 
 my_rmtree(wd)
 remove(filename)

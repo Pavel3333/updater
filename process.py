@@ -6,7 +6,7 @@ import zipfile
 
 from hashlib import md5
 
-from common import my_rmtree, zip_folder
+from common import *
 
 DEBUG = False
 INDENT = 4 if DEBUG else 0
@@ -138,7 +138,7 @@ for archive_name in os.listdir(archives_wd):
     if mod_name not in mods_list_by_name:
         raise StandardError('Mod is not exists on the server!')
 
-    with zipfile.ZipFile(archives_wd + archive_name) as archive:
+    with Archive(mod_name) as archive:
         archive.extractall(unpacked_wd + mod_name)
 
     if not os.path.exists(unpacked_wd + mod_name):
@@ -148,16 +148,16 @@ for archive_name in os.listdir(archives_wd):
         for dependencyID in dependencies:
             dependency_name = mods_list_by_ID[str(dependencyID)]['name']
             
-            with zipfile.ZipFile(archives_wd + '%s.zip'%(dependency_name)) as archive:
+            with Archive(dependency_name) as archive:
                 archive.extractall(unpacked_deploy_wd + mod_name)
         
-        with zipfile.ZipFile(archives_wd + archive_name) as archive:
+        with Archive(mod_name) as archive:
             archive.extractall(unpacked_deploy_wd + mod_name)
 
         if not os.path.exists(unpacked_deploy_wd + mod_name):
             os.mkdir(unpacked_deploy_wd + mod_name)
 
-        with zipfile.ZipFile(deploy_wd + archive_name, 'w', zipfile.ZIP_DEFLATED) as archive:
+        with Archive(mod_name, True) as archive:
             os.chdir(unpacked_deploy_wd + mod_name + '/')
             zip_folder('./', archive)
             os.chdir('../../')
