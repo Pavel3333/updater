@@ -1,5 +1,6 @@
 import codecs
 import os
+import requests
 import urllib
 import json
 
@@ -202,3 +203,93 @@ class Wotmod(ZipFile):
 
         return meta
         
+def add_mods(packages_metadata):
+    config = {}
+    with codecs.open('config.json', 'r', 'utf-8') as cfg:
+        config = json.load(cfg)
+    
+    for mod_id in packages_metadata:
+        print mod_id
+        
+        if mod_id not in config:
+            print mod_id, 'not found in config. Creating a new one...'
+            config[mod_id] = {}
+
+        if 'deploy' not in config[mod_id]:
+            config[mod_id]['deploy'] = False
+
+        if config[mod_id]['deploy'] and 'public' not in config[mod_id]:
+            config[mod_id]['public'] = False
+        elif not config[mod_id]['deploy'] and 'public' in config[mod_id]:
+            del config[mod_id]['public']
+        
+        metadata = packages_metadata[mod_id]
+        
+        dependencies = set(config[mod_id]['dependencies'])
+        if 'dependencies' not in metadata:
+            print 'Dependencies not found in %s. Please set it manually'%(metadata['name'])
+            config[mod_id]['dependencies'] = []
+        else:
+            dependencies.update(set(metadata['dependencies']))
+        
+        if 'dependencies_optional' in metadata:
+            dependencies.update(set(metadata['dependencies_optional']))
+        
+        config[mod_id]['dependencies'] = list(dependencies)
+
+        if 'excludeChecksum' in metadata:
+            config[mod_id]['excludeChecksum'] = metadata['excludeChecksum']
+            
+        if 'name' not in config[mod_id]:
+            config[mod_id]['name'] = {
+                'RU' : metadata['name'],
+                'EN' : metadata['name'],
+                'CN' : metadata['name']
+            }
+
+        if 'description' not in config[mod_id]:
+            config[mod_id]['description'] = {
+                'RU' : metadata['description'],
+                'EN' : metadata['description'],
+                'CN' : metadata['description']
+            }
+
+        #if not config[mod_id].get('public', False):
+        #    print '\tnot public mod'
+        #    continue
+        
+        req = requests.post(
+            'http://api.pavel3333.ru/add_mod.php',
+            data = {
+                'ID'      : mod_id,
+                'name_ru' : config[mod_id]['name']['RU'],
+                'name_en' : config[mod_id]['name']['EN'],
+                'name_cn' : config[mod_id]['name']['CN'],
+                'desc_ru' : config[mod_id]['description']['RU'],
+                'desc_en' : config[mod_id]['description']['EN'],
+                'desc_cn' : config[mod_id]['description']['CN'],
+                'version' : metadata['version'],
+                'deploy'  : 1 if config[mod_id]['deploy'] else 0,
+                'public'  : 1 if config[mod_id].get('public', False) else 0
+            }
+        )
+        
+        try:
+            req_decoded = json.loads(req.text)
+        except Exception:
+            print '\tinvalid response:', req.text
+            continue
+        
+        if req_decoded['status'] == 'ok':
+            print '\tsuccessed'
+            print '\tlog:',  req_decoded['log']
+            print '\tdata:', req_decoded['data']
+        elif req_decoded['status'] == 'error':
+            print '\tfailed'
+            print '\terror code:',  req_decoded['code']
+            print '\tdescription:', req_decoded['desc']
+        else:
+            print '\tinvalid response:', req_decoded
+
+    with codecs.open('config.json', 'w', 'utf-8') as cfg:
+        json.dump(config, cfg, ensure_ascii=False, sort_keys=True, indent=4)

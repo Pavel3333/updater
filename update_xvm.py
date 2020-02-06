@@ -115,10 +115,6 @@ if exists(wd + xvm_configs['wd']):
         
         create_deploy(wd, xvm_configs['id'], xvm_configs['wd'])
 
-config = {}
-with codecs.open('config.json', 'r', 'utf-8') as cfg:
-    config = json.load(cfg)
-
 #some packages need main XVM module version
 if 'com.modxvm.xvm' in packages_metadata:
     #processing lobby
@@ -182,76 +178,4 @@ else:
 my_rmtree(wd)
 remove(filename)
 
-for mod_name in packages_metadata:
-    if mod_name not in config:
-        print mod_name, 'not found in config. Creating a new one...'
-        config[mod_name] = {}
-    
-    if 'deploy' not in config[mod_name]:
-        config[mod_name]['deploy'] = False
-
-    metadata = packages_metadata[mod_name]
-    
-    dependencies = set()
-    if 'dependencies' not in metadata:
-        print 'Dependencies not found in %s. Please set it manually'%(metadata['name'])
-        config[mod_name]['dependencies'] = []
-    else:
-        dependencies.update(set(metadata['dependencies']))
-    
-    if 'dependencies_optional' in metadata:
-        dependencies.update(set(metadata['dependencies_optional']))
-    
-    config[mod_name]['dependencies'] = list(dependencies)
-
-    if 'excludeChecksum' in metadata:
-        config[mod_name]['excludeChecksum'] = metadata['excludeChecksum']
-
-    if 'name' not in config[mod_name]:
-        config[mod_name]['name'] = {
-            'RU' : metadata['name'],
-            'EN' : metadata['name'],
-            'CN' : metadata['name']
-        }
-
-    if 'description' not in config[mod_name]:
-        config[mod_name]['description'] = {
-            'RU' : metadata['description'],
-            'EN' : metadata['description'],
-            'CN' : metadata['description']
-        }
-    
-    req = requests.post(
-        'http://api.pavel3333.ru/add_mod.php',
-        data = {
-            'ID'           : metadata['id'],
-            'name_ru'      : config[mod_name]['name']['RU'],
-            'name_en'      : config[mod_name]['name']['EN'],
-            'name_cn'      : config[mod_name]['name']['CN'],
-            'desc_ru'      : config[mod_name]['description']['RU'],
-            'desc_en'      : config[mod_name]['description']['EN'],
-            'desc_cn'      : config[mod_name]['description']['CN'],
-            'version'      : metadata['version'],
-            'deploy'       : 1 if config[mod_name]['deploy'] else 0
-        }
-    )
-    
-    try:
-        req_decoded = json.loads(req.text)
-    except Exception:
-        print 'invalid response:', req.text
-        continue
-    
-    if req_decoded['status'] == 'ok':
-        print 'successed'
-        print 'log:',  req_decoded['log']
-        print 'data:', req_decoded['data']
-    elif req_decoded['status'] == 'error':
-        print 'failed'
-        print 'error code:',  req_decoded['code']
-        print 'description:', req_decoded['desc']
-    else:
-        print 'invalid response:', req_decoded
-    
-with codecs.open('config.json', 'w', 'utf-8') as cfg:
-    json.dump(config, cfg, ensure_ascii=False, sort_keys=True, indent=4)
+add_mods(packages_metadata)

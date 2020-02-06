@@ -127,8 +127,10 @@ for archive_name in os.listdir(archives_wd):
     print 'mod:', mod_name
 
     is_deploy = False
-    if mod_name in config and config[mod_name].get('deploy', False):
-        is_deploy = True
+    is_public = False
+    if mod_name in config:
+        is_deploy = config[mod_name].get('deploy', False)
+        is_public = config[mod_name].get('public', False)
     
     dependencies = set()
 
@@ -138,7 +140,7 @@ for archive_name in os.listdir(archives_wd):
     if mod_name not in mods_list_by_name:
         raise StandardError('Mod is not exists on the server!')
 
-    with Archive(mod_name) as archive:
+    with Archive(mod_name, False) as archive:
         archive.extractall(unpacked_wd + mod_name)
 
     if not os.path.exists(unpacked_wd + mod_name):
@@ -148,10 +150,10 @@ for archive_name in os.listdir(archives_wd):
         for dependencyID in dependencies:
             dependency_name = mods_list_by_ID[str(dependencyID)]['name']
             
-            with Archive(dependency_name) as archive:
+            with Archive(dependency_name, False) as archive:
                 archive.extractall(unpacked_deploy_wd + mod_name)
         
-        with Archive(mod_name) as archive:
+        with Archive(mod_name, False) as archive:
             archive.extractall(unpacked_deploy_wd + mod_name)
 
         if not os.path.exists(unpacked_deploy_wd + mod_name):
@@ -180,13 +182,15 @@ for archive_name in os.listdir(archives_wd):
     if settings_path:
         with open(settings_path, 'r') as fil:
             settings = json.loads(fil.read().decode('utf-8-sig'))
-
+    
     os.chdir('../../')
+    
+    if not is_public: continue
     
     files_dict = {
         'mod_autoupd' : open(archives_wd + '%s.zip'%(mod_name), 'rb')
     }
-
+    
     if is_deploy:
         files_dict['mod_deploy'] = open(deploy_wd + '%s.zip'%(mod_name), 'rb')
     

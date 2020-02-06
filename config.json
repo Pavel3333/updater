@@ -29,6 +29,7 @@
             "com.modxvm.xvm.online"
         ], 
         "deploy": true, 
+		"public": true,
         "description": {
             "CN": "XVM - eXtended Visualization Mod", 
             "EN": "XVM - eXtended Visualization Mod", 
@@ -779,6 +780,7 @@
             "com.spoter.mods_gui"
         ], 
         "deploy": true, 
+		"public": true,
         "description": {
             "CN": "Shows signs on the nice positions in the battle", 
             "EN": "Shows signs on the nice positions in the battle", 
@@ -791,6 +793,25 @@
             "CN": "Positions Mod", 
             "EN": "Positions Mod", 
             "RU": "Мод Позиций"
+        }
+    }, 
+    "com.pavel3333.mods.PositionsMod.TestersEdition": {
+        "dependencies": [
+            "com.spoter.mods_gui", 
+            "com.pavel3333.mods.PositionsMod.models",
+			"com.modxvm.xfw.loader"
+        ], 
+        "deploy": true, 
+		"publuc": false,
+        "description": {
+            "CN": "PositionsMod for Testers", 
+            "EN": "PositionsMod for Testers", 
+            "RU": "Мод Позиций для тестеров"
+        }, 
+        "name": {
+            "CN": "PositionsMod for Testers", 
+            "EN": "PositionsMod for Testers", 
+            "RU": "Мод Позиций для тестеров"
         }
     }, 
     "com.pavel3333.mods.PositionsMod.models": {
