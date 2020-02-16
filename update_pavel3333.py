@@ -56,7 +56,11 @@ mods = [
             'com.spoter.mods_gui' : {
                 'dir'        : '',
                 'name_start' : 'mod_mods_gui'
-            }
+            },
+            'com.gambiter.guiflash' : {
+                'dir'        : '',
+                'name_start' : 'gambiter.guiflash'
+            }   
         }
     },
     {
@@ -75,7 +79,7 @@ for mod in mods:
     mod_name = mod['id']
     metadata = None
     
-    with RawArchive(mod_name, False) as archive:
+    with RawArchive('', mod_name, False) as archive:
         metadata = archive.getXFWPackageMeta(mod['dir'], mod_name)
         archive.extractall(wd)
        
@@ -89,7 +93,7 @@ for mod in mods:
         curr_mods_wd = wd + mods_wd + metadata['wot_version_min'] + '/'
         move_files(wd + wotmods_wd, curr_mods_wd)
     
-    create_deploy(wd, mod_name, './', False, True)
+    create_deploy(wd, '', mod_name, './', False, True)
     my_rmtree(wd, False)
 
 for mod in mods:
@@ -101,7 +105,7 @@ for mod in mods:
     for dep_id in mod['deps']:
         dep_path = mod['deps'][dep_id]
         
-        with RawArchive(dep_id, False) as archive:
+        with RawArchive('', dep_id, False) as archive:
             archive.extractall(wd)
 
         dep_dir = wotmods_wd + dep_path['dir']
@@ -130,7 +134,7 @@ for mod in mods:
         curr_mods_wd = wd + mods_wd + metadata['wot_version_min'] + '/'
         move_files(wd + wotmods_wd, curr_mods_wd)
         
-        create_deploy(wd, dep_id, './', False, True)
+        create_deploy(wd, mod_name, dep_id, './', False, True)
         
         my_rmtree(wd, False)
 

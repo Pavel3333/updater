@@ -4,7 +4,6 @@ import json
 import requests
 import sys
 
-from urllib import urlretrieve
 from zipfile import ZipFile, ZIP_DEFLATED
 from os import chdir, rename, remove, listdir, mkdir, makedirs, rmdir
 from os.path import basename, exists, isfile, join
@@ -16,9 +15,9 @@ sys.path.insert(0, 'libs/')
 
 import JSONxLoader
 
-filename = 'xvm.zip'
-urlretrieve('https://nightly.modxvm.com/download/master/xvm_latest.zip', filename)
-print filename, 'successfully downloaded'
+MOD_NAME = 'xvm'
+
+filename = get_archive(MOD_NAME)
 
 wd = 'temp/'
 
@@ -42,7 +41,7 @@ if exists(wd + packages_wd):
         
         packages_metadata[metadata['id']] = metadata
 
-        create_deploy(wd, metadata['id'], packages_wd + package_name)
+        create_deploy(wd, '', metadata['id'], packages_wd + package_name, isRaw=True)
 
 #processing configs
 xvm_configs = {
@@ -92,7 +91,7 @@ if exists(wd + xvm_configs['wd']):
                 }
                 print 'Generated %s config metadata'%(cfg_name)
 
-                create_deploy(wd, configs[cfg_name]['id'], configs[cfg_name]['wd'], False)
+                create_deploy(wd, '', configs[cfg_name]['id'], configs[cfg_name]['wd'], False, isRaw=True)
 
     for cfg_name in configs:
         if exists(wd + configs[cfg_name]['wd']):
@@ -113,7 +112,7 @@ if exists(wd + xvm_configs['wd']):
         }
         print 'Generated configs metadata'
         
-        create_deploy(wd, xvm_configs['id'], xvm_configs['wd'])
+        create_deploy(wd, '', xvm_configs['id'], xvm_configs['wd'], isRaw=True)
 
 #some packages need main XVM module version
 if 'com.modxvm.xvm' in packages_metadata:
@@ -132,7 +131,7 @@ if 'com.modxvm.xvm' in packages_metadata:
         }
         print 'Generated xvm_lobby metadata'
 
-        create_deploy(wd, xvm_lobby['id'], xvm_lobby['wd'])
+        create_deploy(wd, '', xvm_lobby['id'], xvm_lobby['wd'], isRaw=True)
 
     #processing resources
     resources_wd = 'res_mods/mods/shared_resources/'
@@ -147,7 +146,7 @@ if 'com.modxvm.xvm' in packages_metadata:
         packages_metadata[metadata['id']] = metadata
         print 'Generated shared resources metadata'
 
-        create_deploy(wd, metadata['id'], resources_wd)
+        create_deploy(wd, '', metadata['id'], resources_wd, isRaw=True)
     
     #building final XVM package
     xvm_id = 'XVM'
@@ -170,7 +169,7 @@ if 'com.modxvm.xvm' in packages_metadata:
         if not isfile(wd + item):
             my_rmtree(wd + item)
     
-    create_deploy(wd, xvm_id, './', False)
+    create_deploy(wd, '', xvm_id, './', False, isRaw=True)
 else:
     print 'Main XVM module metadata was not found'
     print 'lobby and shared resources won\'t be processed'

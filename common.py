@@ -1,8 +1,11 @@
 import codecs
 import os
+import re
 import requests
 import urllib
+import time
 import json
+import sys
 
 from zipfile import ZipFile, ZIP_STORED, ZIP_DEFLATED
 from os import chdir, listdir, rename, remove, rmdir, makedirs
@@ -11,6 +14,12 @@ from hashlib import md5
 from xml.etree import ElementTree as ET
 
 DEBUG = True
+
+ARCHIVES_WD     = 'archives/'
+RAW_ARCHIVES_WD = 'raw_' + ARCHIVES_WD
+DEPLOY_WD       = 'deploy/'
+
+DAYS_SINCE = 30
 
 def get_reversed_path(path):
     return '../' * len(filter(lambda wd: wd, path.split('/')))
@@ -43,8 +52,8 @@ def zip_folder(path, archive):
         for fil in files:
             archive.write(join(root, fil))
 
-def create_deploy(wd, name, folder_path, del_folder=True, isRaw=False):
-    out_zip = RawArchive(name, True) if isRaw else Archive(name, True)
+def create_deploy(wd, src_dir, name, folder_path, del_folder=True, isRaw=False):
+    out_zip = RawArchive(src_dir, name, True) if isRaw else Archive(src_dir, name, True)
     chdir(wd)
     zip_folder(folder_path, out_zip)
     if del_folder:
@@ -82,7 +91,7 @@ class Archive(ZipFile):
     IN_DIR  = 'archives/'
     OUT_DIR = 'deploy/'
     
-    def __init__(self, name, isDeploy, *args, **kwargs):
+    def __init__(self, src_dir, name, isDeploy, *args, **kwargs):
         if not isDeploy:
             self.mode = 'r'
             self.WD   = self.IN_DIR
@@ -90,12 +99,26 @@ class Archive(ZipFile):
             self.mode = 'w'
             self.WD   = self.OUT_DIR
         
-        self.path = self.WD + name + '.zip'
+        self.path = None
+        
+        if not isDeploy:
+            path = self.WD + '%s' + name + '.zip'
+            if exists(path%(src_dir + '/')):
+                self.path = path%(src_dir + '/')
+            elif exists(path%('')):
+                self.path = path%('')
+        else:
+            self.path = self.WD + src_dir + '/'
+            if not exists(self.path):
+                makedirs(self.path)
+            self.path += name + '.zip'
+            print 'creating deploy archive', self.WD + src_dir, self.path
+        
+        if self.path is None:
+            raise StandardError(name, 'not found in', src_dir)
         
         if isDeploy and exists(self.path):
             remove(self.path)
-        elif not isDeploy and not exists(self.path):
-            raise StandardError(self.path, 'not found')
         
         super(Archive, self).__init__(self.path, self.mode, ZIP_DEFLATED, *args, **kwargs)
 
@@ -293,3 +316,42 @@ def add_mods(packages_metadata):
 
     with codecs.open('config.json', 'w', 'utf-8') as cfg:
         json.dump(config, cfg, ensure_ascii=False, sort_keys=True, indent=4)
+
+def get_archive(mod_name):
+    fmt        = 'https://gitlab.com/api/v4/projects/xvm%%2Fxvm/repository/commits?since=%s'
+    since_time = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(time.time() - DAYS_SINCE * 86400))
+
+    data = ''
+    xvm_data = {}
+    #try:
+    data     = urllib.urlopen(fmt%(since_time)).read()
+    xvm_data = json.loads(data)
+    #except:
+    #    print 'failed to load XVM data'
+    #    print data
+    #    sys.exit(1)
+
+    for commit in xvm_data:
+        dt = time.time() - time.mktime(time.strptime(commit['created_at'].split('T')[0], '%Y-%m-%d'))
+        add = ' <================' if 'WoT' in commit['title'] else ''
+        print commit['id']
+        print '\t' + commit['title'], '(%s days ago)'%(int(dt//86400)) + add
+        #print '\t' + 'author :', commit['author_name']
+
+    print ''
+    
+    page = urllib.urlopen('https://nightly.modxvm.com/download/master/').read()
+
+    commit  = raw_input('Please type the commit: ')
+    matches = re.search(r'%s_([0-9._]+)_master_%s.zip'%(mod_name, commit), page)
+    if not matches:
+        raise ValueError('This commit was not found')
+    
+    archive_name = matches.group(0)
+    
+    filename = mod_name + '.zip'
+    print 'downloading', archive_name
+    urllib.urlretrieve('https://nightly.modxvm.com/download/master/%s'%(archive_name), filename)
+    print filename, 'successfully downloaded'
+
+    return filename

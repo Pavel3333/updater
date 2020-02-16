@@ -2,7 +2,6 @@ import codecs
 import json
 import requests
 
-from urllib import urlretrieve
 from zipfile import ZipFile, ZIP_DEFLATED
 from os import chdir, rename, remove, listdir, mkdir, makedirs
 from os.path import basename, exists, isfile
@@ -10,9 +9,7 @@ from xml.etree import ElementTree as ET
 
 from common import *
 
-filename = 'xfw.zip'
-urlretrieve('https://nightly.modxvm.com/download/master/xfw_latest.zip', filename)
-print filename, 'successfully downloaded'
+MOD_NAME = 'xfw'
 
 wotmod_prefix = 'wotmod/com.modxvm.xfw'
 
@@ -29,6 +26,8 @@ xfw_packages = {
     'com.modxvm.xfw.wotfix.hidpi'   : 'xfw_wotfix_hidpi',
     'com.modxvm.xfw.wwise'          : 'xfw_wwise'
 }
+
+filename = get_archive(MOD_NAME)
 
 wd = 'temp/'
 
@@ -71,7 +70,7 @@ if exists(wd + wotmod_wd):
         
         zip_dir  = 'mods/%s/com.modxvm.xfw/'%(metadata['wot_version_min'])
         
-        with RawArchive(metadata['id'], True) as out:
+        with RawArchive('', metadata['id'], True) as out:
             out.write(wotmod_path, zip_dir + wotmod_name)
 
 my_rmtree(wd)

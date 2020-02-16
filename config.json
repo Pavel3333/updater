@@ -1,35 +1,34 @@
 {
     "XVM": {
         "dependencies": [
-            "com.modxvm.xvm.tankcarousel", 
-            "com.modxvm.xvm.squad", 
             "com.modxvm.xvm.crew", 
-            "com.modxvm.xvm.equip", 
             "com.modxvm.xvm.autologin", 
             "com.modxvm.xvm.configs.default", 
-            "com.modxvm.xvm.profiler", 
-            "com.modxvm.xvm.configs", 
-            "com.modxvm.xvm.export", 
             "com.modxvm.xvm.lobby", 
             "com.modxvm.xvm.techtree", 
             "com.modxvm.xvm.hotfix", 
             "com.modxvm.xvm.tooltips", 
-            "com.modxvm.xvm", 
-            "com.modxvm.xvm.contacts", 
-            "com.modxvm.xvm.hangar", 
             "com.modxvm.xvm.integrity", 
             "com.modxvm.xvm.profile", 
             "com.modxvm.xvm.configs.sirmax", 
             "com.modxvm.xvm.battle", 
             "com.modxvm.xvm.shared_resources", 
-            "com.modxvm.xvm.limits", 
             "com.modxvm.xvm.sounds", 
-            "com.modxvm.xvm.ping", 
             "com.modxvm.xvm.battleresults", 
+            "com.modxvm.xvm.tankcarousel", 
+            "com.modxvm.xvm.squad", 
+            "com.modxvm.xvm.profiler", 
+            "com.modxvm.xvm.configs", 
+            "com.modxvm.xvm.export", 
+            "com.modxvm.xvm", 
+            "com.modxvm.xvm.contacts", 
+            "com.modxvm.xvm.hangar", 
+            "com.modxvm.xvm.limits", 
+            "com.modxvm.xvm.ping", 
+            "com.modxvm.xvm.equip", 
             "com.modxvm.xvm.online"
         ], 
         "deploy": true, 
-		"public": true,
         "description": {
             "CN": "XVM - eXtended Visualization Mod", 
             "EN": "XVM - eXtended Visualization Mod", 
@@ -39,7 +38,8 @@
             "CN": "XVM", 
             "EN": "XVM", 
             "RU": "XVM"
-        }
+        }, 
+        "public": true
     }, 
     "com.PYmods.PYmodsCore": {
         "dependencies": [], 
@@ -744,7 +744,8 @@
             "CN": "Checks the collision on crosshair direction", 
             "EN": "Checks the collision on crosshair direction", 
             "RU": "Проверка коллизий по направлению прицела"
-        }
+        }, 
+        "public": false
     }, 
     "com.pavel3333.mods.CollisionChecker.alpha": {
         "dependencies": [
@@ -765,22 +766,23 @@
             "CN": "Checks the collision on crosshair direction", 
             "EN": "Checks the collision on crosshair direction", 
             "RU": "Проверка коллизий по направлению прицела"
-        }
+        }, 
+        "public": false
     }, 
     "com.pavel3333.mods.PositionsMod": {
         "dependencies": [
-            "com.pavel3333.mods.PositionsMod.models", 
+            "com.gambiter.guiflash", 
             "com.PYmods.PYmodsCore", 
+            "com.spoter.mods_gui", 
             "com.modxvm.xfw.wotfix.hidpi", 
             "com.modxvm.xfw.libraries", 
             "com.modxvm.xfw.native", 
+            "com.pavel3333.mods.PositionsMod.models", 
             "com.modxvm.xfw.filewatcher", 
             "com.modxvm.xfw.loader", 
-            "com.modxvm.xfw.wotfix.crashes", 
-            "com.spoter.mods_gui"
+            "com.modxvm.xfw.wotfix.crashes"
         ], 
         "deploy": true, 
-		"public": true,
         "description": {
             "CN": "Shows signs on the nice positions in the battle", 
             "EN": "Shows signs on the nice positions in the battle", 
@@ -793,16 +795,17 @@
             "CN": "Positions Mod", 
             "EN": "Positions Mod", 
             "RU": "Мод Позиций"
-        }
+        }, 
+        "public": false
     }, 
     "com.pavel3333.mods.PositionsMod.TestersEdition": {
         "dependencies": [
+            "com.gambiter.guiflash", 
+            "com.pavel3333.mods.PositionsMod.models", 
             "com.spoter.mods_gui", 
-            "com.pavel3333.mods.PositionsMod.models",
-			"com.modxvm.xfw.loader"
+            "com.modxvm.xfw.loader"
         ], 
         "deploy": true, 
-		"publuc": false,
         "description": {
             "CN": "PositionsMod for Testers", 
             "EN": "PositionsMod for Testers", 
@@ -812,7 +815,9 @@
             "CN": "PositionsMod for Testers", 
             "EN": "PositionsMod for Testers", 
             "RU": "Мод Позиций для тестеров"
-        }
+        }, 
+        "public": false, 
+        "publuc": false
     }, 
     "com.pavel3333.mods.PositionsMod.models": {
         "dependencies": [], 

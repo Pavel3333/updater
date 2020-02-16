@@ -40,16 +40,12 @@ def move(path, child, curr_dic):
     ID += 1
     
     if os.path.isfile(subpath):
-        #print 'File:', child
-        
         curr_dic[ID] = 0
         
         paths[ID]  = subpath
         names[ID]  = child
         hashes[ID] = md5(open(subpath, 'rb').read()).hexdigest()
     else:
-        #print 'Folder:', child
-
         subpath += '/'
         subdic = curr_dic[ID] = {}
         names[ID] = child
@@ -140,7 +136,7 @@ for archive_name in os.listdir(archives_wd):
     if mod_name not in mods_list_by_name:
         raise StandardError('Mod is not exists on the server!')
 
-    with Archive(mod_name, False) as archive:
+    with Archive('', mod_name, False) as archive:
         archive.extractall(unpacked_wd + mod_name)
 
     if not os.path.exists(unpacked_wd + mod_name):
@@ -150,16 +146,16 @@ for archive_name in os.listdir(archives_wd):
         for dependencyID in dependencies:
             dependency_name = mods_list_by_ID[str(dependencyID)]['name']
             
-            with Archive(dependency_name, False) as archive:
+            with Archive(mod_name, dependency_name, False) as archive:
                 archive.extractall(unpacked_deploy_wd + mod_name)
         
-        with Archive(mod_name, False) as archive:
+        with Archive('', mod_name, False) as archive:
             archive.extractall(unpacked_deploy_wd + mod_name)
 
         if not os.path.exists(unpacked_deploy_wd + mod_name):
             os.mkdir(unpacked_deploy_wd + mod_name)
 
-        with Archive(mod_name, True) as archive:
+        with Archive('', mod_name, True) as archive:
             os.chdir(unpacked_deploy_wd + mod_name + '/')
             zip_folder('./', archive)
             os.chdir('../../')
