@@ -5,11 +5,11 @@
             "com.modxvm.xvm.autologin", 
             "com.modxvm.xvm.configs.default", 
             "com.modxvm.xvm.lobby", 
-            "com.modxvm.xvm.techtree", 
+            "com.modxvm.xvm.profile", 
             "com.modxvm.xvm.hotfix", 
             "com.modxvm.xvm.tooltips", 
             "com.modxvm.xvm.integrity", 
-            "com.modxvm.xvm.profile", 
+            "com.modxvm.xvm.techtree", 
             "com.modxvm.xvm.configs.sirmax", 
             "com.modxvm.xvm.battle", 
             "com.modxvm.xvm.shared_resources", 
@@ -20,13 +20,13 @@
             "com.modxvm.xvm.profiler", 
             "com.modxvm.xvm.configs", 
             "com.modxvm.xvm.export", 
-            "com.modxvm.xvm", 
+            "com.modxvm.xvm.online", 
             "com.modxvm.xvm.contacts", 
             "com.modxvm.xvm.hangar", 
             "com.modxvm.xvm.limits", 
             "com.modxvm.xvm.ping", 
             "com.modxvm.xvm.equip", 
-            "com.modxvm.xvm.online"
+            "com.modxvm.xvm"
         ], 
         "deploy": true, 
         "description": {
@@ -801,8 +801,8 @@
     "com.pavel3333.mods.PositionsMod.TestersEdition": {
         "dependencies": [
             "com.gambiter.guiflash", 
-            "com.pavel3333.mods.PositionsMod.models", 
             "com.spoter.mods_gui", 
+            "com.pavel3333.mods.PositionsMod.models", 
             "com.modxvm.xfw.loader"
         ], 
         "deploy": true, 
