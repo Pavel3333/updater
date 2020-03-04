@@ -796,13 +796,13 @@
             "EN": "Positions Mod", 
             "RU": "Мод Позиций"
         }, 
-        "public": false
+        "public": true
     }, 
     "com.pavel3333.mods.PositionsMod.TestersEdition": {
         "dependencies": [
             "com.gambiter.guiflash", 
-            "com.spoter.mods_gui", 
             "com.pavel3333.mods.PositionsMod.models", 
+            "com.spoter.mods_gui", 
             "com.modxvm.xfw.loader"
         ], 
         "deploy": true, 

@@ -143,8 +143,17 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
     os.chdir('../../')
 
     if not isPublic: return
+
+    path_autoupd = archives_wd + '%s.zip'%(mod_name)
+    if not os.path.exists(path_autoupd):
+        if not main_mod_name:
+            raise StandardError('Unable to find mod archive %s'%(mod_name))
+        path_autoupd = archives_wd + '%s/%s.zip'%(main_mod_name, mod_name)
+        if not os.path.exists(path_autoupd):
+            raise StandardError('Unable to find dependency archive %s of mod %s'%(mod_name, main_mod_name))
+
     files_dict = {
-        'mod_autoupd' : open(archives_wd + '%s.zip'%(mod_name), 'rb')
+        'mod_autoupd' : open(path_autoupd, 'rb')
     }
 
     if not isDependency:
