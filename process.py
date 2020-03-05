@@ -18,28 +18,49 @@ unpacked_wd        = 'unpacked/'
 unpacked_deploy_wd = 'unpacked_deploy/'
 deploy_wd          = 'deploy/'
 
-def move(exclude_paths, ID, paths, names, hashes, path, child, curr_dic):
-    subpath = path + child
-    
-    if any(mask in path or mask in subpath for mask in exclude_paths):
-        print 'path %s excluded'%(subpath)
-        return
-    
-    ID += 1
-    
-    if os.path.isfile(subpath):
-        curr_dic[ID] = 0
+class ModStructure:
+    def __init__(self, exclude_paths, path):
+        self.exclude_paths = exclude_paths
+        self.ID     = 0
+        self.paths  = {}
+        self.names  = {}
+        self.hashes = {}
+        self.tree   = {}
         
-        paths[ID]  = subpath
-        names[ID]  = child
-        hashes[ID] = md5(open(subpath, 'rb').read()).hexdigest()
-    else:
-        subpath += '/'
-        subdic = curr_dic[ID] = {}
-        names[ID] = child
+        self.settings = {}
+
+        for child in os.listdir(path):
+            self.move(path, child, self.tree)
+
+    def setSettings(self, path):
+        if path:
+            with open(path, 'r') as fil:
+                self.settings = json.loads(fil.read().decode('utf-8-sig'))
+
+    def move(self, path, child, curr_dic):
+        subpath = path + child
         
-        for subchild in os.listdir(subpath):
-            move(exclude_paths, ID, paths, names, hashes, subpath, subchild, subdic)
+        if any(mask in path or mask in subpath for mask in self.exclude_paths):
+            print 'path %s excluded'%(subpath)
+            return
+        
+        self.ID += 1
+        
+        if os.path.isfile(subpath):
+            #print 'file', subpath
+            curr_dic[self.ID] = 0
+            
+            self.paths[self.ID]  = subpath
+            self.names[self.ID]  = child
+            self.hashes[self.ID] = md5(open(subpath, 'rb').read()).hexdigest()
+        else:
+            #print 'dir', subpath
+            subpath += '/'
+            subdic = curr_dic[self.ID] = {}
+            self.names[self.ID] = child
+            
+            for subchild in os.listdir(subpath):
+                self.move(subpath, subchild, subdic)
 
 def get_dependency(main_mod_name, mod_name=None):
     if main_mod_name not in config:
@@ -76,7 +97,7 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
         raise StandardError('Mod is not exists on the server!')
     
     dependencies = get_dependency(mod_name)
-    print '\tdependencies:', dependencies
+    #print '\tdependencies:', dependencies
     
     if isDependency:
         if main_mod_name is None:
@@ -131,14 +152,9 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
         exclude_paths.extend(config[mod_name]['excludeChecksum'])
     
     os.chdir(unpacked_wd + mod_name + '/')
-    
-    for child in os.listdir('./'):
-        move(exclude_paths, 0, paths, names, hashes, '', child, tree)     # Get tree, paths, names and hashes
 
-    settings_path = mod['settings_path']
-    if settings_path:
-        with open(settings_path, 'r') as fil:
-            settings = json.loads(fil.read().decode('utf-8-sig'))
+    structure = ModStructure(exclude_paths, './') # Get tree, paths, names and hashes
+    structure.setSettings(mod['settings_path'])   # Set mod settings file
     
     os.chdir('../../')
 
@@ -163,11 +179,11 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
         'http://api.pavel3333.ru/update_mods.php',
         data = {
             'ID'           : mod['ID'],
-            'tree'         : json.dumps(tree,               sort_keys=True),
-            'paths'        : json.dumps(paths,              sort_keys=True),
-            'names'        : json.dumps(names,              sort_keys=True),
-            'hashes'       : json.dumps(hashes,             sort_keys=True),
-            'settings'     : json.dumps(settings,           sort_keys=True),
+            'tree'         : json.dumps(structure.tree,     sort_keys=True),
+            'paths'        : json.dumps(structure.paths,    sort_keys=True),
+            'names'        : json.dumps(structure.names,    sort_keys=True),
+            'hashes'       : json.dumps(structure.hashes,   sort_keys=True),
+            'settings'     : json.dumps(structure.settings, sort_keys=True),
             'dependencies' : json.dumps(list(dependencies), sort_keys=True)
         },
         files = files_dict
@@ -190,11 +206,11 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
             fil.write(
                 json.dumps(
                     {
-                        'tree'     : tree,
-                        'paths'    : paths,
-                        'names'    : names,
-                        'hashes'   : hashes,
-                        'settings' : settings
+                        'tree'     : structure.tree,
+                        'paths'    : structure.paths,
+                        'names'    : structure.names,
+                        'hashes'   : structure.hashes,
+                        'settings' : structure.settings
                     },
                     sort_keys=True,
                     indent=INDENT

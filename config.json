@@ -816,8 +816,7 @@
             "EN": "PositionsMod for Testers", 
             "RU": "Мод Позиций для тестеров"
         }, 
-        "public": false, 
-        "publuc": false
+        "public": false
     }, 
     "com.pavel3333.mods.PositionsMod.models": {
         "dependencies": [], 
