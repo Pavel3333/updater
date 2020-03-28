@@ -112,7 +112,7 @@ class Archive(ZipFile):
             if not exists(self.path):
                 makedirs(self.path)
             self.path += name + '.zip'
-            print 'creating deploy archive', self.WD + src_dir, self.path
+            print 'creating deploy archive', self.path
         
         if self.path is None:
             raise StandardError(name, 'not found in', src_dir)

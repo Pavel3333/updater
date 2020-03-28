@@ -22,9 +22,21 @@ wotmods_wd  = 'wotmod/'
 
 mods = [
     {
-        'id'   : 'com.pavel3333.mods.PositionsMod',
-        'dir'  : 'PositionsMod',
-        'deps' : {
+        'id'     : 'com.pavel3333.Autoupdater',
+        'dir'    : 'Autoupdater',
+        'public' : True,
+        'deps'   : {
+            'com.pavel3333.Autoupdater.GUI' : {
+                'dir'        : '',
+                'name_start' : 'com.pavel3333.Autoupdater.GUI'
+            }
+        }
+    },
+    {
+        'id'     : 'com.pavel3333.mods.PositionsMod',
+        'dir'    : 'PositionsMod',
+        'public' : True,
+        'deps'   : {
             'com.pavel3333.mods.PositionsMod.models' : {
                 'dir'        : 'com.pavel3333.mods/',
                 'name_start' : 'com.pavel3333.mods.PositionsMod.models',
@@ -45,9 +57,10 @@ mods = [
         }
     },
     {
-        'id'   : 'com.pavel3333.mods.PositionsMod.TestersEdition',
-        'dir'  : 'PositionsMod_TEST',
-        'deps' : {
+        'id'     : 'com.pavel3333.mods.PositionsMod.TestersEdition',
+        'dir'    : 'PositionsMod_TEST',
+        'public' : False,
+        'deps'   : {
             'com.pavel3333.mods.PositionsMod.models' : {
                 'dir'        : 'com.pavel3333.mods/',
                 'name_start' : 'com.pavel3333.mods.PositionsMod.models',
@@ -64,14 +77,16 @@ mods = [
         }
     },
     {
-        'id'   : 'com.pavel3333.mods.CollisionChecker',
-        'dir'  : 'CollisionChecker',
-        'deps' : {}
+        'id'     : 'com.pavel3333.mods.CollisionChecker',
+        'dir'    : 'CollisionChecker',
+        'public' : False,
+        'deps'   : {}
     },
     {
-        'id'   : 'com.pavel3333.mods.CollisionChecker.alpha',
-        'dir'  : 'CollisionChecker',
-        'deps' : {}
+        'id'     : 'com.pavel3333.mods.CollisionChecker.alpha',
+        'dir'    : 'CollisionChecker',
+        'public' : False,
+        'deps'   : {}
     }
 ]
 
@@ -100,6 +115,10 @@ for mod in mods:
     mod_name = mod['id']
     if mod_name not in packages_metadata:
         print mod_name, 'not found'
+        continue
+
+    if not mod['public']:
+        print mod_name, 'is not public'
         continue
     
     for dep_id in mod['deps']:

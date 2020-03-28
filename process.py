@@ -95,6 +95,10 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
     
     if mod_name not in mods_list_by_name:
         raise StandardError('Mod is not exists on the server!')
+
+    # cleaning
+    my_rmtree(unpacked_wd, False)
+    my_rmtree(unpacked_deploy_wd, False)
     
     dependencies = get_dependency(mod_name)
     #print '\tdependencies:', dependencies
@@ -104,7 +108,7 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
             raise StandardError('This dependency have no main mod name')
         print 'mod: %s, dependency: %s'%(main_mod_name, mod_name)
     else:
-        print 'mod: ', mod_name
+        print 'mod:', mod_name
 
         for dependencyID in dependencies:
             dependency_name = mods_list_by_ID[str(dependencyID)]['name']
@@ -240,17 +244,17 @@ for ID in mods_list_by_ID:
         'settings_path' : mod['settings_path']
     }
 
-if os.path.exists(unpacked_wd):
-    my_rmtree(unpacked_wd)
-os.mkdir(unpacked_wd)
+if not os.path.exists(unpacked_wd):
+    os.mkdir(unpacked_wd)
+my_rmtree(unpacked_wd, False)
 
-if os.path.exists(unpacked_deploy_wd):
-    my_rmtree(unpacked_deploy_wd)
-os.mkdir(unpacked_deploy_wd)
+if not os.path.exists(unpacked_deploy_wd):
+    os.mkdir(unpacked_deploy_wd)
+my_rmtree(unpacked_deploy_wd, False)
 
-if os.path.exists(deploy_wd):
-    my_rmtree(deploy_wd)
-os.mkdir(deploy_wd)
+if not os.path.exists(deploy_wd):
+    os.mkdir(deploy_wd)
+my_rmtree(deploy_wd, False)
 
 for archive_name in os.listdir(archives_wd):
     if '.zip' not in archive_name:

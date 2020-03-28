@@ -20,6 +20,7 @@
             "com.modxvm.xvm.profiler", 
             "com.modxvm.xvm.configs", 
             "com.modxvm.xvm.export", 
+            "com.modxvm.xfw.native", 
             "com.modxvm.xvm.online", 
             "com.modxvm.xvm.contacts", 
             "com.modxvm.xvm.hangar", 
@@ -725,6 +726,37 @@
             "RU": "XVM Подсказки"
         }
     }, 
+    "com.pavel3333.Autoupdater": {
+        "dependencies": [
+            "com.pavel3333.Autoupdater.GUI"
+        ], 
+        "deploy": true, 
+        "description": {
+            "CN": "Autoupdater main module", 
+            "EN": "Autoupdater main module", 
+            "RU": "Главный модуль Автозагрузчика"
+        }, 
+        "name": {
+            "CN": "Autoupdater", 
+            "EN": "Autoupdater", 
+            "RU": "Автозагрузчик"
+        }, 
+        "public": true
+    }, 
+    "com.pavel3333.Autoupdater.GUI": {
+        "dependencies": [], 
+        "deploy": false, 
+        "description": {
+            "CN": "Shows Autoupdater GUI in the hangar", 
+            "EN": "Shows Autoupdater GUI in the hangar", 
+            "RU": "Отображает графический интерфейс Автозагрузчика модов в ангаре"
+        }, 
+        "name": {
+            "CN": "Autoupdater GUI module", 
+            "EN": "Autoupdater GUI module", 
+            "RU": "Графический модуль Автозагрузчика"
+        }
+    }, 
     "com.pavel3333.mods.CollisionChecker": {
         "dependencies": [
             "com.modxvm.xfw.wotfix.hidpi", 
@@ -800,10 +832,10 @@
     }, 
     "com.pavel3333.mods.PositionsMod.TestersEdition": {
         "dependencies": [
-            "com.gambiter.guiflash", 
             "com.pavel3333.mods.PositionsMod.models", 
-            "com.spoter.mods_gui", 
-            "com.modxvm.xfw.loader"
+            "com.gambiter.guiflash", 
+            "com.modxvm.xfw.loader", 
+            "com.spoter.mods_gui"
         ], 
         "deploy": true, 
         "description": {
