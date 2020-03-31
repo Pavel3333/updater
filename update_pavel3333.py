@@ -23,14 +23,15 @@ wotmods_wd  = 'wotmod/'
 mods = [
     {
         'id'     : 'com.pavel3333.Autoupdater',
-        'dir'    : 'Autoupdater',
+        'dir'    : 'Autoupdater_Main',
         'public' : True,
-        'deps'   : {
-            'com.pavel3333.Autoupdater.GUI' : {
-                'dir'        : '',
-                'name_start' : 'com.pavel3333.Autoupdater.GUI'
-            }
-        }
+        'deps'   : {}
+    },
+    {
+        'id'     : 'com.pavel3333.Autoupdater.GUI',
+        'dir'    : 'Autoupdater_GUI',
+        'public' : True,
+        'deps'   : {}
     },
     {
         'id'     : 'com.pavel3333.mods.PositionsMod',

@@ -4,29 +4,38 @@
             "com.modxvm.xvm.crew", 
             "com.modxvm.xvm.autologin", 
             "com.modxvm.xvm.configs.default", 
+            "com.modxvm.xfw.mutex", 
             "com.modxvm.xvm.lobby", 
-            "com.modxvm.xvm.profile", 
+            "com.modxvm.xfw.filewatcher", 
             "com.modxvm.xvm.hotfix", 
             "com.modxvm.xvm.tooltips", 
             "com.modxvm.xvm.integrity", 
+            "com.modxvm.xfw.libraries", 
             "com.modxvm.xvm.techtree", 
             "com.modxvm.xvm.configs.sirmax", 
             "com.modxvm.xvm.battle", 
             "com.modxvm.xvm.shared_resources", 
-            "com.modxvm.xvm.sounds", 
+            "com.modxvm.xfw.ping", 
             "com.modxvm.xvm.battleresults", 
+            "com.modxvm.xvm.profile", 
             "com.modxvm.xvm.tankcarousel", 
             "com.modxvm.xvm.squad", 
+            "com.modxvm.xvm.equip", 
             "com.modxvm.xvm.profiler", 
             "com.modxvm.xvm.configs", 
+            "com.modxvm.xvm.sounds", 
             "com.modxvm.xvm.export", 
             "com.modxvm.xfw.native", 
+            "com.modxvm.xfw.loader", 
             "com.modxvm.xvm.online", 
             "com.modxvm.xvm.contacts", 
             "com.modxvm.xvm.hangar", 
+            "com.modxvm.xfw.wotfix.hidpi", 
             "com.modxvm.xvm.limits", 
+            "com.modxvm.xfw.wwise", 
             "com.modxvm.xvm.ping", 
-            "com.modxvm.xvm.equip", 
+            "com.modxvm.xfw.actionscript", 
+            "com.modxvm.xfw.wotfix.crashes", 
             "com.modxvm.xvm"
         ], 
         "deploy": true, 
@@ -728,6 +737,8 @@
     }, 
     "com.pavel3333.Autoupdater": {
         "dependencies": [
+            "com.modxvm.xfw.loader", 
+            "com.modxvm.xfw.native", 
             "com.pavel3333.Autoupdater.GUI"
         ], 
         "deploy": true, 
@@ -744,7 +755,11 @@
         "public": true
     }, 
     "com.pavel3333.Autoupdater.GUI": {
-        "dependencies": [], 
+        "dependencies": [
+            "com.pavel3333.Autoupdater", 
+            "com.modxvm.xfw.native", 
+            "com.modxvm.xfw.loader"
+        ], 
         "deploy": false, 
         "description": {
             "CN": "Shows Autoupdater GUI in the hangar", 
@@ -832,10 +847,10 @@
     }, 
     "com.pavel3333.mods.PositionsMod.TestersEdition": {
         "dependencies": [
-            "com.pavel3333.mods.PositionsMod.models", 
+            "com.spoter.mods_gui", 
             "com.gambiter.guiflash", 
             "com.modxvm.xfw.loader", 
-            "com.spoter.mods_gui"
+            "com.pavel3333.mods.PositionsMod.models"
         ], 
         "deploy": true, 
         "description": {
