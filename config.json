@@ -756,7 +756,6 @@
     }, 
     "com.pavel3333.Autoupdater.GUI": {
         "dependencies": [
-            "com.pavel3333.Autoupdater", 
             "com.modxvm.xfw.native", 
             "com.modxvm.xfw.loader"
         ], 
