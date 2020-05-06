@@ -29,10 +29,9 @@ with ZipFile(filename) as archive:
     archive.extractall(wd)
 
 packages_metadata = {}
-packages_wd = 'res_mods/mods/xfw_packages/'
 
-if exists(wd + packages_wd):
-    for package_name in listdir(wd + packages_wd):
+if exists(wd + XFW_PACKAGES_DIR):
+    for package_name in listdir(wd + XFW_PACKAGES_DIR):
         metadata = Package(wd, package_name).getXFWPackageMeta()
         
         if not metadata:
@@ -41,7 +40,7 @@ if exists(wd + packages_wd):
         
         packages_metadata[metadata['id']] = metadata
 
-        create_deploy(wd, '', metadata['id'], packages_wd + package_name, isRaw=True)
+        create_deploy(wd, '', metadata['id'], XFW_PACKAGES_DIR + package_name, isRaw=True)
 
 #processing configs
 xvm_configs = {
@@ -119,7 +118,7 @@ if 'com.modxvm.xvm' in packages_metadata:
     #processing lobby
     xvm_lobby = {
         'id'      : 'com.modxvm.xvm.lobby',
-        'wd'      : packages_wd + 'xvm_lobby/',
+        'wd'      : XFW_PACKAGES_DIR + 'xvm_lobby/',
     }
     if exists(wd + xvm_lobby['wd']) and xvm_lobby['id'] not in packages_metadata:
         packages_metadata[xvm_lobby['id']] = {

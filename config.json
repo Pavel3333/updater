@@ -20,23 +20,24 @@
             "com.modxvm.xvm.profile", 
             "com.modxvm.xvm.tankcarousel", 
             "com.modxvm.xvm.squad", 
-            "com.modxvm.xvm.equip", 
             "com.modxvm.xvm.profiler", 
             "com.modxvm.xvm.configs", 
             "com.modxvm.xvm.sounds", 
             "com.modxvm.xvm.export", 
             "com.modxvm.xfw.native", 
+            "XVM", 
             "com.modxvm.xfw.loader", 
             "com.modxvm.xvm.online", 
+            "com.modxvm.xvm", 
             "com.modxvm.xvm.contacts", 
             "com.modxvm.xvm.hangar", 
             "com.modxvm.xfw.wotfix.hidpi", 
             "com.modxvm.xvm.limits", 
-            "com.modxvm.xfw.wwise", 
+            "com.modxvm.xfw.wotfix.crashes", 
             "com.modxvm.xvm.ping", 
             "com.modxvm.xfw.actionscript", 
-            "com.modxvm.xfw.wotfix.crashes", 
-            "com.modxvm.xvm"
+            "com.modxvm.xfw.wwise", 
+            "com.modxvm.xvm.equip"
         ], 
         "deploy": true, 
         "description": {
@@ -256,8 +257,8 @@
     "com.modxvm.xvm": {
         "dependencies": [
             "com.modxvm.xfw.mutex", 
-            "com.modxvm.xfw.libraries", 
-            "com.modxvm.xfw.filewatcher"
+            "com.modxvm.xfw.filewatcher", 
+            "com.modxvm.xfw.libraries"
         ], 
         "deploy": false, 
         "description": {
@@ -747,6 +748,19 @@
             "EN": "Autoupdater main module", 
             "RU": "Главный модуль Автозагрузчика"
         }, 
+        "excludeChecksum": [
+            "res_mods/mods/xfw_packages/Autoupdater_Main/python/enum.pyc", 
+            "res_mods/mods/xfw_packages/Autoupdater_Main/python/common.pyc", 
+            "res_mods/mods/xfw_packages/Autoupdater_Main/python/packet.pyc", 
+            "res_mods/mods/xfw_packages/Autoupdater_Main/python/request.pyc", 
+            "res_mods/mods/xfw_packages/Autoupdater_Main/python/response.pyc", 
+            "res_mods/mods/xfw_packages/Autoupdater_Main/python/shared.pyc", 
+            "res_mods/mods/xfw_packages/Autoupdater_Main/python/main.pyc", 
+            "res_mods/mods/xfw_packages/Autoupdater_Main/python/__init__.pyc", 
+            "win32/com.pavel3333.Autoupdater.helper.exe", 
+            "win32/com.pavel3333.Autoupdater.helper.pdb", 
+            "res_mods/mods/xfw_packages/Autoupdater_Main/native_32bit/AUGetter.pyd"
+        ], 
         "name": {
             "CN": "Autoupdater", 
             "EN": "Autoupdater", 
@@ -756,6 +770,7 @@
     }, 
     "com.pavel3333.Autoupdater.GUI": {
         "dependencies": [
+            "com.pavel3333.Autoupdater", 
             "com.modxvm.xfw.native", 
             "com.modxvm.xfw.loader"
         ], 
@@ -765,6 +780,13 @@
             "EN": "Shows Autoupdater GUI in the hangar", 
             "RU": "Отображает графический интерфейс Автозагрузчика модов в ангаре"
         }, 
+        "excludeChecksum": [
+            "res_mods/mods/xfw_packages/Autoupdater_GUI/python/common.pyc", 
+            "res_mods/mods/xfw_packages/Autoupdater_GUI/python/dialog.pyc", 
+            "res_mods/mods/xfw_packages/Autoupdater_GUI/python/shared.pyc", 
+            "res_mods/mods/xfw_packages/Autoupdater_GUI/python/window.pyc", 
+            "res_mods/mods/xfw_packages/Autoupdater_GUI/python/__init__.pyc"
+        ], 
         "name": {
             "CN": "Autoupdater GUI module", 
             "EN": "Autoupdater GUI module", 
@@ -773,23 +795,34 @@
     }, 
     "com.pavel3333.mods.CollisionChecker": {
         "dependencies": [
-            "com.modxvm.xfw.wotfix.hidpi", 
-            "com.modxvm.xfw.libraries", 
             "com.modxvm.xfw.native", 
-            "com.modxvm.xfw.filewatcher", 
-            "com.modxvm.xfw.loader", 
-            "com.modxvm.xfw.wotfix.crashes"
+            "com.modxvm.xfw.loader"
         ], 
         "deploy": true, 
         "description": {
-            "CN": "CollisionChecker", 
-            "EN": "CollisionChecker", 
-            "RU": "Проверка коллизий по направлению прицела"
-        }, 
-        "name": {
             "CN": "Checks the collision on crosshair direction", 
             "EN": "Checks the collision on crosshair direction", 
             "RU": "Проверка коллизий по направлению прицела"
+        }, 
+        "name": {
+            "CN": "CollisionChecker", 
+            "EN": "CollisionChecker", 
+            "RU": "Мод на невидимые стены"
+        }, 
+        "public": true
+    }, 
+    "com.pavel3333.mods.CollisionChecker.1.0.1.0": {
+        "dependencies": [], 
+        "deploy": true, 
+        "description": {
+            "CN": "Checks the collision on crosshair direction", 
+            "EN": "Checks the collision on crosshair direction", 
+            "RU": "Проверка коллизий по направлению прицела"
+        }, 
+        "name": {
+            "CN": "CollisionChecker (1.0.1.0)", 
+            "EN": "CollisionChecker (1.0.1.0)", 
+            "RU": "Мод на невидимые стены (1.0.1.0)"
         }, 
         "public": false
     }, 
@@ -815,18 +848,59 @@
         }, 
         "public": false
     }, 
+    "com.pavel3333.mods.Dora": {
+        "dependencies": [], 
+        "deploy": true, 
+        "description": {
+            "CN": "Dora Remodelling", 
+            "EN": "Dora Remodelling", 
+            "RU": "Ремоделлинг Dora"
+        }, 
+        "name": {
+            "CN": "Dora Mod", 
+            "EN": "Dora Mod", 
+            "RU": "Мода Dora"
+        }, 
+        "public": false
+    }, 
+    "com.pavel3333.mods.Doshik_E-100": {
+        "dependencies": [], 
+        "deploy": true, 
+        "description": {
+            "CN": "Funny skin for E-100", 
+            "EN": "Funny skin for E-100", 
+            "RU": "Весёлая шкурка для E-100"
+        }, 
+        "name": {
+            "CN": "Doshik E-100 Mod", 
+            "EN": "Doshik E-100 Mod", 
+            "RU": "#ДошикЛучшеГречки E-100"
+        }, 
+        "public": true
+    }, 
+    "com.pavel3333.mods.GRILLE_AUF_E-100": {
+        "dependencies": [], 
+        "deploy": true, 
+        "description": {
+            "CN": "Funny remodelling for Grille 15", 
+            "EN": "Funny remodelling for Grille 15", 
+            "RU": "Фановый ремоделлинг для Grille 15"
+        }, 
+        "name": {
+            "CN": "Grille Auf E-100", 
+            "EN": "Grille Auf E-100", 
+            "RU": "Grille Auf E-100"
+        }, 
+        "public": true
+    }, 
     "com.pavel3333.mods.PositionsMod": {
         "dependencies": [
             "com.gambiter.guiflash", 
             "com.PYmods.PYmodsCore", 
             "com.spoter.mods_gui", 
-            "com.modxvm.xfw.wotfix.hidpi", 
-            "com.modxvm.xfw.libraries", 
             "com.modxvm.xfw.native", 
             "com.pavel3333.mods.PositionsMod.models", 
-            "com.modxvm.xfw.filewatcher", 
-            "com.modxvm.xfw.loader", 
-            "com.modxvm.xfw.wotfix.crashes"
+            "com.modxvm.xfw.loader"
         ], 
         "deploy": true, 
         "description": {
@@ -877,6 +951,21 @@
             "EN": "Positions Mod Models", 
             "RU": "Модели мода Позиций"
         }
+    }, 
+    "com.pavel3333.mods.Xcavator": {
+        "dependencies": [], 
+        "deploy": true, 
+        "description": {
+            "CN": "XCAVATOR fun mod", 
+            "EN": "XCAVATOR fun mod", 
+            "RU": "Фан-мод XCAVATOR"
+        }, 
+        "name": {
+            "CN": "XCAVATOR. Test the strength of random!", 
+            "EN": "XCAVATOR. Test the strength of random!", 
+            "RU": "XCAVATOR. Испытай на прочность рандом!"
+        }, 
+        "public": true
     }, 
     "com.spoter.mods_gui": {
         "dependencies": [

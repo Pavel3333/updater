@@ -15,9 +15,13 @@ from xml.etree import ElementTree as ET
 
 DEBUG = True
 
+WOTMODS_WD      = 'wotmod/'
 ARCHIVES_WD     = 'archives/'
 RAW_ARCHIVES_WD = 'raw_' + ARCHIVES_WD
 DEPLOY_WD       = 'deploy/'
+
+XFW_PACKAGES_DIR    = 'res_mods/mods/xfw_packages/'
+XFW_PACKAGES_WM_DIR = 'res/mods/xfw_packages/'
 
 DAYS_SINCE = 30
 
@@ -126,10 +130,11 @@ class RawArchive(Archive):
     IN_DIR  = 'raw_archives/'
     OUT_DIR = 'archives/'
     
-    XFW_PACKAGES_DIR = 'res_mods/mods/xfw_packages/'
-    
-    def getXFWPackageMeta(self, name, identifier=None):
-        path = self.XFW_PACKAGES_DIR + name + '/xfw_package.json'
+    def getMeta(self, xfw_name=None, identifier=None):
+        path = 'meta.json'
+        if xfw_name is not None:
+            path = XFW_PACKAGES_DIR + xfw_name + '/xfw_package.json'
+        
         if path not in self.namelist():
             return None
         
@@ -145,12 +150,10 @@ class RawArchive(Archive):
                     print '\t%s: %s'%(key, metadata[key])
         
         return metadata
-        
+
 class Package(object):
-    XFW_PACKAGES_DIR = 'res_mods/mods/xfw_packages/'
-    
     def __init__(self, wd, name):
-        self.path = wd + self.XFW_PACKAGES_DIR + name + '/xfw_package.json'
+        self.path = wd + XFW_PACKAGES_DIR + name + '/xfw_package.json'
         self.meta = {}
         
         if exists(self.path):
@@ -171,8 +174,6 @@ class Package(object):
         return self.meta
 
 class Wotmod(ZipFile):
-    XFW_PACKAGES_DIR = 'res/mods/xfw_packages/'
-    
     def __init__(self, path):
         self.path = path
         
@@ -192,12 +193,10 @@ class Wotmod(ZipFile):
             }
     
     def getXFWPackageMeta(self, name):
-        meta = {}
-        meta_path = self.XFW_PACKAGES_DIR + name + '/xfw_package.json'
+        meta_path = XFW_PACKAGES_WM_DIR + name + '/xfw_package.json'
         if meta_path in self.namelist():
-            meta = json.loads(self.read(meta_path))
-        
-        return meta
+            return json.loads(self.read(meta_path))
+        return {}
 
     def getMeta(self, name=None, identifier=None, ver=None):
         meta = {}
@@ -248,15 +247,11 @@ def add_mods(packages_metadata):
         
         metadata = packages_metadata[mod_id]
         
-        dependencies = set(config[mod_id]['dependencies'])
+        dependencies = set(config[mod_id].get('dependencies', []))
         if 'dependencies' not in metadata:
             print 'Dependencies not found in %s. Please set it manually'%(metadata['name'])
-            config[mod_id]['dependencies'] = []
         else:
-            dependencies.update(set(metadata['dependencies']))
-        
-        if 'dependencies_optional' in metadata:
-            dependencies.update(set(metadata['dependencies_optional']))
+            dependencies.update(set(metadata['dependencies']) | set(metadata.get('dependencies_optional', [])))
         
         config[mod_id]['dependencies'] = list(dependencies)
 

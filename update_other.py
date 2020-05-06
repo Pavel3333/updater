@@ -1,39 +1,55 @@
-import codecs
-import json
-
-from urllib import urlretrieve
-from zipfile import ZipFile, ZIP_DEFLATED
-from os import chdir, rename, remove, listdir, mkdir, makedirs
-from os.path import basename, exists, isfile
-from xml.etree import ElementTree as ET
+from os import mkdir, makedirs
+from os.path import exists
+from shutil import copy2
 
 from common import *
 
 packages_metadata = {}
 
 mods = {
-    'com.pavel3333.Autoupdater' : {
-        'name' : 'Autoupdater',
-        'desc' : 'Autoupdater main module',
-        'ver'  : 1.0
-    },
-    'com.pavel3333.Autoupdater.GUI' : {
-        'name' : 'Autoupdater GUI module',
-        'desc' : 'Shows Autoupdater GUI in the hangar',
-        'ver'  : 1.0
+    'com.pavel3333.mods.Doshik_E-100' : {
+        'dir'  : 'com.pavel3333.mods/',
+        'type' : 'wotmod'
     }
 }
 
 game_version = raw_input('Please enter the game version: ')
 
-for mod_id in mods:
-    mod = mods[mod_id]
-    packages_metadata[mod_id] = {
-        'id'              : mod_id,
-        'name'            : mod['name'],
-        'description'     : mod['desc'],
-        'version'         : mod['ver'],
-        'wot_version_min' : game_version
-    }
+wd = 'temp/'
+
+if exists(wd):
+    my_rmtree(wd)
+mkdir(wd)
+
+for mod_id, mod in mods.iteritems():
+    print mod_id
+
+    if mod['type'] == 'archive':
+        packages_metadata[mod_id] = {
+            'id'              : mod_id,
+            'name'            : mod['name'],
+            'description'     : mod['desc'],
+            'version'         : mod['ver'],
+            'wot_version_min' : game_version
+        }
+    elif mod['type'] == 'wotmod':
+        wotmod_path    = WOTMODS_WD + mod_id + '.wotmod'
+        wotmod_dst_dir = wd + '/mods/%s/'%(game_version) + mod['dir']
+
+        metadata = {}
+
+        with Wotmod(wotmod_path) as wotmod:
+            packages_metadata[mod_id] = metadata = wotmod.getMeta(identifier=mod_id, ver=game_version)
+
+        makedirs(wotmod_dst_dir)
+
+        copy2(wotmod_path, wotmod_dst_dir + mod_id + '.wotmod')
+
+        create_deploy(wd, '', mod_id, './', False, True)
+        my_rmtree(wd, False)
+    else:
+        print '\tUnknown type: %s'%(mod['type'])
+
+my_rmtree(wd)
 
 add_mods(packages_metadata)

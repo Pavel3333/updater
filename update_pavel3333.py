@@ -78,14 +78,33 @@ mods = [
         }
     },
     {
-        'id'     : 'com.pavel3333.mods.CollisionChecker',
-        'dir'    : 'CollisionChecker',
-        'public' : False,
+        'id'     : 'com.pavel3333.mods.Xcavator',
+        'public' : True,
         'deps'   : {}
     },
     {
-        'id'     : 'com.pavel3333.mods.CollisionChecker.alpha',
+        'id'     : 'com.pavel3333.mods.Dora',
+        'public' : True,
+        'deps'   : {}
+    },
+    {
+        'id'     : 'com.pavel3333.mods.Doshik_E-100',
+        'public' : True,
+        'deps'   : {}
+    },
+    {
+        'id'     : 'com.pavel3333.mods.GRILLE_AUF_E-100',
+        'public' : True,
+        'deps'   : {}
+    },
+    {
+        'id'     : 'com.pavel3333.mods.CollisionChecker',
         'dir'    : 'CollisionChecker',
+        'public' : True,
+        'deps'   : {}
+    },
+    {
+        'id'     : 'com.pavel3333.mods.CollisionChecker.1.0.1.0',
         'public' : False,
         'deps'   : {}
     }
@@ -96,9 +115,13 @@ for mod in mods:
     metadata = None
     
     with RawArchive('', mod_name, False) as archive:
-        metadata = archive.getXFWPackageMeta(mod['dir'], mod_name)
-        archive.extractall(wd)
-       
+        if 'dir' in mod:
+            metadata = archive.getMeta(mod['dir'], mod_name)
+            archive.extractall(wd)
+        else:
+            metadata = archive.getMeta(None, mod_name)
+            archive.extractall(wd, filter(lambda name: name != 'meta.json', archive.namelist()))
+    
     if metadata is None:
         print mod_name, 'metadata not found'
         continue
@@ -109,7 +132,7 @@ for mod in mods:
         curr_mods_wd = wd + mods_wd + metadata['wot_version_min'] + '/'
         move_files(wd + wotmods_wd, curr_mods_wd)
     
-    create_deploy(wd, '', mod_name, './', False, True)
+    create_deploy(wd, '', mod_name, './', del_folder=False, isRaw=True)
     my_rmtree(wd, False)
 
 for mod in mods:
