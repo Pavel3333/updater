@@ -27,12 +27,14 @@ xfw_packages = {
     'com.modxvm.xfw.wwise'          : 'xfw_wwise'
 }
 
+wot_version = None
+
 filename = get_archive(MOD_NAME)
 
 wd = 'temp/'
 
 if exists(wd):
-    my_rmtree(wd)
+    hard_rmtree(wd)
 mkdir(wd)
 
 with ZipFile(filename) as archive:
@@ -64,16 +66,24 @@ if exists(wd + wotmod_wd):
         metadata = {}
         
         with Wotmod(wotmod_path) as wotmod:
-            metadata = wotmod.getMeta(name)
+            metadata = wotmod.getMeta(name, ver=wot_version)
             
             wotmods_metadata[metadata['id']] = metadata
+
+        if wot_version is None:
+            wot_version = metadata['wot_version_min']
+        elif wot_version != metadata['wot_version_min']:
+            raise ValueError, 'Invalid WoT version: %s, expected %s'%(metadata['wot_version_min'], wot_version)
         
         zip_dir  = 'mods/%s/com.modxvm.xfw/'%(metadata['wot_version_min'])
         
         with RawArchive('', metadata['id'], True) as out:
             out.write(wotmod_path, zip_dir + wotmod_name)
 
-my_rmtree(wd)
+        remove(wotmod_path)
+
+soft_rmtree(wd, False)
+hard_rmtree(wd)
 remove(filename)
 
 add_mods(wotmods_metadata)

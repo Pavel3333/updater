@@ -5,7 +5,8 @@ import json
 from time import time, sleep
 from os import mkdir
 from os.path import exists
-from shutil import rmtree
+
+from common import *
 
 TAGS = {
     11: "Damage Panels",
@@ -131,7 +132,7 @@ def get_mod_data(mod_id):
 wd = 'wgmods_zip/'
 
 if exists(wd):
-    rmtree(wd)
+    hard_rmtree(wd)
 mkdir(wd)
 
 setAfterCheck = False

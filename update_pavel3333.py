@@ -12,7 +12,7 @@ from common import *
 wd = 'temp/'
 
 if exists(wd):
-    my_rmtree(wd)
+    hard_rmtree(wd)
 mkdir(wd)
 
 packages_metadata = {}
@@ -107,6 +107,11 @@ mods = [
         'id'     : 'com.pavel3333.mods.CollisionChecker.1.0.1.0',
         'public' : False,
         'deps'   : {}
+    },
+    {
+        'id'     : 'com.pavel3333.mods.CollisionChecker.TesterEdition',
+        'public' : False,
+        'deps'   : {}
     }
 ]
 
@@ -133,7 +138,7 @@ for mod in mods:
         move_files(wd + wotmods_wd, curr_mods_wd)
     
     create_deploy(wd, '', mod_name, './', del_folder=False, isRaw=True)
-    my_rmtree(wd, False)
+    hard_rmtree(wd, False)
 
 for mod in mods:
     mod_name = mod['id']
@@ -179,8 +184,9 @@ for mod in mods:
         
         create_deploy(wd, mod_name, dep_id, './', False, True)
         
-        my_rmtree(wd, False)
+        hard_rmtree(wd, False)
 
-my_rmtree(wd)
+soft_rmtree(wd, False)
+hard_rmtree(wd)
 
 add_mods(packages_metadata)

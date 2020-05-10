@@ -6,7 +6,7 @@ import sys
 
 from zipfile import ZipFile, ZIP_DEFLATED
 from os import chdir, rename, remove, listdir, mkdir, makedirs, rmdir
-from os.path import basename, exists, isfile, join
+from os.path import basename, exists, isfile, isdir, join
 from xml.etree import ElementTree as ET
 
 from common import *
@@ -22,7 +22,7 @@ filename = get_archive(MOD_NAME)
 wd = 'temp/'
 
 if exists(wd):
-    my_rmtree(wd)
+    hard_rmtree(wd)
 mkdir(wd)
 
 with ZipFile(filename) as archive:
@@ -88,13 +88,14 @@ if exists(wd + xvm_configs['wd']):
                     'dependencies'    : [],
                     'excludeChecksum' : excludeChecksum
                 }
+                
                 print 'Generated %s config metadata'%(cfg_name)
 
                 create_deploy(wd, '', configs[cfg_name]['id'], configs[cfg_name]['wd'], False, isRaw=True)
 
     for cfg_name in configs:
         if exists(wd + configs[cfg_name]['wd']):
-            my_rmtree(wd + configs[cfg_name]['wd'])
+            hard_rmtree(wd + configs[cfg_name]['wd'])
     
     if configs['default']['data'].get('configVersion') is None:
         print 'Config version was not found'
@@ -109,6 +110,7 @@ if exists(wd + xvm_configs['wd']):
                 configs['sirmax']['id']
             ]
         }
+        
         print 'Generated configs metadata'
         
         create_deploy(wd, '', xvm_configs['id'], xvm_configs['wd'], isRaw=True)
@@ -128,10 +130,11 @@ if 'com.modxvm.xvm' in packages_metadata:
             'version'      : packages_metadata['com.modxvm.xvm']['version'],
             'dependencies' : []
         }
+        
         print 'Generated xvm_lobby metadata'
 
         create_deploy(wd, '', xvm_lobby['id'], xvm_lobby['wd'], isRaw=True)
-
+    
     #processing resources
     resources_wd = 'res_mods/mods/shared_resources/'
     if exists(wd + resources_wd):
@@ -151,8 +154,11 @@ if 'com.modxvm.xvm' in packages_metadata:
     xvm_id = 'XVM'
     
     dependencies = set(packages_metadata.keys())
-    dependencies.update(check_depends(wd))
-
+    print 'XVM packages:', dependencies
+    new_deps = check_depends(wd, xvm_id)
+    print 'found deps:', new_deps
+    dependencies.update(new_deps)
+    
     version = packages_metadata['com.modxvm.xvm']['version']
     
     packages_metadata[xvm_id] = {
@@ -164,16 +170,20 @@ if 'com.modxvm.xvm' in packages_metadata:
     }
     print 'Generated XVM metadata'
     
+    soft_rmtree(wd, False)
+    
     for item in listdir(wd):
-        if not isfile(wd + item):
-            my_rmtree(wd + item)
+        path = join(wd, item)
+        if isdir(path):
+            hard_rmtree(path)
     
     create_deploy(wd, '', xvm_id, './', False, isRaw=True)
 else:
     print 'Main XVM module metadata was not found'
     print 'lobby and shared resources won\'t be processed'
 
-my_rmtree(wd)
+soft_rmtree(wd, False)
+hard_rmtree(wd)
 remove(filename)
 
 add_mods(packages_metadata)

@@ -9,7 +9,7 @@ import sys
 
 from zipfile import ZipFile, ZIP_STORED, ZIP_DEFLATED
 from os import chdir, listdir, rename, remove, rmdir, makedirs
-from os.path import exists, isfile, join
+from os.path import exists, isfile, isdir, join
 from hashlib import md5
 from xml.etree import ElementTree as ET
 
@@ -28,13 +28,26 @@ DAYS_SINCE = 30
 def get_reversed_path(path):
     return '../' * len(filter(lambda wd: wd, path.split('/')))
 
-def my_rmtree(wd, remove_wd=True):
+def soft_rmtree(wd, remove_wd=True):
+    for item in listdir(wd):
+        path = join(wd, item)
+        if isdir(path):
+            if not listdir(path):
+                rmdir(path)
+            else:
+                soft_rmtree(path)
+        else:
+            print 'excess file found:', path
+    if remove_wd and not listdir(wd):
+        rmdir(wd)
+
+def hard_rmtree(wd, remove_wd=True):
     for item in listdir(wd):
         path = join(wd, item)
         if isfile(path):
             remove(path)
         else:
-            my_rmtree(path)
+            hard_rmtree(path)
     if remove_wd:
         rmdir(wd)
 
@@ -61,16 +74,25 @@ def create_deploy(wd, src_dir, name, folder_path, del_folder=True, isRaw=False):
     chdir(wd)
     zip_folder(folder_path, out_zip)
     if del_folder:
-        my_rmtree(folder_path)
+        hard_rmtree(folder_path)
     chdir(get_reversed_path(wd))
     out_zip.close()
 
-def check_depends(wd):
+def check_depends(wd, mod_id=None):
     dependencies = set()
     
-    mods_list = json.loads(urllib.urlopen('http://api.pavel3333.ru/get_mods.php').read())
-
+    mods_data = {}
+    with open('ModsData.json', 'rb') as fil:
+        mods_data = json.load(fil)
+    
+    for 
+    
     for ID in mods_list:
+        if mod_id is not None and mods_list[ID]['name'] == mod_id:
+            print mod_id, 'ignored'
+            continue
+        
+        print '\t' + mods_list[ID]['name']
         paths  = json.loads(mods_list[ID]['paths'])
         hashes = json.loads(mods_list[ID]['hashes'])
         if not paths or not hashes: continue
@@ -78,7 +100,10 @@ def check_depends(wd):
             exists(wd + paths[itemID]) \
             and md5(open(wd + paths[itemID], 'rb').read()).hexdigest() == hashes[itemID] \
             for itemID in hashes
-        ):  continue
+        ):
+            #print '\t\tsome files not exists or non-equal hashes'
+            #print '\t\tpaths:', paths
+            continue
         
         for path in paths.values():
             if isfile(wd + path):
@@ -86,7 +111,7 @@ def check_depends(wd):
             else:
                 rmdir(wd + path)
         
-        print 'mod depends of %s (ver: %s #%s)'%(mods_list[ID]['name'], mods_list[ID]['ver'], mods_list[ID]['build'])
+        print '\t\tmod depends of %s (ver: %s #%s)'%(mods_list[ID]['name'], mods_list[ID]['ver'], mods_list[ID]['build'])
         dependencies.add(mods_list[ID]['name'])
 
     return dependencies
@@ -253,7 +278,7 @@ def add_mods(packages_metadata):
         else:
             dependencies.update(set(metadata['dependencies']) | set(metadata.get('dependencies_optional', [])))
         
-        config[mod_id]['dependencies'] = list(dependencies)
+        config[mod_id]['dependencies'] = list(filter(lambda name: name != mod_id, dependencies))
 
         if 'excludeChecksum' in metadata:
             config[mod_id]['excludeChecksum'] = metadata['excludeChecksum']
@@ -316,19 +341,19 @@ def get_archive(mod_name):
     fmt        = 'https://gitlab.com/api/v4/projects/xvm%%2Fxvm/repository/commits?since=%s'
     since_time = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(time.time() - DAYS_SINCE * 86400))
 
-    data = ''
-    xvm_data = {}
-    #try:
     data     = urllib.urlopen(fmt%(since_time)).read()
-    xvm_data = json.loads(data)
-    #except:
-    #    print 'failed to load XVM data'
-    #    print data
-    #    sys.exit(1)
-
+    xvm_data = {}
+    
+    try:
+        xvm_data = json.loads(data)
+    except:
+        print 'failed to parse XVM data'
+        print data
+        sys.exit(1)
+    
     for commit in xvm_data:
         dt = time.time() - time.mktime(time.strptime(commit['created_at'].split('T')[0], '%Y-%m-%d'))
-        add = ' <================' if 'WoT' in commit['title'] else ''
+        add = ' <================' if 'wot' in commit['title'].lower() else ''
         print commit['id']
         print '\t' + commit['title'], '(%s days ago)'%(int(dt//86400)) + add
         #print '\t' + 'author :', commit['author_name']

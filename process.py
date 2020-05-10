@@ -8,9 +8,6 @@ from hashlib import md5
 
 from common import *
 
-DEBUG = False
-INDENT = 4 if DEBUG else 0
-
 config = {}
 
 archives_wd        = 'archives/'
@@ -40,10 +37,6 @@ class ModStructure:
     def move(self, path, child, curr_dic):
         subpath = path + child
         
-        if any(mask in path or mask in subpath for mask in self.exclude_paths):
-            print 'path %s excluded'%(subpath)
-            return
-        
         self.ID += 1
         
         if os.path.isfile(subpath):
@@ -52,7 +45,10 @@ class ModStructure:
             
             self.paths[self.ID]  = subpath
             self.names[self.ID]  = child
-            self.hashes[self.ID] = md5(open(subpath, 'rb').read()).hexdigest()
+            if any(mask in path or mask in subpath for mask in self.exclude_paths):
+                print 'path %s excluded'%(subpath)
+            else:
+                self.hashes[self.ID] = md5(open(subpath, 'rb').read()).hexdigest()
         else:
             #print 'dir', subpath
             subpath += '/'
@@ -97,8 +93,8 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
         raise StandardError('Mod is not exists on the server!')
 
     # cleaning
-    my_rmtree(unpacked_wd, False)
-    my_rmtree(unpacked_deploy_wd, False)
+    hard_rmtree(unpacked_wd, False)
+    hard_rmtree(unpacked_deploy_wd, False)
     
     dependencies = get_dependency(mod_name)
     #print '\tdependencies:', dependencies
@@ -203,23 +199,37 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
         print '\tsuccessed'
         print '\tlog:',  req_decoded['log']
         print '\tdata:', req_decoded['data']
+
+        build_meta = req_decoded['data']
         
-        name = req_decoded['data']
-    
-        with open('json/%s.json'%(name), 'w') as fil:
-            fil.write(
-                json.dumps(
-                    {
-                        'tree'     : structure.tree,
-                        'paths'    : structure.paths,
-                        'names'    : structure.names,
-                        'hashes'   : structure.hashes,
-                        'settings' : structure.settings
-                    },
-                    sort_keys=True,
-                    indent=INDENT
-                )
-            )
+        name        = build_meta['Name']
+        wot_version = build_meta['WoT_Version']
+        version     = build_meta['Version']
+        build       = build_meta['Build']
+        
+        mods_data = {}
+        with open('ModsData.json', 'r') as fil:
+            mods_data = json.load(fil)
+        
+        if name not in mods_data:
+            mods_data[name] = {}
+
+        if wot_version not in mods_data[name]:
+            mods_data[name][wot_version] = {}
+
+        if version not in mods_data[name][wot_version]:
+            mods_data[name][wot_version][version] = {}
+        
+        mods_data[name][wot_version][version][build] = {
+            'tree'     : structure.tree,
+            'paths'    : structure.paths,
+            'names'    : structure.names,
+            'hashes'   : structure.hashes
+            #'settings' : structure.settings
+        }
+        
+        with open('ModsData.json', 'r') as fil:
+            json.dump(mods_data, fil, sort_keys=True, indent=4)
         
     elif req_decoded['status'] == 'error':
         print '\tfailed'
@@ -246,15 +256,15 @@ for ID in mods_list_by_ID:
 
 if not os.path.exists(unpacked_wd):
     os.mkdir(unpacked_wd)
-my_rmtree(unpacked_wd, False)
+hard_rmtree(unpacked_wd, False)
 
 if not os.path.exists(unpacked_deploy_wd):
     os.mkdir(unpacked_deploy_wd)
-my_rmtree(unpacked_deploy_wd, False)
+hard_rmtree(unpacked_deploy_wd, False)
 
 if not os.path.exists(deploy_wd):
     os.mkdir(deploy_wd)
-my_rmtree(deploy_wd, False)
+hard_rmtree(deploy_wd, False)
 
 for archive_name in os.listdir(archives_wd):
     if '.zip' not in archive_name:
