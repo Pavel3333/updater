@@ -78,41 +78,41 @@ def create_deploy(wd, src_dir, name, folder_path, del_folder=True, isRaw=False):
     chdir(get_reversed_path(wd))
     out_zip.close()
 
-def check_depends(wd, mod_id=None):
+def check_depends(wd, exclude_name=None):
     dependencies = set()
     
     mods_data = {}
     with open('ModsData.json', 'rb') as fil:
         mods_data = json.load(fil)
     
-    for 
-    
-    for ID in mods_list:
-        if mod_id is not None and mods_list[ID]['name'] == mod_id:
-            print mod_id, 'ignored'
+    for mod_name in mods_data:
+        if exclude_name is not None and mod_name == exclude_name:
+            print exclude_name, 'ignored'
             continue
-        
-        print '\t' + mods_list[ID]['name']
-        paths  = json.loads(mods_list[ID]['paths'])
-        hashes = json.loads(mods_list[ID]['hashes'])
-        if not paths or not hashes: continue
-        if not all(
-            exists(wd + paths[itemID]) \
-            and md5(open(wd + paths[itemID], 'rb').read()).hexdigest() == hashes[itemID] \
-            for itemID in hashes
-        ):
-            #print '\t\tsome files not exists or non-equal hashes'
-            #print '\t\tpaths:', paths
-            continue
-        
-        for path in paths.values():
-            if isfile(wd + path):
-                remove(wd + path)
-            else:
-                rmdir(wd + path)
-        
-        print '\t\tmod depends of %s (ver: %s #%s)'%(mods_list[ID]['name'], mods_list[ID]['ver'], mods_list[ID]['build'])
-        dependencies.add(mods_list[ID]['name'])
+        for wot_version in reversed(sorted(mods_data[mod_name])):
+            for version in reversed(sorted(mods_data[mod_name][wot_version])):
+                for build in reversed(sorted(map(int, mods_data[mod_name][wot_version][version]))):
+                    build_data = mods_data[mod_name][wot_version][version][str(build)]
+                    
+                    paths  = build_data['paths']
+                    hashes = build_data['hashes']
+                    
+                    if not hashes or not all(
+                        exists(wd + paths[itemID])                                                   \
+                        and md5(open(wd + paths[itemID], 'rb').read()).hexdigest() == hashes[itemID] \
+                        for itemID in hashes
+                    ):
+                        continue
+                    
+                    print '\tmod depends of %s (WoT %s, ver: %s #%s)'%(mod_name, wot_version, version, build)
+                    
+                    for path in paths.values():
+                        if isfile(wd + path):
+                            remove(wd + path)
+                        else:
+                            rmdir(wd + path)
+                    
+                    dependencies.add(mod_name)
 
     return dependencies
 

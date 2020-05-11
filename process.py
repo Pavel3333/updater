@@ -8,7 +8,8 @@ from hashlib import md5
 
 from common import *
 
-config = {}
+config    = {}
+mods_data = {}
 
 archives_wd        = 'archives/'
 unpacked_wd        = 'unpacked/'
@@ -207,10 +208,6 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
         version     = build_meta['Version']
         build       = build_meta['Build']
         
-        mods_data = {}
-        with open('ModsData.json', 'r') as fil:
-            mods_data = json.load(fil)
-        
         if name not in mods_data:
             mods_data[name] = {}
 
@@ -228,9 +225,6 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
             #'settings' : structure.settings
         }
         
-        with open('ModsData.json', 'r') as fil:
-            json.dump(mods_data, fil, sort_keys=True, indent=4)
-        
     elif req_decoded['status'] == 'error':
         print '\tfailed'
         print '\terror code:',  req_decoded['code']
@@ -240,6 +234,10 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
     
 with open('config.json', 'r') as fil:
     config = json.load(fil)
+
+
+with open('ModsData.json', 'r') as fil:
+    mods_data = json.load(fil)
 
 mods_list_by_ID   = json.loads(urllib.urlopen('http://api.pavel3333.ru/get_mods.php').read())
 mods_list_by_name = {}
@@ -279,3 +277,6 @@ for archive_name in os.listdir(archives_wd):
 
     if isDeploy:
         send_mod(mod_name, isPublic)
+
+with open('ModsData.json', 'wb') as fil:
+    json.dump(mods_data, fil, sort_keys=True, indent=4)

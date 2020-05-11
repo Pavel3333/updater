@@ -20,24 +20,24 @@
             "com.modxvm.xfw.fonts", 
             "com.modxvm.xvm.tankcarousel", 
             "com.modxvm.xvm.squad", 
-            "com.modxvm.xvm.equip", 
             "com.modxvm.xvm.profiler", 
             "com.modxvm.xvm.configs", 
             "com.modxvm.xvm.sounds", 
             "com.modxvm.xvm.export", 
             "com.modxvm.xfw.native", 
             "com.modxvm.xfw.loader", 
-            "com.modxvm.xfw.actionscript", 
+            "com.modxvm.xvm.online", 
+            "com.modxvm.xvm", 
             "com.modxvm.xvm.contacts", 
             "com.modxvm.xvm.profile", 
             "com.modxvm.xvm.hangar", 
             "com.modxvm.xfw.wotfix.hidpi", 
             "com.modxvm.xvm.limits", 
-            "com.modxvm.xfw.wwise", 
-            "com.modxvm.xvm.ping", 
-            "com.modxvm.xvm", 
             "com.modxvm.xfw.wotfix.crashes", 
-            "com.modxvm.xvm.online"
+            "com.modxvm.xvm.ping", 
+            "com.modxvm.xfw.actionscript", 
+            "com.modxvm.xfw.wwise", 
+            "com.modxvm.xvm.equip"
         ], 
         "deploy": true, 
         "description": {
@@ -738,8 +738,8 @@
     }, 
     "com.pavel3333.Autoupdater": {
         "dependencies": [
-            "com.modxvm.xfw.loader", 
             "com.modxvm.xfw.native", 
+            "com.modxvm.xfw.loader", 
             "com.pavel3333.Autoupdater.GUI"
         ], 
         "deploy": true, 
@@ -765,8 +765,8 @@
     "com.pavel3333.Autoupdater.GUI": {
         "dependencies": [
             "com.pavel3333.Autoupdater", 
-            "com.modxvm.xfw.native", 
-            "com.modxvm.xfw.loader"
+            "com.modxvm.xfw.loader", 
+            "com.modxvm.xfw.native"
         ], 
         "deploy": false, 
         "description": {
@@ -787,8 +787,8 @@
     }, 
     "com.pavel3333.mods.CollisionChecker": {
         "dependencies": [
-            "com.modxvm.xfw.native", 
-            "com.modxvm.xfw.loader"
+            "com.modxvm.xfw.loader", 
+            "com.modxvm.xfw.native"
         ], 
         "deploy": true, 
         "description": {
@@ -927,10 +927,10 @@
     }, 
     "com.pavel3333.mods.PositionsMod.TestersEdition": {
         "dependencies": [
-            "com.spoter.mods_gui", 
+            "com.pavel3333.mods.PositionsMod.models", 
             "com.gambiter.guiflash", 
             "com.modxvm.xfw.loader", 
-            "com.pavel3333.mods.PositionsMod.models"
+            "com.spoter.mods_gui"
         ], 
         "deploy": true, 
         "description": {
