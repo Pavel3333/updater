@@ -9,7 +9,8 @@ from os import chdir, rename, remove, listdir, mkdir, makedirs, rmdir
 from os.path import basename, exists, isfile, isdir, join
 from xml.etree import ElementTree as ET
 
-from common import *
+from common   import *
+from entities import *
 
 sys.path.insert(0, 'libs/')
 
@@ -32,10 +33,15 @@ packages_metadata = {}
 
 if exists(wd + XFW_PACKAGES_DIR):
     for package_name in listdir(wd + XFW_PACKAGES_DIR):
-        metadata = Package(wd, package_name).getXFWPackageMeta()
+        package = g_EntityFactory.create(
+            Package,
+            name=package_name,
+            wd=wd
+        )
+        metadata = package.meta.copy()
         
         if not metadata:
-            print package_name, 'metainfo was not found'
+            print package_name, 'Metainfo was not found'
             continue
         
         packages_metadata[metadata['id']] = metadata
@@ -187,3 +193,5 @@ hard_rmtree(wd)
 remove(filename)
 
 add_mods(packages_metadata)
+
+raw_input('------ DONE ------')

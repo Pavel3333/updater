@@ -15,29 +15,29 @@
             "com.modxvm.xvm.configs.sirmax", 
             "com.modxvm.xvm.battle", 
             "com.modxvm.xvm.shared_resources", 
-            "com.modxvm.xfw.ping", 
+            "com.modxvm.xvm.sounds", 
             "com.modxvm.xvm.battleresults", 
             "com.modxvm.xfw.fonts", 
             "com.modxvm.xvm.tankcarousel", 
             "com.modxvm.xvm.squad", 
+            "com.modxvm.xvm.equip", 
             "com.modxvm.xvm.profiler", 
             "com.modxvm.xvm.configs", 
-            "com.modxvm.xvm.sounds", 
+            "com.modxvm.xfw.ping", 
             "com.modxvm.xvm.export", 
             "com.modxvm.xfw.native", 
             "com.modxvm.xfw.loader", 
-            "com.modxvm.xvm.online", 
-            "com.modxvm.xvm", 
+            "com.modxvm.xfw.actionscript", 
             "com.modxvm.xvm.contacts", 
             "com.modxvm.xvm.profile", 
             "com.modxvm.xvm.hangar", 
             "com.modxvm.xfw.wotfix.hidpi", 
             "com.modxvm.xvm.limits", 
-            "com.modxvm.xfw.wotfix.crashes", 
-            "com.modxvm.xvm.ping", 
-            "com.modxvm.xfw.actionscript", 
             "com.modxvm.xfw.wwise", 
-            "com.modxvm.xvm.equip"
+            "com.modxvm.xvm.ping", 
+            "com.modxvm.xvm", 
+            "com.modxvm.xfw.wotfix.crashes", 
+            "com.modxvm.xvm.online"
         ], 
         "deploy": true, 
         "description": {
@@ -50,7 +50,8 @@
             "EN": "XVM", 
             "RU": "XVM"
         }, 
-        "public": true
+        "public": true, 
+        "version": "8.6.1.0017"
     }, 
     "com.PYmods.PYmodsCore": {
         "dependencies": [], 
@@ -64,7 +65,8 @@
             "CN": "Polyacov_Yury's mods core", 
             "EN": "Polyacov_Yury's mods core", 
             "RU": "Ядро модов от Polyacov_Yury"
-        }
+        }, 
+        "version": "2.3.1"
     }, 
     "com.gambiter.guiflash": {
         "dependencies": [], 
@@ -78,7 +80,8 @@
             "CN": "GUIFlash", 
             "EN": "GUIFlash", 
             "RU": "GUIFlash"
-        }
+        }, 
+        "version": "0.3.1"
     }, 
     "com.modxvm.xfw.actionscript": {
         "dependencies": [
@@ -94,7 +97,8 @@
             "CN": "XFW Actionscript", 
             "EN": "XFW Actionscript", 
             "RU": "XFW Actionscript"
-        }
+        }, 
+        "version": "8.6.1.0034"
     }, 
     "com.modxvm.xfw.filewatcher": {
         "dependencies": [
@@ -110,7 +114,8 @@
             "CN": "XFW filewatcher", 
             "EN": "XFW filewatcher", 
             "RU": "XFW filewatcher"
-        }
+        }, 
+        "version": "8.6.1.0034"
     }, 
     "com.modxvm.xfw.fonts": {
         "dependencies": [
@@ -127,7 +132,8 @@
             "CN": "XFW Font Manager", 
             "EN": "XFW Font Manager", 
             "RU": "XFW: Менеджер шрифтов"
-        }
+        }, 
+        "version": "8.6.1.0034"
     }, 
     "com.modxvm.xfw.libraries": {
         "dependencies": [
@@ -143,7 +149,8 @@
             "CN": "XFW Libraries Module", 
             "EN": "XFW Libraries Module", 
             "RU": "XFW: модуль Библиотек"
-        }
+        }, 
+        "version": "8.6.1.0034"
     }, 
     "com.modxvm.xfw.loader": {
         "dependencies": [], 
@@ -157,7 +164,8 @@
             "CN": "XVM Framework Loader", 
             "EN": "XVM Framework Loader", 
             "RU": "Загрузчик фреймворка XVM"
-        }
+        }, 
+        "version": "8.6.1.0034"
     }, 
     "com.modxvm.xfw.mutex": {
         "dependencies": [
@@ -173,7 +181,8 @@
             "CN": "XFW Mutex", 
             "EN": "XFW Mutex", 
             "RU": "XFW Mutex"
-        }
+        }, 
+        "version": "8.6.1.0034"
     }, 
     "com.modxvm.xfw.native": {
         "dependencies": [], 
@@ -187,7 +196,8 @@
             "CN": "XVM Framework Native Components", 
             "EN": "XVM Framework Native Components", 
             "RU": "Нативные компоненты фреймворка XVM"
-        }
+        }, 
+        "version": "2.0.9"
     }, 
     "com.modxvm.xfw.ping": {
         "dependencies": [
@@ -203,7 +213,8 @@
             "CN": "XFW Ping module", 
             "EN": "XFW Ping module", 
             "RU": "XFW: модуль Пинга"
-        }
+        }, 
+        "version": "8.6.1.0034"
     }, 
     "com.modxvm.xfw.wotfix.crashes": {
         "dependencies": [
@@ -219,7 +230,8 @@
             "CN": "XFW Crashfix module", 
             "EN": "XFW Crashfix module", 
             "RU": "XFW: модуль Crashfix"
-        }
+        }, 
+        "version": "8.6.1.0034"
     }, 
     "com.modxvm.xfw.wotfix.hidpi": {
         "dependencies": [
@@ -235,7 +247,8 @@
             "CN": "XFW HiDPI module", 
             "EN": "XFW HiDPI module", 
             "RU": "XFW: модуль HiDPI"
-        }
+        }, 
+        "version": "8.6.1.0034"
     }, 
     "com.modxvm.xfw.wwise": {
         "dependencies": [
@@ -252,7 +265,8 @@
             "CN": "XFW WWISE module", 
             "EN": "XFW WWISE module", 
             "RU": "XFW: модуль WWISE"
-        }
+        }, 
+        "version": "8.6.1.0034"
     }, 
     "com.modxvm.xvm": {
         "dependencies": [
@@ -270,7 +284,8 @@
             "CN": "XVM", 
             "EN": "XVM", 
             "RU": "XVM"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.autologin": {
         "dependencies": [
@@ -286,7 +301,8 @@
             "CN": "XVM Autologin", 
             "EN": "XVM Autologin", 
             "RU": "XVM: Автологин"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.battle": {
         "dependencies": [
@@ -302,7 +318,8 @@
             "CN": "XVM Battle", 
             "EN": "XVM Battle", 
             "RU": "XVM: Бой"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.battleresults": {
         "dependencies": [
@@ -318,7 +335,8 @@
             "CN": "XVM Battle Results", 
             "EN": "XVM Battle Results", 
             "RU": "XVM: Результаты боя"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.configs": {
         "dependencies": [
@@ -335,7 +353,8 @@
             "CN": "XVM Configs", 
             "EN": "XVM Configs", 
             "RU": "XVM: Конфигурация"
-        }
+        }, 
+        "version": "6.1.0"
     }, 
     "com.modxvm.xvm.configs.default": {
         "dependencies": [], 
@@ -399,7 +418,8 @@
             "CN": "XVM Default Config", 
             "EN": "XVM Default Config", 
             "RU": "XVM: Конфигурация по умолчанию"
-        }
+        }, 
+        "version": "6.1.0"
     }, 
     "com.modxvm.xvm.configs.sirmax": {
         "dependencies": [], 
@@ -430,7 +450,8 @@
             "CN": "XVM Sirmax Config", 
             "EN": "XVM Sirmax Config", 
             "RU": "XVM: Конфигурация от sirmax"
-        }
+        }, 
+        "version": "6.1.0"
     }, 
     "com.modxvm.xvm.contacts": {
         "dependencies": [
@@ -446,7 +467,8 @@
             "CN": "XVM Contacts", 
             "EN": "XVM Contacts", 
             "RU": "XVM: Контакты"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.crew": {
         "dependencies": [
@@ -462,7 +484,8 @@
             "CN": "XVM Crew", 
             "EN": "XVM Crew", 
             "RU": "XVM Экипаж"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.equip": {
         "dependencies": [
@@ -478,7 +501,8 @@
             "CN": "XVM Equip", 
             "EN": "XVM Equip", 
             "RU": "XVM: Оборудование"
-        }
+        }, 
+        "version": "8.5.4.0044"
     }, 
     "com.modxvm.xvm.export": {
         "dependencies": [
@@ -494,7 +518,8 @@
             "CN": "XVM Export", 
             "EN": "XVM Export", 
             "RU": "XVM Экспорт"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.hangar": {
         "dependencies": [
@@ -510,7 +535,8 @@
             "CN": "XVM Hangar", 
             "EN": "XVM Hangar", 
             "RU": "XVM Ангар"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.hotfix": {
         "dependencies": [
@@ -526,7 +552,8 @@
             "CN": "XVM Hotfix", 
             "EN": "XVM Hotfix", 
             "RU": "XVM Hotfix"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.integrity": {
         "dependencies": [
@@ -542,7 +569,8 @@
             "CN": "XVM Integrity", 
             "EN": "XVM Integrity", 
             "RU": "XVM Integrity"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.limits": {
         "dependencies": [
@@ -558,7 +586,8 @@
             "CN": "XVM Limits", 
             "EN": "XVM Limits", 
             "RU": "XVM Limits"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.lobby": {
         "dependencies": [], 
@@ -572,7 +601,8 @@
             "CN": "XVM Lobby", 
             "EN": "XVM Lobby", 
             "RU": "XVM Lobby"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.online": {
         "dependencies": [
@@ -588,7 +618,8 @@
             "CN": "XVM Online", 
             "EN": "XVM Online", 
             "RU": "XVM Онлайн"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.ping": {
         "dependencies": [
@@ -606,7 +637,8 @@
             "CN": "XVM Ping", 
             "EN": "XVM Ping", 
             "RU": "XVM Пинг"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.profile": {
         "dependencies": [
@@ -622,7 +654,8 @@
             "CN": "XVM Profile", 
             "EN": "XVM Profile", 
             "RU": "XVM Профиль"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.profiler": {
         "dependencies": [
@@ -638,7 +671,8 @@
             "CN": "XVM Profiler", 
             "EN": "XVM Profiler", 
             "RU": "XVM Профилировщик"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.shared_resources": {
         "dependencies": [], 
@@ -652,7 +686,8 @@
             "CN": "XVM Shared Resources", 
             "EN": "XVM Shared Resources", 
             "RU": "XVM Общие Ресурсы"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.sounds": {
         "dependencies": [
@@ -669,7 +704,8 @@
             "CN": "XVM Sounds", 
             "EN": "XVM Sounds", 
             "RU": "XVM Звук"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.squad": {
         "dependencies": [
@@ -685,7 +721,8 @@
             "CN": "XVM Squad", 
             "EN": "XVM Squad", 
             "RU": "XVM Команда"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.tankcarousel": {
         "dependencies": [
@@ -701,7 +738,8 @@
             "CN": "XVM Tankcarousel", 
             "EN": "XVM Tankcarousel", 
             "RU": "XVM Танковая карусель"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.techtree": {
         "dependencies": [
@@ -717,7 +755,8 @@
             "CN": "XVM Techtree", 
             "EN": "XVM Techtree", 
             "RU": "XVM Дерево развития"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.modxvm.xvm.tooltips": {
         "dependencies": [
@@ -734,12 +773,13 @@
             "CN": "XVM Tooltips", 
             "EN": "XVM Tooltips", 
             "RU": "XVM Подсказки"
-        }
+        }, 
+        "version": "8.6.1.0017"
     }, 
     "com.pavel3333.Autoupdater": {
         "dependencies": [
-            "com.modxvm.xfw.native", 
             "com.modxvm.xfw.loader", 
+            "com.modxvm.xfw.native", 
             "com.pavel3333.Autoupdater.GUI"
         ], 
         "deploy": true, 
@@ -748,25 +788,19 @@
             "EN": "Autoupdater main module", 
             "RU": "Главный модуль Автозагрузчика"
         }, 
-        "excludeChecksum": [
-            "res_mods/mods/xfw_packages/Autoupdater_Main/python/__init__.pyc", 
-            "res_mods/mods/xfw_packages/Autoupdater_Main/native_32bit/AUGetter.pyd", 
-            "res_mods/mods/xfw_packages/Autoupdater_Main/native_32bit/Autoupdater_Main.pyd", 
-            "res_mods/mods/xfw_packages/Autoupdater_Main/native_64bit/AUGetter.pyd", 
-            "res_mods/mods/xfw_packages/Autoupdater_Main/native_64bit/Autoupdater_Main.pyd"
-        ], 
         "name": {
             "CN": "Autoupdater", 
             "EN": "Autoupdater", 
             "RU": "Автозагрузчик"
         }, 
-        "public": true
+        "public": true, 
+        "version": "0.9.22.0.1"
     }, 
     "com.pavel3333.Autoupdater.GUI": {
         "dependencies": [
             "com.pavel3333.Autoupdater", 
-            "com.modxvm.xfw.loader", 
-            "com.modxvm.xfw.native"
+            "com.modxvm.xfw.native", 
+            "com.modxvm.xfw.loader"
         ], 
         "deploy": false, 
         "description": {
@@ -774,21 +808,17 @@
             "EN": "Shows Autoupdater GUI in the hangar", 
             "RU": "Отображает графический интерфейс Автозагрузчика модов в ангаре"
         }, 
-        "excludeChecksum": [
-            "res_mods/mods/xfw_packages/Autoupdater_GUI/python/__init__.pyc", 
-            "res_mods/mods/xfw_packages/Autoupdater_GUI/native_32bit/Autoupdater_GUI.pyd", 
-            "res_mods/mods/xfw_packages/Autoupdater_GUI/native_64bit/Autoupdater_GUI.pyd"
-        ], 
         "name": {
             "CN": "Autoupdater GUI module", 
             "EN": "Autoupdater GUI module", 
             "RU": "Графический модуль Автозагрузчика"
-        }
+        }, 
+        "version": "0.9.22.0.1"
     }, 
     "com.pavel3333.mods.CollisionChecker": {
         "dependencies": [
-            "com.modxvm.xfw.loader", 
-            "com.modxvm.xfw.native"
+            "com.modxvm.xfw.native", 
+            "com.modxvm.xfw.loader"
         ], 
         "deploy": true, 
         "description": {
@@ -801,7 +831,8 @@
             "EN": "CollisionChecker", 
             "RU": "Мод на невидимые стены"
         }, 
-        "public": true
+        "public": true, 
+        "version": "1.0.0.1"
     }, 
     "com.pavel3333.mods.CollisionChecker.1.0.1.0": {
         "dependencies": [], 
@@ -816,7 +847,8 @@
             "EN": "CollisionChecker (1.0.1.0)", 
             "RU": "Мод на невидимые стены (1.0.1.0)"
         }, 
-        "public": false
+        "public": false, 
+        "version": "1.0.0.0"
     }, 
     "com.pavel3333.mods.CollisionChecker.TesterEdition": {
         "dependencies": [], 
@@ -831,7 +863,8 @@
             "EN": "CollisionChecker Tester Edition", 
             "RU": "Мод невидимых стен для тестеров"
         }, 
-        "public": false
+        "public": false, 
+        "version": "1.0.0.0"
     }, 
     "com.pavel3333.mods.CollisionChecker.alpha": {
         "dependencies": [
@@ -859,16 +892,17 @@
         "dependencies": [], 
         "deploy": true, 
         "description": {
-            "CN": "Dora Remodelling", 
-            "EN": "Dora Remodelling", 
-            "RU": "Ремоделлинг Dora"
+            "CN": "DORA Mod: Improve your artillery!", 
+            "EN": "DORA Mod: Improve your artillery!", 
+            "RU": "Мод DORA: Прокачай арту"
         }, 
         "name": {
             "CN": "Dora Mod", 
             "EN": "Dora Mod", 
-            "RU": "Мода Dora"
+            "RU": "Мод Dora"
         }, 
-        "public": false
+        "public": true, 
+        "version": "1.0.0.0"
     }, 
     "com.pavel3333.mods.Doshik_E-100": {
         "dependencies": [], 
@@ -883,7 +917,8 @@
             "EN": "Doshik E-100 Mod", 
             "RU": "#ДошикЛучшеГречки E-100"
         }, 
-        "public": true
+        "public": true, 
+        "version": "1.0.0.0"
     }, 
     "com.pavel3333.mods.GRILLE_AUF_E-100": {
         "dependencies": [], 
@@ -898,7 +933,8 @@
             "EN": "Grille Auf E-100", 
             "RU": "Grille Auf E-100"
         }, 
-        "public": true
+        "public": true, 
+        "version": "1.0.0.0"
     }, 
     "com.pavel3333.mods.PositionsMod": {
         "dependencies": [
@@ -923,14 +959,15 @@
             "EN": "Positions Mod", 
             "RU": "Мод Позиций"
         }, 
-        "public": true
+        "public": true, 
+        "version": "2.0.0.2"
     }, 
     "com.pavel3333.mods.PositionsMod.TestersEdition": {
         "dependencies": [
-            "com.pavel3333.mods.PositionsMod.models", 
             "com.gambiter.guiflash", 
             "com.modxvm.xfw.loader", 
-            "com.spoter.mods_gui"
+            "com.spoter.mods_gui", 
+            "com.pavel3333.mods.PositionsMod.TestersEdition.models"
         ], 
         "deploy": true, 
         "description": {
@@ -943,7 +980,23 @@
             "EN": "PositionsMod for Testers", 
             "RU": "Мод Позиций для тестеров"
         }, 
-        "public": false
+        "public": false, 
+        "version": "1.0.0.3"
+    }, 
+    "com.pavel3333.mods.PositionsMod.TestersEdition.models": {
+        "dependencies": [], 
+        "deploy": false, 
+        "description": {
+            "CN": "Models package for Positions Mod Testers Edition", 
+            "EN": "Models package for Positions Mod Testers Edition", 
+            "RU": "Models package for Positions Mod Testers Edition"
+        }, 
+        "name": {
+            "CN": "Positions Mod Testers Edition Models", 
+            "EN": "Positions Mod Testers Edition Models", 
+            "RU": "Positions Mod Testers Edition Models"
+        }, 
+        "version": "1.007"
     }, 
     "com.pavel3333.mods.PositionsMod.models": {
         "dependencies": [], 
@@ -957,7 +1010,8 @@
             "CN": "Positions Mod Models", 
             "EN": "Positions Mod Models", 
             "RU": "Модели мода Позиций"
-        }
+        }, 
+        "version": "1.007"
     }, 
     "com.pavel3333.mods.Xcavator": {
         "dependencies": [], 
@@ -972,7 +1026,40 @@
             "EN": "XCAVATOR. Test the strength of random!", 
             "RU": "XCAVATOR. Испытай на прочность рандом!"
         }, 
-        "public": true
+        "public": true, 
+        "version": "1.0.0.0"
+    }, 
+    "com.pavel3333.mods.skins.RhmPzw": {
+        "dependencies": [], 
+        "deploy": true, 
+        "description": {
+            "CN": "Rhm. Pzw. skin by RAINN VOD", 
+            "EN": "Rhm. Pzw. skin by RAINN VOD", 
+            "RU": "Шкурка на Rhm. Pzw. от RAINN VOD"
+        }, 
+        "name": {
+            "CN": "Rhm. Pzw. skin", 
+            "EN": "Rhm. Pzw. skin", 
+            "RU": "Шкурка на Rhm. Pzw."
+        }, 
+        "public": true, 
+        "version": "1.0.0.0"
+    }, 
+    "com.pavel3333.mods.skins.UDES_03": {
+        "dependencies": [], 
+        "deploy": true, 
+        "description": {
+            "CN": "UDES 03 skin by RAINN VOD", 
+            "EN": "UDES 03 skin by RAINN VOD", 
+            "RU": "Шкурка на UDES 03 от RAINN VOD"
+        }, 
+        "name": {
+            "CN": "UDES 03 skin", 
+            "EN": "UDES 03 skin", 
+            "RU": "Шкурка на UDES 03"
+        }, 
+        "public": true, 
+        "version": "1.0.0.0"
     }, 
     "com.spoter.mods_gui": {
         "dependencies": [
@@ -991,6 +1078,7 @@
             "CN": "Mods Settings GUI", 
             "EN": "Mods Settings GUI", 
             "RU": "Графические настройки модов"
-        }
+        }, 
+        "version": "2.25"
     }
 }

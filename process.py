@@ -1,15 +1,16 @@
 import urllib
 import os
+import sys
 import requests
 import json
 import zipfile
 
 from hashlib import md5
 
-from common import *
+from common   import *
+from entities import *
 
 config    = {}
-mods_data = {}
 
 archives_wd        = 'archives/'
 unpacked_wd        = 'unpacked/'
@@ -90,8 +91,8 @@ def get_dependency(main_mod_name, mod_name=None):
 def send_mod(mod_name, isPublic, main_mod_name=None):
     isDependency = main_mod_name is not None
     
-    if mod_name not in mods_list_by_name:
-        raise StandardError('Mod is not exists on the server!')
+    if isPublic and mod_name not in mods_list_by_name:
+        raise StandardError('Mod %s is not exists on the server!'%(mod_name))
 
     # cleaning
     hard_rmtree(unpacked_wd, False)
@@ -108,8 +109,9 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
         print 'mod:', mod_name
 
         for dependencyID in dependencies:
-            dependency_name = mods_list_by_ID[str(dependencyID)]['name']
-            send_mod(dependency_name, isPublic, mod_name)
+            dependency_name = mods_list_by_ID[str(dependencyID)]['Name']
+            if not send_mod(dependency_name, isPublic, mod_name):
+                return False
     
     exclude_paths = []
     
@@ -119,33 +121,48 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
     hashes   = {}
     settings = {}
     
-    with Archive('' if main_mod_name is None else main_mod_name, mod_name, False) as archive:  # Unpack the mod archive
-        archive.extractall(unpacked_wd + mod_name)
+    extract_wd = myjoin(unpacked_wd, mod_name)
     
-    if not os.path.exists(unpacked_wd + mod_name): # Make unpacked mod dir if not exists
-        os.mkdir(unpacked_wd + mod_name)
+    # Unpack the mod archive
+    archive = g_EntityFactory.create(Archive, mod_name, False, source_dir=main_mod_name)
+    archive.io.extractall(extract_wd)
+    archive.fini()
+    
+    # Make unpacked mod dir if not exists
+    if not os.path.exists(extract_wd):
+        os.mkdir(extract_wd)
     
     if not isDependency:
-        for dependencyID in dependencies:                     # Unpack all dependencies into deploy mod directory
-            dependency_name = mods_list_by_ID[str(dependencyID)]['name']
-            
-            with Archive(mod_name, dependency_name, False) as archive:
-                archive.extractall(unpacked_deploy_wd + mod_name)
+        extract_wd = myjoin(unpacked_deploy_wd, mod_name)
         
-        with Archive('', mod_name, False) as archive:         # Unpack mod into deploy mod directory
-            archive.extractall(unpacked_deploy_wd + mod_name)
-
-        if not os.path.exists(unpacked_deploy_wd + mod_name): # Make unpacked deploy mod dir if not exists
-            os.mkdir(unpacked_deploy_wd + mod_name)
+        # Unpack all dependencies into deploy mod directory
+        for dependencyID in dependencies:
+            archive = g_EntityFactory.create(
+                Archive,
+                mods_list_by_ID[str(dependencyID)]['Name'],
+                False,
+                source_dir=mod_name
+            )
+            archive.io.extractall(extract_wd)
+            archive.fini()
+        
+        # Unpack mod into deploy mod directory
+        archive = g_EntityFactory.create(Archive, mod_name, False)
+        archive.io.extractall(extract_wd)
+        archive.fini()
+        
+        # Make unpacked deploy mod dir if not exists
+        if not os.path.exists(extract_wd):
+            os.mkdir(extract_wd)
+        
+        # Make deploy archive
+        archive = g_EntityFactory.create(Archive, mod_name, True)
+        os.chdir(extract_wd + '/')
+        zip_folder('./', archive.io)
+        os.chdir('../../')
+        archive.fini()
     
-        with Archive('', mod_name, True) as archive:          # Make deploy archive
-            os.chdir(unpacked_deploy_wd + mod_name + '/')
-            zip_folder('./', archive)
-            os.chdir('../../')
-    
-    mod = mods_list_by_name[mod_name]
-
-    settings_path = mod['settings_path']                                  # Exclude settings path
+    settings_path = mods_list_by_name.get(mod_name, {}).get('SettingsPath', '') # Exclude settings path
     if settings_path:
         exclude_paths.append(settings_path)
 
@@ -155,11 +172,11 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
     os.chdir(unpacked_wd + mod_name + '/')
 
     structure = ModStructure(exclude_paths, './') # Get tree, paths, names and hashes
-    structure.setSettings(mod['settings_path'])   # Set mod settings file
+    structure.setSettings(settings_path)   # Set mod settings file
     
     os.chdir('../../')
 
-    if not isPublic: return
+    if not isPublic: return True
 
     path_autoupd = archives_wd + '%s.zip'%(mod_name)
     if not os.path.exists(path_autoupd):
@@ -179,7 +196,10 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
     req = requests.post(
         'http://api.pavel3333.ru/update_mods.php',
         data = {
-            'ID'           : mod['ID'],
+            'password'     : PASSWORD,
+            
+            'ID'           : mods_list_by_name[mod_name]['ID'],
+            'version'      : config[mod_name]['version'],
             'tree'         : json.dumps(structure.tree,     sort_keys=True),
             'paths'        : json.dumps(structure.paths,    sort_keys=True),
             'names'        : json.dumps(structure.names,    sort_keys=True),
@@ -194,63 +214,46 @@ def send_mod(mod_name, isPublic, main_mod_name=None):
         req_decoded = json.loads(req.text)
     except Exception:
         print '\tinvalid response:', req.text
-        return
+        return False
     
     if req_decoded['status'] == 'ok':
         print '\tsuccessed'
         print '\tlog:',  req_decoded['log']
-        print '\tdata:', req_decoded['data']
-
-        build_meta = req_decoded['data']
         
-        name        = build_meta['Name']
-        wot_version = build_meta['WoT_Version']
-        version     = build_meta['Version']
-        build       = build_meta['Build']
+        if not req_decoded['data']:
+          print 'Build data was not changed'
+        else:
+            for key, value in req_decoded['data'].iteritems():
+                print '%s: %s'%(key, value)
         
-        if name not in mods_data:
-            mods_data[name] = {}
-
-        if wot_version not in mods_data[name]:
-            mods_data[name][wot_version] = {}
-
-        if version not in mods_data[name][wot_version]:
-            mods_data[name][wot_version][version] = {}
-        
-        mods_data[name][wot_version][version][build] = {
-            'tree'     : structure.tree,
-            'paths'    : structure.paths,
-            'names'    : structure.names,
-            'hashes'   : structure.hashes
-            #'settings' : structure.settings
-        }
-        
+        return True
     elif req_decoded['status'] == 'error':
         print '\tfailed'
         print '\terror code:',  req_decoded['code']
         print '\tdescription:', req_decoded['desc']
+        return False
     else:
         print '\tinvalid response:', req_decoded
+        return False
     
 with open('config.json', 'r') as fil:
     config = json.load(fil)
 
-
-with open('ModsData.json', 'r') as fil:
-    mods_data = json.load(fil)
-
-mods_list_by_ID   = json.loads(urllib.urlopen('http://api.pavel3333.ru/get_mods.php').read())
+mods_list_by_ID = json.loads(
+    requests.post(
+        'http://api.pavel3333.ru/get_mods.php',
+        data={
+            'password' : PASSWORD
+        }
+    ).text
+)
 mods_list_by_name = {}
 
 for ID in mods_list_by_ID:
-    mod = mods_list_by_ID[ID]
-    mods_list_by_name[str(mod['name'])] = {
-        'ID'            : ID,
-        'ver'           : mod['ver'],
-        'upd'           : mod['upd'],
-        'build'         : mod['build'],
-        'settings_path' : mod['settings_path']
-    }
+    mod = mods_list_by_ID[ID].copy()
+    mod_name = str(mod.pop('Name'))
+    mods_list_by_name[mod_name] = mod
+    mods_list_by_name[mod_name]['ID'] = ID
 
 if not os.path.exists(unpacked_wd):
     os.mkdir(unpacked_wd)
@@ -276,7 +279,7 @@ for archive_name in os.listdir(archives_wd):
     isPublic = config[mod_name].get('public', False)
 
     if isDeploy:
-        send_mod(mod_name, isPublic)
+        if not send_mod(mod_name, isPublic):
+            break
 
-with open('ModsData.json', 'wb') as fil:
-    json.dump(mods_data, fil, sort_keys=True, indent=4)
+raw_input('------ DONE ------')

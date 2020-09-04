@@ -7,7 +7,8 @@ from os import chdir, rename, remove, listdir, mkdir, makedirs
 from os.path import basename, exists, isfile
 from xml.etree import ElementTree as ET
 
-from common import *
+from common   import *
+from entities import *
 
 wd = 'temp/'
 
@@ -60,11 +61,11 @@ mods = [
     {
         'id'     : 'com.pavel3333.mods.PositionsMod.TestersEdition',
         'dir'    : 'PositionsMod_TEST',
-        'public' : False,
+        'public' : True,
         'deps'   : {
-            'com.pavel3333.mods.PositionsMod.models' : {
+            'com.pavel3333.mods.PositionsMod.TestersEdition.models' : {
                 'dir'        : 'com.pavel3333.mods/',
-                'name_start' : 'com.pavel3333.mods.PositionsMod.models',
+                'name_start' : 'com.pavel3333.mods.PositionsMod.TestersEdition.models',
                 'markVer'    : True
             },
             'com.spoter.mods_gui' : {
@@ -98,6 +99,16 @@ mods = [
         'deps'   : {}
     },
     {
+        'id'     : 'com.pavel3333.mods.skins.RhmPzw',
+        'public' : True,
+        'deps'   : {}
+    },
+    {
+        'id'     : 'com.pavel3333.mods.skins.UDES_03',
+        'public' : True,
+        'deps'   : {}
+    },
+    {
         'id'     : 'com.pavel3333.mods.CollisionChecker',
         'dir'    : 'CollisionChecker',
         'public' : True,
@@ -119,13 +130,20 @@ for mod in mods:
     mod_name = mod['id']
     metadata = None
     
-    with RawArchive('', mod_name, False) as archive:
+    with g_EntityFactory.create(RawArchive, mod_name, False) as archive:
         if 'dir' in mod:
-            metadata = archive.getMeta(mod['dir'], mod_name)
-            archive.extractall(wd)
+            metadata = archive.entities['packages'][mod['dir']].meta.copy()
+            metadata['id'] = mod_name
+            
+            archive.io.extractall(wd)
         else:
-            metadata = archive.getMeta(None, mod_name)
-            archive.extractall(wd, filter(lambda name: name != 'meta.json', archive.namelist()))
+            with archive.entities['files']['meta.json'].open('r') as meta_file:
+                metadata = json.load(meta_file)
+            metadata['id'] = mod_name
+            archive.io.extractall(
+                wd,
+                filter(lambda name: name != 'meta.json', archive.io.namelist())
+            )
     
     if metadata is None:
         print mod_name, 'metadata not found'
@@ -153,8 +171,8 @@ for mod in mods:
     for dep_id in mod['deps']:
         dep_path = mod['deps'][dep_id]
         
-        with RawArchive('', dep_id, False) as archive:
-            archive.extractall(wd)
+        with g_EntityFactory.create(RawArchive, dep_id, False) as archive:
+            archive.io.extractall(wd)
 
         dep_dir = wotmods_wd + dep_path['dir']
         
@@ -168,21 +186,30 @@ for mod in mods:
         
         wotmod_name = max(wotmod_list)
         
-        metadata = {}
-        
-        with Wotmod(wd + dep_dir + wotmod_name) as wotmod:
-            packages_metadata[dep_id] = metadata = wotmod.getMeta(identifier=dep_id, ver=packages_metadata[mod_name]['wot_version_min'])
+        with g_EntityFactory.create(WotMod, myjoin(wd, dep_dir, wotmod_name)) as wotmod:
+            metadata = packages_metadata[dep_id] = wotmod.meta.copy()
+            metadata['id'] = dep_id
+            metadata['wot_version_min'] = packages_metadata[mod_name]['wot_version_min']
         
         if dep_id not in packages_metadata[mod_name]['dependencies']:
             packages_metadata[mod_name]['dependencies'].append(dep_id)
         
         if dep_path.get('markVer', False):
-            rename(wd + dep_dir + wotmod_name, wd + dep_dir + wotmod_name.replace('.wotmod', '_%s_v%s.wotmod'%(metadata['wot_version_min'], metadata['version'])))
+            rename(
+                myjoin(wd, dep_dir, wotmod_name),
+                myjoin(wd, dep_dir, wotmod_name.replace(
+                    '.wotmod',
+                    '_%s_v%s.wotmod'%(
+                        metadata['wot_version_min'],
+                        metadata['version']
+                    )
+                ))
+            )
         
         curr_mods_wd = wd + mods_wd + metadata['wot_version_min'] + '/'
         move_files(wd + wotmods_wd, curr_mods_wd)
         
-        create_deploy(wd, mod_name, dep_id, './', False, True)
+        create_deploy(wd, mod_name, dep_id, './', del_folder=False, isRaw=True)
         
         hard_rmtree(wd, False)
 
@@ -190,3 +217,5 @@ soft_rmtree(wd, False)
 hard_rmtree(wd)
 
 add_mods(packages_metadata)
+
+raw_input('------ DONE ------')

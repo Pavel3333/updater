@@ -1,0 +1,46 @@
+{
+    "com.pavel3333.mods.PositionsMod" : {
+        "patch"    : "1.9.0.3",
+        "packages" : [
+            "PositionsMod"
+        ],
+        "dependencies" : [
+            "com.pavel3333.mods.PositionsMod.models",
+            "com.PYmods.PYmodsCore",
+            "com.spoter.mods_gui",
+            "com.gambiter.guiflash"
+        ]
+    },
+    "com.pavel3333.mods.PositionsMod.models" : {
+        "patch"   : "1.9.0.3",
+        "wotmods" : {
+            "com.pavel3333.mods/com.pavel3333.mods.PositionsMod.models.wotmod" : {
+                "markVersion" : true
+            }
+        }
+    },
+    "com.PYmods.PYmodsCore": {
+        "patch" : "1.9.0.3",
+        "wotmods" : {
+            "PYmods/PYmodsCore.wotmod" : {
+                "markVersion" : false
+            }
+        }
+    },
+    "com.spoter.mods_gui": {
+        "patch" : "1.9.0.3",
+        "wotmods" : {
+            "mod_mods_gui.wotmod" : {
+                "markVersion" : true
+            }
+        }
+    },
+    "com.gambiter.guiflash": {
+        "patch" : "1.9.0.3",
+        "wotmods" : {
+            "gambiter.guiflash.wotmod" : {
+                "markVersion" : true
+            }
+        }
+    }
+}

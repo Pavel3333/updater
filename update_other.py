@@ -36,10 +36,11 @@ for mod_id, mod in mods.iteritems():
         wotmod_path    = WOTMODS_WD + mod_id + '.wotmod'
         wotmod_dst_dir = wd + '/mods/%s/'%(game_version) + mod['dir']
 
-        metadata = {}
-
-        with Wotmod(wotmod_path) as wotmod:
-            packages_metadata[mod_id] = metadata = wotmod.getMeta(identifier=mod_id, ver=game_version)
+        wotmod = packages_metadata[mod_id] = g_EntityFactory.create(WotMod, wotmod_path)
+        
+        metadata = wotmod.meta.copy()
+        metadata['id'] = mod_id
+        metadata['wot_version_min'] = game_version
 
         makedirs(wotmod_dst_dir)
 
