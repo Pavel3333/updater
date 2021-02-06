@@ -121,8 +121,70 @@ if exists(wd + xvm_configs['wd']):
         
         create_deploy(wd, '', xvm_configs['id'], xvm_configs['wd'], isRaw=True)
 
+xfw_packages = {
+    'com.modxvm.xfw.actionscript'   : 'xfw_actionscript',
+    'com.modxvm.xfw.filewatcher'    : 'xfw_filewatcher',
+    'com.modxvm.xfw.fonts'          : 'xfw_fonts',
+    'com.modxvm.xfw.libraries'      : 'xfw_libraries',
+    'com.modxvm.xfw.loader'         : 'xfw_loader',
+    'com.modxvm.xfw.mutex'          : 'xfw_mutex',
+    'com.modxvm.xfw.native'         : 'xfw_native',
+    'com.modxvm.xfw.ping'           : 'xfw_ping',
+    'com.modxvm.xfw.wotfix.crashes' : 'xfw_wotfix_crashes',
+    'com.modxvm.xfw.wotfix.hidpi'   : 'xfw_wotfix_hidpi',
+    'com.modxvm.xfw.wwise'          : 'xfw_wwise'
+}
+
 #some packages need main XVM module version
-if 'com.modxvm.xvm' in packages_metadata:
+xvm_metadata = packages_metadata.get('com.modxvm.xvm')
+if xvm_metadata is not None:
+    version = xvm_metadata['version']
+    wot_version = xvm_metadata['wot_version_min']
+    
+    # Processing xfw
+    xfw_wd = 'mods/%s/com.modxvm.xfw/' % wot_version
+    xfw_wd_path = myjoin(wd, xfw_wd)
+    print 'xfw_wd_path:', xfw_wd_path
+    if exists(xfw_wd_path):
+        for wotmod_name in listdir(xfw_wd_path):
+            print 'wotmod_name', wotmod_name
+            wotmod_path = myjoin(xfw_wd_path, wotmod_name)
+            if not isfile(wotmod_path):
+                print 'not isfile(wotmod_path=%s)' % wotmod_path
+                continue
+
+            name = None
+                    
+            for package_id, package_name in xfw_packages.iteritems():
+                if wotmod_name.startswith(package_id):
+                    name = package_name
+                    break
+
+            if name is None:
+                print 'Cannot find wotmod', wotmod_name
+                continue
+
+            wotmod = g_EntityFactory.create(WotMod, wotmod_path)
+            
+            metadata = wotmod.entities['packages'][name].meta.copy()
+            if not metadata:
+                metadata = wotmod.meta
+
+            metadata['wot_version_min'] = wot_version
+
+            wotmod_id = metadata['id']
+
+            packages_metadata[wotmod_id] = metadata
+
+            out = g_EntityFactory.create(RawArchive, wotmod_id, True)
+            out.io.write(
+                wotmod_path,
+                myjoin(xfw_wd, wotmod_name)
+            )
+            out.closeIO()
+
+            wotmod.fini()
+    
     #processing lobby
     xvm_lobby = {
         'id'      : 'com.modxvm.xvm.lobby',
@@ -133,7 +195,7 @@ if 'com.modxvm.xvm' in packages_metadata:
             'id'           : xvm_lobby['id'],
             'name'         : 'XVM Lobby',
             'description'  : 'XVM Lobby module',
-            'version'      : packages_metadata['com.modxvm.xvm']['version'],
+            'version'      : version,
             'dependencies' : []
         }
         
@@ -148,7 +210,7 @@ if 'com.modxvm.xvm' in packages_metadata:
             'id'           : 'com.modxvm.xvm.shared_resources',
             'name'         : 'XVM Shared Resources',
             'description'  : 'XVM Shared Resources Package',
-            'version'      : packages_metadata['com.modxvm.xvm']['version'],
+            'version'      : version,
             'dependencies' : []
         }
         packages_metadata[metadata['id']] = metadata
@@ -164,8 +226,6 @@ if 'com.modxvm.xvm' in packages_metadata:
     new_deps = check_depends(wd, xvm_id)
     print 'found deps:', new_deps
     dependencies.update(new_deps)
-    
-    version = packages_metadata['com.modxvm.xvm']['version']
     
     packages_metadata[xvm_id] = {
         'id'           : xvm_id,

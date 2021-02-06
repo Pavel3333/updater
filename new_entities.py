@@ -17,21 +17,43 @@ AnalyzeType = {
     'WotMods'  : 5
 }
 
+class EntityFactory(object):
+    SourceInstanceData = {
+        'Entity': ('path', 'parent'),
+    }
+    
+    def __init__(self):
+        self.maxID = 1
+    
+    def create(self, cls, source_instance=None, **kw):
+        if source_instance is not None:
+            kw.update(
+                dict(field, getattr(source_instance, field))
+                for field in self.SourceInstanceData.get(
+                    source_instance.type, ()
+                )
+            )
+        
+        instance = cls(ID=self.maxID, **kw)
+        
+        self.maxID += 1
+        
+        return instance
+
 class Entity(object):
     __logable = { 'path' }
     
     def __init__(self, ID, path=None, parent=None, *args, **kw):
+        super(Entity, self).__init__()
+        
         self._path = None
         
         self.ID     = ID
         self.parent = parent
-        self.path   = path
         
-        super(Entity, self).__init__()
-    
-    @property
-    def path(self):
-        return self._path
+        self.path   = path
+
+    path = property(lambda self: self._path)
     
     @path.setter
     def path(self, path):
@@ -109,22 +131,30 @@ class Entity(object):
 class File(Entity):
     __logable = { 'md5_hash' }
     
-    def __init__(self, *args, **kw):
-        super(File, self).__init__(*args, **kw)
+    def __init__(self, strict=True, *args, **kwargs):
+        self.__strict = strict
         
         self.temp = False
-        
         self.md5_hash = None
+
+        super(File, self).__init__(*args, **kwargs)
     
     @Entity.path.setter
     def path(self, path):
         Entity.path.fset(self, path)
+        
         self.checkPath()
         
         self.md5_hash = md5(self.open().read()).hexdigest()
     
     def checkPath(self):
-        if not exists(self.fullpath):
+        fullpath = self.fullpath
+        if exists(fullpath):
+            return
+
+        if not self.__strict:
+            self.create()
+        else:
             self.log()
             
             raise StandardError('%s is not exists'%(fullpath))
@@ -136,16 +166,12 @@ class File(Entity):
         if path is None:
             path = self._path
         
-        changed = True
-        
-        if path in new_tree:
-            if self != new_tree[path]:
-                del new_tree[path]
-            else:
-                changed = False
-        
-        if not changed:
-            return
+        entity = new_tree.get(path)
+        if entity is not None:
+            if self == entity:
+                return entity
+            
+            del new_tree[path]
         
         dst_path = myjoin(new_tree.fullpath, path)
         
@@ -160,17 +186,20 @@ class File(Entity):
             del self.parent[self._path]
         
         return new_tree[path]
+
+    def create(self):
+        with self.open('wb') as fil:
+            pass
     
     def remove(self):
+        print 'File::remove()'
         fullpath = self.fullpath
         if os.path.exists(fullpath):
+            print 'os.path.exists(%s)' % repr(fullpath)
             os.remove(fullpath)
         
         super(File, self).remove()
     
-    # Open file:
-    # - For ZIP-archives supports only read mode
-    # - For simple files all supported modes
     def open(self, mode='rb', encoding=None):
         root = self.root
         
@@ -250,7 +279,7 @@ class Directory(Entity, dict):
             elif directory == '..':
                 tree = tree.parent
                 if tree is None:
-                    return
+                    return None
                 
                 continue
             
@@ -259,7 +288,7 @@ class Directory(Entity, dict):
                     onItemNotFound(tree, directory)
                 
                 if strict:
-                    return
+                    return None
             
             tree = tree[directory]
         
@@ -276,7 +305,9 @@ class Directory(Entity, dict):
         if result is not None:
             tree, basename, is_file = result
             
-            return super(Directory, tree).__getitem__(basename)
+            result = super(Directory, tree).__getitem__(basename)
+
+        return result
     
     def __setitem__(self, path, value):
         if value is None:
@@ -292,18 +323,20 @@ class Directory(Entity, dict):
             value_type = value
         else:                    # Instance of some class
             value_type = type(value)
-        
-        if basename in tree:
-            if tree[basename] == value:
+
+        entity = tree.get(basename)
+        if entity is not None:
+            if entity == value:
                 return
-            else:
-                del tree[basename]
+            
+            del tree[basename]
         
         if type(value) is type:
             new_entity = g_EntityFactory.create(
                 value_type,
                 path=basename,
-                parent=tree
+                parent=tree,
+                strict=False
             )
             if value_type is Directory:
                 new_entity.create()
@@ -318,11 +351,19 @@ class Directory(Entity, dict):
             return
         
         tree, basename, is_file = result
+        print tree, basename, is_file
         
         tree[basename].remove()
         
         super(Directory, tree).__delitem__(basename)
 
+    def get(self, path, default=None):
+        entity = self[path]
+        if entity is None:
+            entity = default
+
+        return entity
+    
     def create(self):
         fullpath = self.fullpath
         if not os.path.exists(fullpath):
@@ -354,6 +395,7 @@ class Directory(Entity, dict):
         return result
     
     def remove(self):
+        print 'Directory::remove()'
         fullpath = self.fullpath
         if os.path.exists(fullpath):
             hard_rmtree(fullpath)
@@ -363,6 +405,7 @@ class Directory(Entity, dict):
     def __printTree(self, tree, indent=0):
         if not tree:
             print_indent(indent+INDENT, 'Empty')
+            
             return
         
         for item, subtree in tree.iteritems():
@@ -382,7 +425,8 @@ class Directory(Entity, dict):
         wd = self.fullpath
         
         for item in os.listdir(wd):
-            is_file    = os.path.isfile(myjoin(wd, item))
+            is_file = os.path.isfile(myjoin(wd, item))
+            
             self[item] = File if is_file else Directory
     
     def analyze(self, analyze_type, path='', indent=0):
@@ -406,9 +450,11 @@ class Directory(Entity, dict):
                     path,
                     indent=indent+INDENT
                 )
+                
                 return
             elif self.CHECK_RAW_MODS and path == self.RAW_MODS_DIR:
                 self[path] = WotModDirectory
+                
                 return
         
         if self.CHECK_XFW_PACKAGES and path == self.XFW_PACKAGES_DIR:
@@ -417,6 +463,7 @@ class Directory(Entity, dict):
                 path,
                 indent=indent+INDENT
             )
+            
             return
         
         # Directory
@@ -432,11 +479,13 @@ class Directory(Entity, dict):
     
     def analyzePackages(self, tree, path, indent=0):
         print_debug(indent, 'Analyzing packages...')
+        
         for package_name, package_tree in tree.iteritems():
             self[package_name] = Package
     
     def analyzeMods(self, tree, path, indent=0):
         print_debug(indent, 'Analyzing mods...')
+        
         for patch_name, patch_tree in tree.iteritems():
             if check_patch(patch_name):
                 print_indent(indent+INDENT, 'Patch', patch_name)
@@ -445,6 +494,7 @@ class Directory(Entity, dict):
                     WotModDirectory,
                     tree=patch_tree
                 )
+                
                 continue
             
             self.analyze(
@@ -456,6 +506,7 @@ class Directory(Entity, dict):
     
     def analyzeWotMods(self, tree, path, indent=0):
         print_debug(indent, 'Analyzing wotmods...')
+        
         for wotmod_name, wotmod_tree in tree.iteritems():
             if wotmod_tree is None and wotmod_name.endswith('.wotmod'): # WotMod
                 print_indent(indent+INDENT, 'WotMod', wotmod_name)
@@ -463,6 +514,7 @@ class Directory(Entity, dict):
                     WotMod,
                     path=myjoin(path, wotmod_name)
                 )
+                
                 continue
             
             self.analyze(
@@ -472,29 +524,13 @@ class Directory(Entity, dict):
                 indent=indent+INDENT
             )
     
-    def getPackableEntities(self):
-        for entity_type in self.packable_entities:
-            for entity in self.entities.get(entity_type, {}).values():
-                yield entity
-    
-    def getAllPackableEntities(self):
-        for entity in self.getPackableEntities():
-            wd = entity.wd
-            if entity.type == 'File':
-                wd = ''
-            yield (wd, entity)
-        
-        for entity_type in ('packages', 'wotmod_directories'):
-            for zip_parent in self.entities.get(entity_type, {}).values():
-                for _, entity in zip_parent.getAllPackableEntities():
-                    yield (zip_parent.wd, entity)
-    
     def log(self, indent=0):
         super(Directory, self).log(indent)
         
-        for entities_type in self.logable_entities:
-            for entity in self.entities[entities_type].values():
-                entity.log(indent+INDENT)
+        for entity_types in self.logable_entities:
+            for entity in self.values():
+                if entity.type in entity_types:
+                    entity.log(indent+INDENT)
     
     def logable(self):
         return super(Directory, self).logable() | self.__logable
@@ -873,27 +909,6 @@ class WotMod(ZipArchive):
     
     def logable(self):
         return super(WotMod, self).logable() | self.__logable
-
-
-class EntityFactory():
-    SourceInstanceData = {
-        Entity: ('io', 'parent', 'path'),
-        
-    }
-    
-    def __init__(self):
-        self.maxID = 1
-    
-    def create(self, cls, source_instance=None, **kw):
-        if source_instance is not None:
-            for field in self.SourceInstanceFields:
-                kw[field] = getattr(source_instance, field)
-        
-        instance = cls(ID=self.maxID, **kw)
-        
-        self.maxID += 1
-        
-        return instance
 
 g_EntityFactory = EntityFactory()
 

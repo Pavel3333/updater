@@ -53,11 +53,10 @@ if exists(wd + wotmod_wd):
 
         name = None
                 
-        for package_id in xfw_packages:
+        for package_id, package_name in xfw_packages.iteritems():
             if wotmod_name.startswith(package_id):
-                name = xfw_packages[package_id]
+                name = package_name
                 break
-        print package_id
 
         if name is None:
             print 'Cannot find wotmod', wotmod_name
